@@ -44,6 +44,7 @@ class admin extends CI_Controller {
 					   'password' 	=>		$_POST['pass'],
 					   'rank'		=>		$_POST['rank'],
 					   'dept'		=>		$_POST['department'] );
+		
 		$this->accountsdb->addLH($user);
 
 	}
@@ -84,8 +85,8 @@ class admin extends CI_Controller {
 	}
 	public function logout()
 	{
-
-
+		$this->session->sess_destroy();
+		$this->load->view('login');
 	}
 	public function addLaboratory()
 	{

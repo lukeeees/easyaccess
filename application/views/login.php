@@ -4,7 +4,7 @@ echo "<table>";
 
 echo form_open('account/login');
 echo "<tr>";
-	echo "<td>Username</td>";
+	echo "<td>Id Number</td>";
 		echo "<td>".form_input('name','','required')."</td>";
 echo "</tr>";
 echo "<tr>";

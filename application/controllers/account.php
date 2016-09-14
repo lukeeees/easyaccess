@@ -41,7 +41,6 @@ class account extends CI_Controller {
 		@$sesh = array('id' 	=>	$x['id'] ,
 					  'type'	=>	$x['type'] );
 
-		echo $x['type'];
 		if ($x['type']=='admin') {
 			$this->session->set_userdata('user',$sesh);
 			$this->load->view('admin/splash');
@@ -57,11 +56,7 @@ class account extends CI_Controller {
 			$this->load->view('index');
 		}
 	}
-	public function logout()
-	{
-		$this->session->unset_userdata($sesh);
-		$this->load->view('login');
-	}
+
 
 
 }
