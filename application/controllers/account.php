@@ -26,7 +26,9 @@ class account extends CI_Controller {
         }
 	public function index()
 	{
+		$this->load->view('templates/header');
 		$this->load->view('login');
+		
 	}
 	public function login()
 	{
@@ -36,27 +38,35 @@ class account extends CI_Controller {
 		$data = array('un' =>	$un ,
 					  'pass' =>	$pass );
 
-		@$x = $this->accountsdb->checktype($data);
+			@$x = $this->accountsdb->checktype($data);
 
-		@$sesh = array('id' 	=>	$x['id'] ,
-					  'type'	=>	$x['type'] );
+			@$sesh = array('id' 	=>	$x['id'] ,
+					  		'type'	=>	$x['type'] );
 
-		if ($x['type']=='admin') {
-			$this->session->set_userdata('user',$sesh);
-			$this->load->view('admin/splash');
+				if ($x['type']=='admin') {
+					$this->session->set_userdata('user',$sesh);
+					$this->load->view('admin/splash');
 
-		}elseif ($x['type'] == 'head') {
-			$this->session->set_userdata('user',$sesh);
-			$this->load->view('labhead/splash');
-		}elseif ($x['type'] =='staff') {
-			$this->session->set_userdata('user',$sesh);
-			$this->load->view('staff/splash');
+				}elseif ($x['type'] == 'head') {
+					$this->session->set_userdata('user',$sesh);
+					$this->load->view('labhead/splash');
+				}elseif ($x['type'] =='staff') {
+					$this->session->set_userdata('user',$sesh);
+					$this->load->view('staff/splash');
 			
-		}else{
-			$this->load->view('index');
-		}
+				}else{
+
+					redirect('account/index/error');
+				}
+			
 	}
 
+		public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('account/index');	
+	}
+	
 
-
+	
 }

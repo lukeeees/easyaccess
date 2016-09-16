@@ -1,5 +1,8 @@
 <?php
-echo "hello admin! ";
+echo "hello ".$this->session->has_userdata('user');
 
-echo anchor(base_url().'index.php/admin/logout','logout');
+echo anchor(base_url().'index.php/account/logout','logout');
+
+
+
 ?>

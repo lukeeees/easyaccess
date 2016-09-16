@@ -22,9 +22,10 @@ class admin extends CI_Controller {
         {
                 parent::__construct();
                 // Your own constructor codein!
+              
                 $user = $this->session->userdata('user');
 
-                if (!($this->session->has_userdata('user'))){
+                if ($this->session->has_userdata('user')!=$user['type']){
                 	redirect('account/index');
                 }
 
@@ -52,6 +53,7 @@ class admin extends CI_Controller {
 	public function editLH($id)
 	{
 		//edit users
+
 
 
 	}
@@ -83,11 +85,7 @@ class admin extends CI_Controller {
 	{
 
 	}
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		$this->load->view('login');
-	}
+
 	public function addLaboratory()
 	{
 		$lab = array('lab'	=>	$_POST['lab'],
@@ -121,7 +119,6 @@ class admin extends CI_Controller {
 	echo "update successful";
 	}
 
-
-
+	
 
 }
