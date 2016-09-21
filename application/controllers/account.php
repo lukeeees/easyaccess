@@ -23,11 +23,33 @@ class account extends CI_Controller {
                 parent::__construct();
                 // Your own constructor codein!
                 $this->load->model('accountsdb');
+                $this->load->view('templates/header');
         }
 	public function index()
 	{
-		$this->load->view('templates/header');
-		$this->load->view('login');
+
+		if($this->session->has_userdata('type')==null){
+			$this->session->has_userdata('type');
+			$this->load->view('login');
+
+		}else{
+				if ($this->session->has_userdata('type')=='admin') {
+					$this->load->view('admin/head');
+					$this->load->view('admin/splash');
+
+				}elseif ($this->session->has_userdata('type')== 'head') {
+				
+					$this->load->view('labhead/splash');
+				}elseif ($this->session->has_userdata('type') =='staff') {
+				
+					$this->load->view('staff/splash');
+			
+				}else{
+
+					redirect('account/index/error');
+				}
+		}
+
 		
 	}
 	public function login()
@@ -36,22 +58,23 @@ class account extends CI_Controller {
 		$pass = $_POST['password'];
 
 		$data = array('un' =>	$un ,
-					  'pass' =>	$pass );
+					  'pass' =>	do_hash($pass,'md5') );
 
 			@$x = $this->accountsdb->checktype($data);
 
 			@$sesh = array('id' 	=>	$x['id'] ,
-					  		'type'	=>	$x['type'] );
+					  		'type'	=>	$x['type']);
 
 				if ($x['type']=='admin') {
-					$this->session->set_userdata('user',$sesh);
+					$this->session->set_userdata($sesh);
+					$this->load->view('admin/head');
 					$this->load->view('admin/splash');
 
 				}elseif ($x['type'] == 'head') {
-					$this->session->set_userdata('user',$sesh);
+					$this->session->set_userdata($sesh);
 					$this->load->view('labhead/splash');
 				}elseif ($x['type'] =='staff') {
-					$this->session->set_userdata('user',$sesh);
+					$this->session->set_userdata($sesh);
 					$this->load->view('staff/splash');
 			
 				}else{

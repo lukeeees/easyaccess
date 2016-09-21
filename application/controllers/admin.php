@@ -22,12 +22,14 @@ class admin extends CI_Controller {
         {
                 parent::__construct();
                 // Your own constructor codein!
-              
+
                 $user = $this->session->userdata('user');
 
                 if ($this->session->has_userdata('user')!=$user['type']){
                 	redirect('account/index');
                 }
+                $this->load->view('admin/head');
+                $this->load->view('templates/header');
 
         }
 	public function index()
@@ -38,13 +40,23 @@ class admin extends CI_Controller {
 	{
 		$this->load->view('admin/addlab');
 	}
+	public function sUser()
+	{
+		$data['x'] = $this->accountsdb->showusers();
+		$this->load->view('admin/showusers',$data);
+	}
 
 	public function addLH()
 	{
 		$user = array('name' 		=>		$_POST['name'] ,
-					   'password' 	=>		$_POST['pass'],
+					   'password' 	=>		do_hash($_POST['pass']),
 					   'rank'		=>		$_POST['rank'],
-					   'dept'		=>		$_POST['department'] );
+					   'type'		=>		$_POST['type'],
+					   'dept'		=>		$_POST['department'],
+					   'firstname'	=>		$_POST['firstname'],
+					   'lastname'	=>		$_POST['lastname'],
+					   'idnum'		=>		$_POST['idnum'],
+					   );
 		
 		$this->accountsdb->addLH($user);
 
@@ -54,6 +66,12 @@ class admin extends CI_Controller {
 	{
 		//edit users
 
+		$user  = array('id'			=>		$id,
+					   'name'		=>		$_POST['name'] ,
+					   'password'	=>		$_POST['password'],
+					   'rank'		=>		$_POST['rank'],
+					   'dept'		=>		$_POST['dept']);
+		//$this->accountsdb->editLH();
 
 
 	}
@@ -67,6 +85,7 @@ class admin extends CI_Controller {
 	public function addStaff()
 	{
 		//add staff
+	
 
 	}
 
@@ -88,7 +107,7 @@ class admin extends CI_Controller {
 
 	public function addLaboratory()
 	{
-		$lab = array('lab'	=>	$_POST['lab'],
+		$lab = array('lab'		=>	$_POST['lab'],
 					'room'		=>	$_POST['room'],
 					'status'	=>	$_POST['status'] );
 		$this->clearancedb->addLab($lab);
@@ -116,7 +135,7 @@ class admin extends CI_Controller {
 					  'status'	=>		$_POST['status'] );
 
 	$this->clearancedb->editlab($data);
-	echo "update successful";
+	
 	}
 
 	

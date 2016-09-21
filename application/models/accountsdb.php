@@ -78,5 +78,12 @@ class accountsdb extends CI_Model {
            $query = $this->db->get('laboratory');
           return $query;
         }
+        public function showusers()
+        {
+          $data=array();
+          $query = $this->db->get('user');
+          $data = $query->result_array();
+          return $data;
+        }
 
   }?>
