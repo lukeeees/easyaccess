@@ -1,7 +1,8 @@
 <div class="container">
 <div class="starter-template">
 	<div class="jumbotron">
-        <h1>List of Users</h1>
+        <center><h1>List of Users</h1>  </center>
+    </div>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -31,7 +32,7 @@
                   <td>".$row['middlename']."</td>
                   <td>".$row['lastname']."</td>
                   <td>".$row['department']."</td>
-                  <td>".anchor('admin/delete','<button type="button" class="btn-xs btn-danger">Delete</button>')."</td>
+                  <td>".anchor('admin/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>')."".anchor('admin/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success">Update</button>')."</td>
                 </tr>";
 
                 $c++;

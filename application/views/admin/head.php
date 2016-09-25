@@ -19,19 +19,28 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#clearance">Clearance</a>
+                        <a href="">Clearance</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#inventory">Inventory</a>
+                        <a href="">Inventory</a>
                     </li>
-                    <li class="page-scroll">
+                   <!--  <li class="page-scroll">
                         <?php echo anchor('admin/sUser','Manage Users')?>
+                    </li> -->
+                     <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Users<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                         <li><?php echo anchor('admin/sUser','Manage Users')?></li>
+                           <li><?php echo anchor('admin/aUser','Add Users')?><li>
+                          </ul>
+                        </li>
+                 
+
+                    <li class="page-scroll">
+                        <a href="">Manage Laboratory</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#laboratory">Manage Laboratory</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#violation">Manage Violation</a>
+                        <a href="">Manage Violation</a>
                     </li>
                     <li class="page-scroll">
                <!--  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> -->

@@ -45,28 +45,57 @@ class admin extends CI_Controller {
 		$data['x'] = $this->accountsdb->showusers();
 		$this->load->view('admin/showusers',$data);
 	}
+	public function aUser(){
+
+		$this->load->view('admin/addUser');
+	}
+	public function LUser(){
+
+		$this->load->view('admin/addLH');
+	}
 
 	public function addLH()
 	{
-		$user = array('name' 		=>		$_POST['name'] ,
-					   'password' 	=>		do_hash($_POST['pass']),
-					   'rank'		=>		$_POST['rank'],
-					   'type'		=>		$_POST['type'],
-					   'dept'		=>		$_POST['department'],
-					   'firstname'	=>		$_POST['firstname'],
-					   'lastname'	=>		$_POST['lastname'],
-					   'idnum'		=>		$_POST['idnum'],
-					   );
-		
-		$this->accountsdb->addLH($user);
+		$user  = array('id'			=>		$_POST['idnum'],
+					   'user'		=>		$_POST['name'],
+					   'lname'		=>		$_POST['lname'] ,
+					   'fname'		=>		$_POST['fname'],
+					   'mname'		=>		$_POST['mname'],
+					   'password'	=>		do_hash($_POST['pass'],'md5'),
+					   'type'		=>		'head',
+					   'dept'		=>		$_POST['department']);
+
+	
+		$this->accountsdb->addAdmin($user);
+		$msg="Successful";
+		$this->load->view('admin/adduser',$msg);
 
 	}
 
+	public function addUser()
+	{
+
+
+		$user  = array('id'			=>		$_POST['idnum'],
+					   'user'		=>		$_POST['name'],
+					   'lname'		=>		$_POST['lname'] ,
+					   'fname'		=>		$_POST['fname'],
+					   'mname'		=>		$_POST['mname'],
+					   'password'	=>		do_hash($_POST['pass'],'md5'),
+					   'type'		=>		'admin',
+					   'dept'		=>		$_POST['department']);
+
+	
+		$this->accountsdb->addAdmin($user);
+		$msg="Successful";
+		$this->load->view('admin/adduser',$msg);
+
+	}
 	public function editLH($id)
 	{
 		//edit users
 
-		$user  = array('id'			=>		$id,
+		$user  = array('id'			=>		$_POST['idnum'],
 					   'name'		=>		$_POST['name'] ,
 					   'password'	=>		$_POST['password'],
 					   'rank'		=>		$_POST['rank'],
@@ -75,7 +104,7 @@ class admin extends CI_Controller {
 
 
 	}
-	public function deleteLH($id)
+	public function deleteuser($id)
 	{
 		//delete labhead
 		$this->accountsdb->deleteLH($id);
@@ -86,18 +115,6 @@ class admin extends CI_Controller {
 	{
 		//add staff
 	
-
-	}
-
-	public function editStaff()
-	{
-		//edit Staff
-
-	}
-
-	public function deleteStaff()
-	{
-		//delete Staff
 
 	}
 	public function showStat()

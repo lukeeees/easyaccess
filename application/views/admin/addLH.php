@@ -4,14 +4,14 @@
         <center><h1>Add User</h1>  </center>
     </div>
   <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><?php echo anchor('admin/aUser','Admin');?></li>
-  <li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
+  <li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
+  <li role="presentation" class="active"><?php echo anchor('admin/LUser','Lab Head');?></li>
   <li role="presentation"><?php echo anchor('admin/SUser','Staff');?></li>
 </ul>
 <?php
 echo @$msg;                       
 echo "<table>";
-	echo form_open('admin/adduser');
+	echo form_open('admin/addLH');
 
 	echo "<tr>";
 		echo "<td>Id Number</td>";
@@ -45,7 +45,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>Department</td>";
-		$arrayName = array('CPE'	 => 	'Computer Engineering',
+				$arrayName = array('CPE'	 => 	'Computer Engineering',
 						   'CE'		 =>		'Civil Engineering',
 						   'CHE'	 =>		'Chemical Engineering',
 						   'EEE'	 =>		'Electrical and Electronics Engineering',

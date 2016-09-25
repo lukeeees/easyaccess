@@ -24,6 +24,19 @@ class accountsdb extends CI_Model {
                 return $data;
 
         }
+        public function addAdmin($values)
+        {
+          $user  = array('idnumber'     =>    $values['id'],
+                        'name'          =>    $values['user'] ,
+                        'lastname'      =>    $values['lname'],
+                        'firstname'     =>    $values['fname'],
+                        'middlename'    =>    $values['mname'],
+                        'password'      =>    $values['password'],
+                        'type'          =>    $values['type'],
+                        'department'    =>    $values['dept']);
+
+          $this->db->insert('user',$user);
+                 }
 
         public function addLH($values)
         {
@@ -46,10 +59,12 @@ class accountsdb extends CI_Model {
 
             $this->db->insert('user',$user);
         }
+
         public function deleteLH()
         {
 
         }
+
         public function addLab($values)
         {
           $lab = array('name'       =>  $values['lab'] ,

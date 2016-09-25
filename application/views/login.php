@@ -4,8 +4,6 @@
             <a class="navbar-brand" href='<?php echo base_url()."index.php"?>'>Easy Access</a>
         </div>
         <ul class="nav navbar-nav pull-right" style="margin-right:20%">
-               <li class="active"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Log In</a></li>
-              
           </ul>
     </div>
 </nav>
