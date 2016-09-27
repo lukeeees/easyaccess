@@ -1,7 +1,7 @@
 <div class="container">
 <div class="starter-template">
 	<div class="jumbotron">
-        <center><h1>List of Staffs</h1>  </center>
+        <center><h1>List of Users</h1>  </center>
     </div>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -32,7 +32,7 @@
                   <td>".$row['middlename']."</td>
                   <td>".$row['lastname']."</td>
                   <td>".$row['department']."</td>
-                  <td>".anchor('admin/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>')."".anchor('admin/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
+                  <td>".anchor('labhead/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>')."".anchor('labhead/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                 </tr>";
                  //a data-toggle="modal" data-target="#myModal" href="#">Logout</a>
                 $c++;

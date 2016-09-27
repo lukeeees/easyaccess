@@ -54,6 +54,11 @@ class admin extends CI_Controller {
 		$this->load->view('admin/addLH');
 	}
 
+	public function stUser(){
+
+		$this->load->view('admin/addstaff');
+	}
+
 	public function addLH()
 	{
 		$user  = array('id'			=>		$_POST['idnum'],
@@ -63,6 +68,26 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'head',
+					   'dept'		=>		$_POST['department']);
+
+	
+		$this->accountsdb->addAdmin($user);
+		$msg="Successful";
+		$this->load->view('admin/adduser',$msg);
+
+	}
+
+	
+
+	public function addStaff()
+	{
+		$user  = array('id'			=>		$_POST['idnum'],
+					   'user'		=>		$_POST['name'],
+					   'lname'		=>		$_POST['lname'] ,
+					   'fname'		=>		$_POST['fname'],
+					   'mname'		=>		$_POST['mname'],
+					   'password'	=>		do_hash($_POST['pass'],'md5'),
+					   'type'		=>		'staff',
 					   'dept'		=>		$_POST['department']);
 
 	
@@ -91,32 +116,22 @@ class admin extends CI_Controller {
 		$this->load->view('admin/adduser',$msg);
 
 	}
-	public function editLH($id)
-	{
-		//edit users
-
-		$user  = array('id'			=>		$_POST['idnum'],
-					   'name'		=>		$_POST['name'] ,
-					   'password'	=>		$_POST['password'],
-					   'rank'		=>		$_POST['rank'],
-					   'dept'		=>		$_POST['dept']);
-		//$this->accountsdb->editLH();
-
-
-	}
+	
 	public function deleteuser($id)
 	{
 		//delete labhead
-		$this->accountsdb->deleteLH($id);
+		$this->accountsdb->deleteUser($id);
+		redirect('admin/sUser');
 
 	}
 
-	public function addStaff()
+	public function updateuser($values)
 	{
-		//add staff
-	
+		$data['x'] = $this->accountsdb->solouser($values);
+		$this->load->view('admin/update',$data);
 
 	}
+
 	public function showStat()
 	{
 
@@ -153,6 +168,24 @@ class admin extends CI_Controller {
 
 	$this->clearancedb->editlab($data);
 	
+	}
+
+	public function dupdateuser()
+	{
+		$user  = array('id'			=>		$_POST['id'],
+					   'idnum'		=>		$_POST['idnum'],
+					   'user'		=>		$_POST['name'],
+					   'lname'		=>		$_POST['lname'] ,
+					   'fname'		=>		$_POST['fname'],
+					   'mname'		=>		$_POST['mname'],
+					   'password'	=>		do_hash($_POST['pass'],'md5'),
+					   'type'		=>		$_POST['type'],
+					   'dept'		=>		$_POST['department']);
+
+	
+		$this->accountsdb->upuser($user);
+		$msg="Successful";
+		redirect('admin/sUser');
 	}
 
 	

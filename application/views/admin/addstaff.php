@@ -5,13 +5,13 @@
     </div>
   <ul class="nav nav-tabs">
   <li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
-  <li role="presentation" class="active"><?php echo anchor('admin/LUser','Lab Head');?></li>
-  <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
+  <li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
+  <li role="presentation" class="active"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php
 echo @$msg;                       
 echo "<table>";
-	echo form_open('admin/addLH');
+	echo form_open('admin/addStaff');
 
 	echo "<tr>";
 		echo "<td>Id Number</td>";

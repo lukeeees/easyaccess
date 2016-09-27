@@ -6,7 +6,7 @@
   <ul class="nav nav-tabs">
   <li role="presentation" class="active"><?php echo anchor('admin/aUser','Admin');?></li>
   <li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
-  <li role="presentation"><?php echo anchor('admin/SUser','Staff');?></li>
+  <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php
 echo @$msg;                       

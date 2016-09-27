@@ -1,8 +1,6 @@
 <?php
 class accountsdb extends CI_Model {
 
-
-
         public function __construct()
         {
                 // Call the CI_Model constructor
@@ -60,8 +58,11 @@ class accountsdb extends CI_Model {
             $this->db->insert('user',$user);
         }
 
-        public function deleteLH()
+        public function deleteUser($x)
         {
+
+          $this->db->where('id', $x);
+          $this->db->delete('user');
 
         }
 
@@ -100,5 +101,26 @@ class accountsdb extends CI_Model {
           $data = $query->result_array();
           return $data;
         }
+
+        public function solouser($x){
+          $this->db->where('id', $x);
+          $query = $this->db->get('user');
+          return $query;
+          }
+
+          public function upuser($values)
+          {
+            $data = array('idnumber'      => $values['idnum'] ,
+                           'name'         => $values['user'],
+                           'password'     => $values['password'],
+                           'lastname'     => $values['lname'],
+                           'firstname'    => $values['fname'],
+                           'middlename'   => $values['mname'],
+                           'type'         => $values['type'],
+                           'department'   => $values['dept'] );
+
+             $this->db->where('id', $values['id']);
+             $this->db->update('user',$data);
+          }
 
   }?>

@@ -38,7 +38,7 @@ class account extends CI_Controller {
 					$this->load->view('admin/splash');
 
 				}elseif ($this->session->has_userdata('type')== 'head') {
-				
+					$this->load->view('labhead/head');
 					$this->load->view('labhead/splash');
 				}elseif ($this->session->has_userdata('type') =='staff') {
 				
@@ -72,9 +72,11 @@ class account extends CI_Controller {
 
 				}elseif ($x['type'] == 'head') {
 					$this->session->set_userdata($sesh);
+					$this->load->view('labhead/head');
 					$this->load->view('labhead/splash');
 				}elseif ($x['type'] =='staff') {
 					$this->session->set_userdata($sesh);
+					$this->load->view('staff/head');
 					$this->load->view('staff/splash');
 			
 				}else{
