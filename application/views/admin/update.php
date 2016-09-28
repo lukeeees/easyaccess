@@ -9,7 +9,7 @@
       echo form_open('admin/dupdateuser');
   echo form_hidden('id',$this->uri->segment(3));
   echo "<tr>";
-    echo "<td>Id Number</td>";
+    echo "<td>ID Number</td>";
     echo "<td>".form_input('idnum',$key->idnumber,'class="form-control" placeholder="Id Number" required')."</td>";
   echo "</tr>";
 

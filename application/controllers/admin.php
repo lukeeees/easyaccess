@@ -25,7 +25,7 @@ class admin extends CI_Controller {
 
                 $user = $this->session->userdata('user');
 
-                if ($this->session->has_userdata('user')!=$user['type']){
+                if ($this->session->userdata('type')!='admin'){
                 	redirect('account/index');
                 }
                 $this->load->view('admin/head');
@@ -74,7 +74,6 @@ class admin extends CI_Controller {
 		$this->accountsdb->addAdmin($user);
 		$msg="Successful";
 		$this->load->view('admin/adduser',$msg);
-
 	}
 
 	
@@ -120,6 +119,7 @@ class admin extends CI_Controller {
 	public function deleteuser($id)
 	{
 		//delete labhead
+		$this->load->view('delete');
 		$this->accountsdb->deleteUser($id);
 		redirect('admin/sUser');
 
@@ -187,7 +187,5 @@ class admin extends CI_Controller {
 		$msg="Successful";
 		redirect('admin/sUser');
 	}
-
-	
 
 }

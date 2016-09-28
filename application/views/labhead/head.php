@@ -24,10 +24,11 @@
                     <li class="page-scroll">
                         <a href="">Inventory</a>
                     </li>
-                   <!--  <li class="page-scroll">
+                     <li class="page-scroll">
                         <?php echo anchor('labhead/sUser','Manage Staff')?>
-                    </li> -->
+                    </li> 
                      <li class="dropdown">
+
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Users<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                          <li><?php echo anchor('labhead/sUser','Manage Staff')?></li>

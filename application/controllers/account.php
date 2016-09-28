@@ -24,6 +24,8 @@ class account extends CI_Controller {
                 // Your own constructor codein!
                 $this->load->model('accountsdb');
                 $this->load->view('templates/header');
+                
+                
         }
 	public function index()
 	{
@@ -33,14 +35,14 @@ class account extends CI_Controller {
 			$this->load->view('login');
 
 		}else{
-				if ($this->session->has_userdata('type')=='admin') {
+				if ($this->session->userdata('type')=='admin') {
 					$this->load->view('admin/head');
 					$this->load->view('admin/splash');
 
-				}elseif ($this->session->has_userdata('type')== 'head') {
+				}elseif ($this->session->userdata('type')== 'head') {
 					$this->load->view('labhead/head');
 					$this->load->view('labhead/splash');
-				}elseif ($this->session->has_userdata('type') =='staff') {
+				}elseif ($this->session->userdata('type') =='staff') {
 				
 					$this->load->view('staff/splash');
 			

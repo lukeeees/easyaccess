@@ -34,7 +34,7 @@ class accountsdb extends CI_Model {
                         'department'    =>    $values['dept']);
 
           $this->db->insert('user',$user);
-                 }
+        }
 
         public function addLH($values)
         {

@@ -19,7 +19,7 @@
                <div class="panel panel-body">
                       <?php
                           if ($this->uri->segment(3)=='error') {
-                            $error = "Invalid username or password";
+                            $error = "Invalid username or password.";
                           } ?>
 
                           <span class="text-danger"><?php echo @$error ?> </span>
