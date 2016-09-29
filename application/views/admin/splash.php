@@ -2,7 +2,9 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Hello! <?php echo "admin"; ?></h1>
+        <h1> <?php 
+        echo br(1)."Hello!";
+        echo "admin"; ?></h1>
         <p class="lead">this is the splash page</p>
       </div>
 

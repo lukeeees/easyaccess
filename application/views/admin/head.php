@@ -18,32 +18,51 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li class="page-scroll">
+
+                    <li class="dropdown">
                         <a href="">Clearance</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('','View Clearance')?>
+                          <?php echo anchor('','View Statistics')?>
+                        </div>
                     </li>
-                    <li class="page-scroll">
+
+                    <li class="dropdown">
                         <a href="">Inventory</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('item/addItem_admin','Add Item')?>
+                          <?php echo anchor('','Edit Item')?>
+                          <?php echo anchor('','Create Report')?>
+                          <?php echo anchor('','Edit Report')?>
+                          <?php echo anchor('','Search Report')?>
+                          <?php echo anchor('','View Statistics')?>
+                        </div>
                     </li>
-                   <!--  <li class="page-scroll">
-                        <?php echo anchor('admin/sUser','Manage Users')?>
-                    </li> -->
-                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Users<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                         <li><?php echo anchor('admin/sUser','Manage Users')?></li>
-                           <li><?php echo anchor('admin/aUser','Add Users')?><li>
-                          </ul>
-                        </li>
-                 
+                   
+                    <li class="dropdown">
+                        <a href="">Manage Accounts</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('admin/sUser','Manage Users')?>
+                          <?php echo anchor('admin/aUser','Add Users')?>
+                        </div>
+                    </li>
 
-
-
-                    <li class="page-scroll">
+                    <li class="dropdown">
                         <a href="">Manage Laboratory</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('admin/sUser','Add Laboratory')?>
+                          <?php echo anchor('admin/aUser','Edit Laboratory')?>
+                        </div>
                     </li>
-                    <li class="page-scroll">
+
+                    <li class="dropdown">
                         <a href="">Manage Violation</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('admin/sUser','Add Violation')?>
+                          <?php echo anchor('admin/aUser','Edit Violation')?>
+                        </div>
                     </li>
+
                     <li class="page-scroll">
                <!--  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> -->
                   <a data-toggle="modal" data-target="#myModal" href="#">Logout</a>

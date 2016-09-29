@@ -17,30 +17,43 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
                         <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
+                        
+                    <li class="dropdown">
                         <a href="">Clearance</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('','View Clearance')?>
+                          <?php echo anchor('','View Statistics')?>
+                        </div>
                     </li>
-                    <li class="page-scroll">
-                        <a href="">Inventory</a>
-                    </li>
-                     <li class="page-scroll">
-                        <?php echo anchor('labhead/sUser','Manage Staff')?>
-                    </li> 
-                     <li class="dropdown">
 
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Users<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                         <li><?php echo anchor('labhead/sUser','Manage Staff')?></li>
-                           <li><?php echo anchor('labhead/aUser','Add Staff')?><li>
-                          </ul>
-                        </li>
-                      <li class="page-scroll">
-                        <a href="">Manage Laboratory</a>
+                    <li class="dropdown">
+                        <a href="">Inventory</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('','Add Item')?>
+                          <?php echo anchor('','Edit Item')?>
+                          <?php echo anchor('','Create Report')?>
+                          <?php echo anchor('','Edit Report')?>
+                          <?php echo anchor('','Search Report')?>
+                          <?php echo anchor('','View Statistics')?>
+                        </div>
                     </li>
-                    <li class="page-scroll">
+                   
+                    <li class="dropdown">
+                        <a href="">Manage Accounts</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('labhead/sUser','Manage Users')?>
+                          <?php echo anchor('labhead/aUser','Add Users')?>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
                         <a href="">Manage Violation</a>
+                        <div class="dropdown-content">
+                          <?php echo anchor('','Add Violation')?>
+                          <?php echo anchor('','Edit Violation')?>
+                        </div>
                     </li>
+
                     <li class="page-scroll">
                <!--  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> -->
                   <a data-toggle="modal" data-target="#myModal" href="#">Logout</a>
