@@ -28,9 +28,9 @@
                     </li>
 
                     <li class="dropdown">
-                        <?php echo anchor('item_admin/ItemSearch','Inventory')?>
+                        <a href="">Inventory</a>
                         <div class="dropdown-content">
-                          <?php echo anchor('item_admin/addItem','Add Item')?>
+                          <?php echo anchor('item/addItem_admin','Add Item')?>
                           <?php echo anchor('','Edit Item')?>
                           <?php echo anchor('','Create Report')?>
                           <?php echo anchor('','Edit Report')?>

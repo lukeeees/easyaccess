@@ -42,7 +42,7 @@
                         <a href="">Manage Accounts</a>
                         <div class="dropdown-content">
                           <?php echo anchor('labhead/sUser','Manage Users')?>
-                          <?php echo anchor('labhead/aStaff','Add Staff')?>
+                          <?php echo anchor('labhead/aUser','Add Users')?>
                         </div>
                     </li>
 
