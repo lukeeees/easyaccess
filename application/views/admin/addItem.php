@@ -50,7 +50,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>Date Acquired</td>";
-		echo "<td>".form_input('dateAcquired','','class="form-control" placeholder="Date Acquired" required')."<td>";
+		echo '<td><input type="date" name="dateAcquired"><td>';
 	echo "<tr>";
 	
 	echo "<tr>";
