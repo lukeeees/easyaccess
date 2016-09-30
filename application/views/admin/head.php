@@ -40,7 +40,7 @@
                     </li>
                    
                     <li class="dropdown">
-                        <a href="">Manage Accounts</a>
+                        <a>Manage Accounts</a>
                         <div class="dropdown-content">
                           <?php echo anchor('admin/sUser','Manage Users')?>
                           <?php echo anchor('admin/aUser','Add Users')?>
