@@ -40,6 +40,7 @@
                   <th>Total Quantity</th>
                   <th>Available Quantity</th>
                   <th>Damaged Quantity</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -60,6 +61,7 @@
                     <td><?php echo $x[$i]->totalquantity; ?></td>
                     <td><?php echo $x[$i]->availablequantity; ?></td>
                     <td><?php echo $x[$i]->damagedquantity; ?></td>
+                  
 
                     
                 </tr>

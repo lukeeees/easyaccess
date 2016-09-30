@@ -36,16 +36,10 @@ class item_admin extends CI_Controller {
 		 $this->load->view('admin/addItem');
 	}
 
-	public function searchItem()
-	{
-
-		$data['x'] = $this->itemdb->showItem();
-		$this->load->view('admin/searchItem',$data);
-	}
 	public function ItemSearch()
 	{
-		$x = $this->input->post('name_search');
-		$data['x'] = $this->itemdb->get_search($x);
+		$item = $this->input->post('name_search');
+		$data['x'] = $this->itemdb->get_search($item);
 		$this->load->view('admin/searchItem',$data);
 	}
 
