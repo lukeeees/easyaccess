@@ -4,7 +4,7 @@
         <center><h1>List of Users</h1>  </center>
     </div>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped" ,>
               <thead>
                 <tr>
                   <th>#</th>

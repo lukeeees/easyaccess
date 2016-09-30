@@ -62,7 +62,8 @@ class item_admin extends CI_Controller {
 					   'remarks'					=>		$_POST['remarks'],
 					   'totalQuantity'				=>		$_POST['totalQuantity'],
 					   'availableQuantity'			=>		$_POST['availableQuantity'],
-					   'damagedQuantity'			=>		$_POST['damagedQuantity']);
+					   'damagedQuantity'			=>		$_POST['damagedQuantity'],
+					   'owner'						=>		$_POST['owner']);
 
 	
 		$this->itemdb->addItem($item);
@@ -70,6 +71,35 @@ class item_admin extends CI_Controller {
 		$this->load->view('admin/addItem',$msg);
 	}
 
+
+	public function updateItem($values)
+	{
+		$data['x'] = $this->itemdb->solItem($values);
+		$this->load->view('admin/updateItem',$data);
+	}
+
+	public function ItemUpdate()
+	{
+	$item  = array('itemCode'					=>		$_POST['code'],
+					   'itemName'					=>		$_POST['itemname'],
+					   'description'				=>		$_POST['description'] ,
+					   'previousStatus'				=>		$_POST['previousstatus'],
+					   'currentStatus'				=>		$_POST['currentstatus'],
+					   'serialNumber'				=>		$_POST['serialnumber'],
+					   'partNumber'					=>		$_POST['partnumber'],
+					   'manufactureNumber'			=>		$_POST['manufacturenumber'],
+					   'dateAcquired'				=>		$_POST['dateacquired'],
+					   'remarks'					=>		$_POST['remarks'],
+					   'totalQuantity'				=>		$_POST['totalquantity'],
+					   'availableQuantity'			=>		$_POST['availablequantity'],
+					   'damagedQuantity'			=>		$_POST['damagedquantity'],
+					   'owner'						=>		$_POST['owner']);
+
+	
+		$this->itemdb->upItem($item);
+		$msg="Successful";
+		redirect('item_admin/ItemSearch');
+	}
 
 }
 ?>

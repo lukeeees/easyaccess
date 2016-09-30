@@ -73,6 +73,12 @@ echo "<table>";
 		echo "<td>".form_input('damagedQuantity','','class="form-control" placeholder="Damaged Quantity" required')."<td>";
 	echo "<tr>";
 
+	echo "<tr>";
+		echo "<td>Owner</td>";
+		echo form_hidden('owner','DCpE','class="form-control"  required');
+		echo "<td>".form_input('hjk','DCpE','class="form-control" disabled  required')."<td>";
+	echo "<tr>";
+
 //echo "<tr><td><button type='button' class='btn-xl btn-danger'>Submit</button></td></tr>";
 	echo "<tr><td>".form_submit('submit','submit','class="form-control"')."</td></tr>";
 	echo form_close();

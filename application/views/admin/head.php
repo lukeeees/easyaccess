@@ -31,7 +31,6 @@
                         <?php echo anchor('item_admin/ItemSearch','Inventory')?>
                         <div class="dropdown-content">
                           <?php echo anchor('item_admin/addItem','Add Item')?>
-                          <?php echo anchor('','Edit Item')?>
                           <?php echo anchor('','Create Report')?>
                           <?php echo anchor('','Edit Report')?>
                           <?php echo anchor('','Search Report')?>

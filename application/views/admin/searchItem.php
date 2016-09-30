@@ -16,7 +16,7 @@
             </div>
         <?php echo form_close(); ?>
         </div>
-    </div>
+</div>
 
 
 
@@ -30,16 +30,11 @@
                   <th>Item Code</th>
                   <th>Item Name</th>
                   <th>Description</th>
-                  <th>Previous Status</th>
-                  <th>Current Status</th>
-                  <th>Serial Number</th>
-                  <th>Part Number</th>
-                  <th>Manufacture Number</th>
-                  <th>Date Acquired</th>
                   <th>Remarks</th>
                   <th>Total Quantity</th>
                   <th>Available Quantity</th>
                   <th>Damaged Quantity</th>
+                  <th>Owner</th>
                   <th></th>
                 </tr>
               </thead>
@@ -51,19 +46,12 @@
                     <td><?php echo $x[$i]->code; ?></td>
                     <td><?php echo $x[$i]->name; ?></td>
                     <td><?php echo $x[$i]->description; ?></td>
-                    <td><?php echo $x[$i]->previousstatus; ?></td>
-                    <td><?php echo $x[$i]->currentstatus; ?></td>
-                    <td><?php echo $x[$i]->serialnumber; ?></td>
-                    <td><?php echo $x[$i]->partnumber; ?></td>
-                    <td><?php echo $x[$i]->manufacturenumber; ?></td>
-                    <td><?php echo $x[$i]->dateacquired; ?></td>
                     <td><?php echo $x[$i]->remarks; ?></td>
                     <td><?php echo $x[$i]->totalquantity; ?></td>
                     <td><?php echo $x[$i]->availablequantity; ?></td>
                     <td><?php echo $x[$i]->damagedquantity; ?></td>
-                  
-
-                    
+                    <td><?php echo $x[$i]->owner; ?></td>
+                    <td><?php echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">Update</button>');?></td>
                 </tr>
                 <?php } ?>
 
