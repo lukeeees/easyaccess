@@ -24,8 +24,8 @@ class account extends CI_Controller {
                 // Your own constructor codein!
                 $this->load->model('accountsdb');
                 $this->load->view('templates/header');
-                
-                
+
+
         }
 	public function index()
 	{
@@ -93,6 +93,8 @@ class account extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect('account/index');	
 	}
+
+
 	
 
 	
