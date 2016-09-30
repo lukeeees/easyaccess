@@ -9,7 +9,12 @@
     echo "<table>";
       echo form_open('item_admin/ItemUpdate');
   echo form_hidden('id',$this->uri->segment(3));
- 
+
+  	echo "<tr>";
+		
+		echo "<td>".form_hidden('code',$key->code,'class="form-control" required')."</td>";
+	echo "</tr>";
+
 	echo "<tr>";
 		echo "<td>Item Name</td>";
 		echo "<td>".form_input('itemname',$key->name,'class="form-control"required')."</td>";
