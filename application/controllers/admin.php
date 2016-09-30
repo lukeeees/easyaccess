@@ -59,8 +59,6 @@ class admin extends CI_Controller {
 		$this->load->view('admin/addstaff');
 	}
 
-
-
 	public function addLH()
 	{
 		$user  = array('id'			=>		$_POST['idnum'],
@@ -118,14 +116,12 @@ class admin extends CI_Controller {
 
 	}
 	
-	public function deleteuser($x)
+	public function deleteuser($id)
 	{
 		//delete labhead
-		//$this->load->view('delete');
-		
-		$this->accountsdb->deleteUser($x);
-		$this->sUser();
-		
+		$this->load->view('delete');
+		$this->accountsdb->deleteUser($id);
+		redirect('admin/sUser');
 
 	}
 

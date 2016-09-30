@@ -102,15 +102,6 @@ class accountsdb extends CI_Model {
           return $data;
         }
 
-       public function showSPusers()
-        {
-          $data=array();
-          $this->db->where('type','staff');
-          $query = $this->db->get('user');
-          $data = $query->result_array();
-          return $data;
-        }
-
         public function solouser($x){
           $this->db->where('id', $x);
           $query = $this->db->get('user');
