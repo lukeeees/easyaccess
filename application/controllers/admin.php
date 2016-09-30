@@ -72,10 +72,21 @@ class admin extends CI_Controller {
 					   'type'		=>		'head',
 					   'dept'		=>		$_POST['department']);
 
-	
-		$this->accountsdb->addAdmin($user);
-		$msg="Successful";
-		$this->load->view('admin/adduser',$msg);
+
+		$data = $this->accountsdb->showusers();
+
+		foreach ($data as $key) {
+				//echo $key['id'];
+				if($_POST['idnum']==$key['id'] || $_POST['name']==$key['name']){
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
+            		redirect('admin/LUser/');
+				}else{
+					$this->accountsdb->addAdmin($user);
+					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Inventory Record is successfully added!</div>');
+					$this->load->view('admin/adduser');
+				}
+			}	
+
 	}
 
 	

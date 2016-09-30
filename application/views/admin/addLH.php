@@ -9,7 +9,7 @@
   <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php
-echo @$msg;                       
+ echo $this->session->flashdata('msg');                     
 echo "<table>";
 	echo form_open('admin/addLH');
 
