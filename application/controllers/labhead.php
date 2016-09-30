@@ -38,12 +38,16 @@ class labhead extends CI_Controller {
 	}
 		public function sUser()
 	{
-		$data['x'] = $this->accountsdb->showusers();
+		$data['x'] = $this->accountsdb->showSPusers();
 		$this->load->view('labhead/showusers',$data);
 	}
 
 	public function stUser(){
 
+		$this->load->view('labhead/addstaff');
+	}
+	public function aStaff()
+	{
 		$this->load->view('labhead/addstaff');
 	}
 
