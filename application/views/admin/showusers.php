@@ -1,4 +1,3 @@
-<?phpecho br(5);?>
 <div class="container">
 <div class="starter-template">
 	<div class="jumbotron">
@@ -33,13 +32,10 @@
                   <td>".$row['middlename']."</td>
                   <td>".$row['lastname']."</td>
                   <td>".$row['department']."</td>
-                  <td>".anchor('admin/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>','onclick="return doconfirm()"')."".anchor('admin/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
-                          
+                  <td>".anchor('admin/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>')."".anchor('admin/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                 </tr>";
-               //<td>".anchor('admin/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>')."".anchor('admin/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
-                // <a data-toggle="modal" data-target="#myModal" href="#">Logout</a>
+               
                 $c++;
-
               }?>
                 
                
@@ -48,15 +44,5 @@
           </div>
    </div>
 </div><!-- /.container -->
-<script>
-function doconfirm()
-{
-    job = confirm("Are you sure you want to delete this item?");
-    if(job!=true)
-    {
-        return false;
 
-    }
-}
-</script>
 

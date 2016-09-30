@@ -7069,3 +7069,7 @@ a.list-group-item-danger.active:focus {
     font-size: 20px;
     color: black;
 }
+
+td.done {
+  background-color: red;
+}

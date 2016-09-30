@@ -1,0 +1,23 @@
+<?php
+  
+   class Form extends CI_Controller { 
+	
+      public function index() { 
+         /* Load form helper */ 
+         $this->load->helper(array('form', 'url'));
+			
+         /* Load form validation library */ 
+         $this->load->library('form_validation');
+			
+         /* Set validation rule for name field in the form */ 
+         $this->form_validation->set_rules('numeric', '0-9', 'required'); 
+			
+         if ($this->form_validation->run() == FALSE) { 
+         $this->load->view('violation/v_vio'); 
+         } 
+         else { 
+            $this->load->view('violation/vio_succ'); 
+         } 
+      }
+   }
+?>
