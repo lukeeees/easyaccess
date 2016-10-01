@@ -25,7 +25,7 @@ class labhead extends CI_Controller {
 
                 $user = $this->session->userdata('user');
 
-                if ($this->session->has_userdata('user')!=$user['type']){
+                if ($this->session->userdata('user')!=$user['type']){
                 	redirect('account/index');
                 }
              	$this->load->view('labhead/head');
@@ -94,7 +94,8 @@ class labhead extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		$_POST['type'],
-					   'dept'		=>		$_POST['department']);
+					   'dept'		=>		$_POST['department'],
+					   'lab'		=>		$_POST['lab']);
 
 	
 		$this->accountsdb->upuser($user);

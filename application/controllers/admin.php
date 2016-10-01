@@ -68,7 +68,8 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'head',
-					   'dept'		=>		$_POST['department']);
+					   'dept'		=>		$_POST['department'],
+					   'lab'		=>		'ceac');
 
 
 		$data = $this->accountsdb->showusers();
@@ -98,12 +99,22 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'staff',
-					   'dept'		=>		$_POST['department']);
+					   'dept'		=>		$_POST['department'],
+					   'lab'		=>		'ceac');
 
-	
-		$this->accountsdb->addAdmin($user);
-		$msg="Successful";
-		$this->load->view('admin/adduser',$msg);
+				$data = $this->accountsdb->showusers();
+
+		foreach ($data as $key) {
+				//echo $key['id'];
+				if($_POST['idnum']==$key['id'] || $_POST['name']==$key['name']){
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
+            		redirect('admin/LUser/');
+				}else{
+					$this->accountsdb->addAdmin($user);
+					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Inventory Record is successfully added!</div>');
+					$this->load->view('admin/adduser');
+				}
+			}	
 
 	}
 
@@ -118,20 +129,30 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'admin',
-					   'dept'		=>		$_POST['department']);
+					   'dept'		=>		$_POST['department'],
+					   'lab'		=>		'department');
+		$data = $this->accountsdb->showusers();
 
-	
-		$this->accountsdb->addAdmin($user);
-		$msg="Successful";
-		$this->load->view('admin/adduser',$msg);
+		foreach ($data as $key) {
+				//echo $key['id'];
+				if($_POST['idnum']==$key['id'] || $_POST['name']==$key['name']){
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
+            		redirect('admin/aUser/');
+				}else{
+					$this->accountsdb->addAdmin($user);
+					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Inventory Record is successfully added!</div>');
+					$this->load->view('admin/adduser');
+				}
+			}	
 
 	}
 	
 	public function deleteuser($id)
 	{
 		//delete labhead
-		$this->load->view('delete');
+		//$this->load->view('delete');
 		$this->accountsdb->deleteUser($id);
+		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Table has been updated.!</div>');
 		redirect('admin/sUser');
 
 	}

@@ -45,3 +45,14 @@
    </div>
 </div><!-- /.container -->
 
+<script>
+function doconfirm()
+{
+    job = confirm("Are you sure you want to delete this item?");
+    if(job!=true)
+    {
+        return false;
+
+    }
+}
+</script>

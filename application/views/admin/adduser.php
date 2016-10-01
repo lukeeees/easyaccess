@@ -8,8 +8,9 @@
   <li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
   <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
+<?php echo $this->session->flashdata('msg');?>
 <?php
-echo @$msg;                       
+                      
 echo "<table>";
 	echo form_open('admin/adduser');
 
@@ -34,7 +35,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Department</td>";
+		echo "<td>DEPARTMENT</td>";
 		$arrayName = array('CE'		 =>		'CIVIL ENGINEERING',
 						   'CPE'	 => 	'COMPUTER ENGINEERING',
 						   'CHE'	 =>		'CHEMICAL ENGINEERING',

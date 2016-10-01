@@ -8,6 +8,7 @@
   <li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
   <li role="presentation" class="active"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
+<?php echo $this->session->flashdata('msg');?>
 <?php
 echo @$msg;                       
 echo "<table>";

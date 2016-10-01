@@ -9,7 +9,7 @@
   <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php
- echo $this->session->flashdata('msg');                     
+echo $this->session->flashdata('msg');                     
 echo "<table>";
 	echo form_open('admin/addLH');
 
@@ -28,7 +28,7 @@ echo "<table>";
 		echo "<td>".form_input('fname','','class="form-control" placeholder="FIRST NAME" required')."</td>";
 	echo "</tr>";
 
-	echo "<tr>";
+ 	echo "<tr>";
 		echo "<td>MIDDLE NAME</td>";
 		echo "<td>".form_input('mname','','class="form-control" placeholder="MIDDLE NAME" required')."</td>";
 	echo "</tr>";
