@@ -8,32 +8,32 @@
 echo "<table>";
 	echo form_open('c_clear/addvio');
 	echo "<tr>";
-		echo "<td>Id Number</td>";
-		echo "<td>".form_input('idnumber','','class="form-control" placeholder="Id Number" required')."</td>";
+		echo "<td>ID NUMBER</td>";
+		echo "<td>".form_input('idnumber','','class="form-control" placeholder="ID NUMBER" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Last Name</td>";
-		echo "<td>".form_input('lastname','','class="form-control" placeholder="Last Name" required')."</td>";
+		echo "<td>LAST NAME</td>";
+		echo "<td>".form_input('lastname','','class="form-control" placeholder="LAST NAME" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>First Name</td>";
-		echo "<td>".form_input('name','','class="form-control" placeholder="First Name" required')."</td>";
+		echo "<td>FIRST NAME</td>";
+		echo "<td>".form_input('name','','class="form-control" placeholder="FIRST NAME" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Middle Name</td>";
-		echo "<td>".form_input('middlename','','class="form-control" placeholder="Middle Name" required')."</td>";
+		echo "<td>MIDDLE NAME</td>";
+		echo "<td>".form_input('middlename','','class="form-control" placeholder="MIDDLE NAME" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>Year Level</td>";
-		$arrayName = array('1'	 => 	'First Year',
-						   '2'	 =>		'Second Year',
-						   '3'	 =>		'Third Year',
-						   '4'	 =>		'Fourth Year',
-						   '5'	 =>		'Fifth Year');
+		$arrayName = array('1st Yr'	 => 	'FIRST YEAR',
+						   '2nd Yr'	 =>		'SECOND YEAR',
+						   '3rd Yr'	 =>		'THIRD YEAR',
+						   '4th Yr'	 =>		'FOURTH YEAR',
+						   '5th Yr'	 =>		'FIFTH YEAR');
 		echo "<td>".form_dropdown('yearlevel',$arrayName,'class="form-control" placeholder="Year Level"')."</td>";
 	echo "</tr>";
 
