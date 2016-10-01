@@ -55,10 +55,9 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="">Manage Violation</a>
+                        <?php echo anchor('#','Violation')?>
                         <div class="dropdown-content">
                           <?php echo anchor('c_clear/violation', 'Add Violation'); ?><!--<a href="#">Add Violation</a>-->
-                          <?php echo anchor('#','Edit Violation')?>
                         </div>
                     </li>
 
