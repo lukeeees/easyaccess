@@ -37,10 +37,12 @@ class itemdb extends CI_Model {
           return $data;
         }
 
-        public function get_search($value)
+        public function get_search($value,$ref)
         {
           
-          $this->db->like('name',$value);
+          $ref1 = $ref;
+
+          $this->db->like($ref1,$value);
           $query = $this->db->get('item');
           
          return $query->result();

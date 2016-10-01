@@ -76,7 +76,7 @@ echo "<table>";
 	echo "<tr>";
 		echo "<td>Owner</td>";
 		echo form_hidden('owner','DCpE','class="form-control"  required');
-		echo "<td>".form_input('hjk','DCpE','class="form-control" disabled  required')."<td>";
+		echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
 	echo "<tr>";
 
 //echo "<tr><td><button type='button' class='btn-xl btn-danger'>Submit</button></td></tr>";

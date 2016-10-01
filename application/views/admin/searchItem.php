@@ -7,12 +7,30 @@
         echo form_open("item_admin/ItemSearch", $attributes);?>
             <div class="form-group">
                 <div class="col-md-6" style="margin-left:20%">
-                    <input class="form-control" id="name_search" name="name_search" placeholder="Search for Item Name" type="text" value="<?php echo set_value('name_search'); ?>" />
+                    <input class="form-control" id="name_search" name="name_search" placeholder="Search Item" type="text" value="<?php echo set_value('name_search'); ?>" />
+
+                    
                 </div>
                 <div>
                     <input id="btn_search" name="btn_search" type="submit" class="btn btn-danger" value="Search"/>
                     <!--<a href="<?php //echo base_url(). "index.php/inventory/index"; ?>" class="btn btn-default">Show All</a> -->
+
+                    
+                         
+                          <?php
+                            $data = array(
+                                      'name'  => 'By Item Name',
+                                      'owner' => 'By Laboratory',
+                                      'code'  => 'By Item Code'
+                            );
+
+                            echo form_dropdown('searchBy',$data,set_value('searchBy'));
+                   
+                          ?>
                 </div>
+
+
+
             </div>
         <?php echo form_close(); ?>
         </div>

@@ -39,7 +39,12 @@ class item_admin extends CI_Controller {
 	public function ItemSearch()
 	{
 		$item = $this->input->post('name_search');
-		$data['x'] = $this->itemdb->get_search($item);
+		$ref = $this->input->post('searchBy');
+		
+		if(!$ref)
+			$ref = 'name';
+		//$ref = 'owner';
+		$data['x'] = $this->itemdb->get_search($item,$ref);
 		$this->load->view('admin/searchItem',$data);
 	}
 
@@ -67,8 +72,10 @@ class item_admin extends CI_Controller {
 
 	
 		$this->itemdb->addItem($item);
+		echo "alert('Successful')";
 		$msg="Successful";
 		$this->load->view('admin/addItem',$msg);
+
 	}
 
 

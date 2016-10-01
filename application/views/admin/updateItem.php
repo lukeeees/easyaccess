@@ -11,7 +11,6 @@
   echo form_hidden('id',$this->uri->segment(3));
 
   	echo "<tr>";
-		
 		echo "<td>".form_hidden('code',$key->code,'class="form-control" required')."</td>";
 	echo "</tr>";
 
