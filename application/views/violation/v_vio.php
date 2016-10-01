@@ -61,28 +61,25 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
+		echo "<td>Violate at</td>";
+		$arrayName = array('DCpE'	 => 'Department of Computer Engineering',
+						   'LB264TC'	 => 	'LB264TC',
+						   'LB265TC'	 => 	'LB265TC',	
+						   'LB266TC'	 =>		'LB266TC',
+						   'LB267TC'	 =>		'LB267TC');
+		echo "<td>".form_dropdown('laboratory',$arrayName,'class="form-control" placeholder="Laboratory"')."</td>";
+	echo "</tr>";
+
+	echo "<tr>";
 		echo "<td>Violation</td>";
 		echo "<td>".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Laboratory</td>";
-		$arrayName = array('CEAC1'	 => 	'CEAC1 Laboratory',
-						   'CEAC2'	 => 	'CEAC2 Laboratory',
-						   'CEAC3'	 => 	'CEAC3 Laboratory',	
-						   'CISCO'	 =>		'CISCO Laboratory',
-						   'CNLAB'	 =>		'CN Laboratory',
-						   'DML285'	 =>		'DML285 Laboratory',
-						   'DML286'	 =>		'DML286 Laboratory',
-						   'NCRLAB'	 =>		'NCR Laboratory',
-						   'PCBLAB'  =>		'PCB Laboratory',
-						   'SELAB'	 =>		'SE Laboratory');
-		echo "<td>".form_dropdown('laboratory',$arrayName,'class="form-control" placeholder="Laboratory"')."</td>";
-	echo "</tr>";
-
-	echo "<tr>";
 		echo "<td>Status</td>";
-		echo "<td>".form_input('status','','class="form-control" placeholder="Status" required')."</td>";
+		$arrayName= array('Pending' => 'Pending',
+							'For Approval' => 'For Approval');
+		echo "<td>".form_dropdown('status',$arrayName,'class="form-control" placeholder="Status" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
