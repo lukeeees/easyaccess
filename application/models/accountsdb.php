@@ -31,8 +31,8 @@ class accountsdb extends CI_Model {
                         'middlename'    =>    $values['mname'],
                         'password'      =>    $values['password'],
                         'type'          =>    $values['type'],
-                        'department'    =>    $values['dept']);
-
+                        'department'    =>    $values['dept'],
+                        'laboratory'    =>    $values['lab']);
           $this->db->insert('user',$user);
         }
 

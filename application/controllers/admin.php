@@ -28,13 +28,13 @@ class admin extends CI_Controller {
                 if ($this->session->userdata('type')!='admin'){
                 	redirect('account/index');
                 }
-                $this->load->view('admin/head');
+               $this->load->view('admin/head');
                 $this->load->view('templates/header');
 
         }
 	public function index()
 	{
-		$this->load->view('admin/adduser');
+		$this->load->view('admin/stat');
 	}
 	public function aLab()
 	{
@@ -75,16 +75,18 @@ class admin extends CI_Controller {
 		$data = $this->accountsdb->showusers();
 
 		foreach ($data as $key) {
-				//echo $key['id'];
-				if($_POST['idnum']==$key['id'] || $_POST['name']==$key['name']){
-					$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
-            		redirect('admin/LUser/');
-				}else{
-					$this->accountsdb->addAdmin($user);
-					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Inventory Record is successfully added!</div>');
-					$this->load->view('admin/adduser');
+			if($_POST['idnum']==$key['idnumber'] || $_POST['name']==$key['name']){
+				$flag=1;
 				}
-			}	
+			}//end foreach
+		if($flag == 1 ){
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
+            redirect('admin/LUser/');
+		}else{
+			$this->accountsdb->addAdmin($user);
+			$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Record is successfully added!</div>');
+			redirect('admin/sUser');
+		}
 
 	}
 
@@ -105,16 +107,18 @@ class admin extends CI_Controller {
 				$data = $this->accountsdb->showusers();
 
 		foreach ($data as $key) {
-				//echo $key['id'];
-				if($_POST['idnum']==$key['id'] || $_POST['name']==$key['name']){
-					$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
-            		redirect('admin/LUser/');
-				}else{
-					$this->accountsdb->addAdmin($user);
-					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Inventory Record is successfully added!</div>');
-					$this->load->view('admin/adduser');
+			if($_POST['idnum']==$key['idnumber'] || $_POST['name']==$key['name']){
+				$flag=1;
 				}
-			}	
+			}//end foreach
+		if($flag == 1 ){
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
+            redirect('admin/stUser/');
+		}else{
+			$this->accountsdb->addAdmin($user);
+			$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Record is successfully added!</div>');
+			redirect('admin/sUser');
+		}	
 
 	}
 
@@ -134,17 +138,18 @@ class admin extends CI_Controller {
 		$data = $this->accountsdb->showusers();
 
 		foreach ($data as $key) {
-				//echo $key['id'];
-				if($_POST['idnum']==$key['id'] || $_POST['name']==$key['name']){
-					$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
-            		redirect('admin/aUser/');
-				}else{
-					$this->accountsdb->addAdmin($user);
-					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Inventory Record is successfully added!</div>');
-					$this->load->view('admin/adduser');
+			if($_POST['idnum']==$key['idnumber'] || $_POST['name']==$key['name']){
+				$flag=1;
 				}
-			}	
-
+			}//end foreach
+		if($flag == 1 ){
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Data</div>');
+            redirect('admin/aUser/');
+		}else{
+			$this->accountsdb->addAdmin($user);
+			$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Record is successfully added!</div>');
+			redirect('admin/sUser');
+		}
 	}
 	
 	public function deleteuser($id)
@@ -161,6 +166,7 @@ class admin extends CI_Controller {
 	{
 		$data['x'] = $this->accountsdb->solouser($values);
 		$this->load->view('admin/update',$data);
+
 
 	}
 
@@ -216,7 +222,7 @@ class admin extends CI_Controller {
 
 	
 		$this->accountsdb->upuser($user);
-		$msg="Successful";
+		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Table has been updated!</div>');
 		redirect('admin/sUser');
 	}
 

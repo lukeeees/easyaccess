@@ -16,6 +16,7 @@
                   <th>Middle Name</th>
                   <th>Last Name</th>
                   <th>Department</th>
+                  <th>Station</th>
                   <th>Option</th>
                 </tr>
               </thead>
@@ -33,6 +34,7 @@
                   <td>".$row['middlename']."</td>
                   <td>".$row['lastname']."</td>
                   <td>".$row['department']."</td>
+                  <td>".$row['laboratory']."</td>
                   <td>".anchor('admin/deleteuser/'.$row['id'],'<button type="button" class="btn-xs btn-danger">Delete</button>','onclick="return doconfirm()"')."".anchor('admin/updateuser/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                 </tr>";
                
