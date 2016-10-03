@@ -123,4 +123,11 @@ class accountsdb extends CI_Model {
              $this->db->update('user',$data);
           }
 
+          public function g_item() 
+          {
+          
+            $query = $this->db->get('item');
+            return $query;
+          }
+
   }?>

@@ -1,25 +1,33 @@
-<div id="piechart" style="width: 900px; height: 500px;"></div>
 
-<script>
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+            google.load("visualization", "1.1", {packages: ["bar"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Total Quantity', 'Available Quantity', 'Damaged Quantity'],
+<?php
+foreach ($chart_data as $data) {
+    echo '[' . $data->totalquantity. ',' . $data->availablequantity . ',' . $data->damagedquantity.'],';
+}
+?>
+                ]);
 
-        var options = {
-          title: 'Statistics for blahblah'
-        };
+                var options = {
+                    chart: {
+                        title: '<?php echo $name?>',
+                        subtitle:'luke',
+                    }
+                };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        chart.draw(data, options);
-      }
-</script>
+                chart.draw(data, options);
+            }
+        </script>
+    </head>
+    <body>        
+        <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+    </body>
+</html>

@@ -28,7 +28,7 @@ class admin extends CI_Controller {
                 if ($this->session->userdata('type')!='admin'){
                 	redirect('account/index');
                 }
-               $this->load->view('admin/head');
+              // $this->load->view('admin/head');
                 $this->load->view('templates/header');
 
         }
@@ -225,5 +225,16 @@ class admin extends CI_Controller {
 		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Table has been updated!</div>');
 		redirect('admin/sUser');
 	}
+
+	public function graph_Sitem($values)
+	{
+
+		$results = $this->ChartModel->get_chart_data($values);
+		$this->load->view('admin/stat',$results);	
+
+
+
+	}
+
 
 }
