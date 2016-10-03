@@ -28,7 +28,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Year Level</td>";
+		echo "<td>YEAR LEVEL</td>";
 		$arrayName = array('1st Yr'	 => 	'FIRST YEAR',
 						   '2nd Yr'	 =>		'SECOND YEAR',
 						   '3rd Yr'	 =>		'THIRD YEAR',
@@ -38,7 +38,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Course</td>";
+		echo "<td>COURSE</td>";
 		$arrayName = array('BS-CE'	 => 	'Civil Engineering',
 						   'BS-CHE'	 =>		'Chemical Engineering',
 						   'BS-CpE'	 =>		'Computer Engineering',
@@ -50,7 +50,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Department</td>";
+		echo "<td>DEPARTMENT</td>";
 		$arrayName = array('CpE'	 => 	'Department of Computer Engineering',
 						   'CE'		 =>		'Department of Civil Engineering',
 						   'CHE'	 =>		'Department of Chemical Engineering',
@@ -61,7 +61,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Violate at</td>";
+		echo "<td>VIOLATE AT</td>";
 		$arrayName = array('DCpE'	 => 'Department of Computer Engineering',
 						   'LB264TC'	 => 	'LB264TC',
 						   'LB265TC'	 => 	'LB265TC',	
@@ -71,14 +71,14 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Violation</td>";
-		echo "<td>".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
+		echo "<td>VIOLATION</td>";
+		echo "<td>".form_input('violation','','class="form-control" placeholder="VIOLATION" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Status</td>";
-		$arrayName= array('Pending' => 'Pending',
-							'For Approval' => 'For Approval');
+		echo "<td>ACTION</td>";
+		$arrayName= array('Pending' 	 => 'Pending',
+						  'For Approval' => 'For Approval');
 		echo "<td>".form_dropdown('status',$arrayName,'class="form-control" placeholder="Status" required')."</td>";
 	echo "</tr>";
 

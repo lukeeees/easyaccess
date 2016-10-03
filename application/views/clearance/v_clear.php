@@ -14,8 +14,8 @@
                   <th>Course</th>
                   <th>Department</th>
                   <th>Violation</th>
-                  <th>Laboratory</th>
-                  <th>Status</th>
+                  <th>Room/Laboratory</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>

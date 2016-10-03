@@ -48,5 +48,39 @@ class clearancedb extends CI_Model {
           $data = $query->result_array();
           return $data;
         }
+
+          public function get_search($value,$ref)
+        {
+          
+          $ref1 = $ref;
+
+          $this->db->like($ref1,$value);
+          $query = $this->db->get('student');
+          
+         return $query->result(); 
+        }
+
+        public function upVio($values) //update violation
+          {
+            $student  = array('u_id'     =>    $values['idnumber'],
+                           'lastname'   =>    $values['lastname'] ,
+                           'name'       =>    $values['name'],
+                           'middlename' =>    $values['middlename'],
+                           'year'       =>    $values['yearlevel'],
+                           'course'     =>    $values['course'],
+                           'department' =>    $values['department'],
+                           'violation'  =>    $values['violation'],
+                           'laboratory' =>    $values['laboratory'],
+                           'status'     =>    $values['status']);
+
+             $this->db->where('student', $values['id']);
+             $this->db->update('student',$student);
+          }
+
+           public function solItem($x){
+          $this->db->where('id', $x);
+          $query = $this->db->get('student');
+          return $query;
+          }
 }
 ?>
