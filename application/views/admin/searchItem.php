@@ -88,6 +88,7 @@
 
               </tbody>
             </table>
+         <?php echo  anchor_popup('admin/graph_item/','<button class="btn-xs">Show Statistics</button>',$atts);?>
           </div>
    </div>
 </div><!-- /.container -->

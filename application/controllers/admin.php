@@ -230,10 +230,18 @@ class admin extends CI_Controller {
 	{
 
 		$results = $this->ChartModel->get_chart_data($values);
-		$this->load->view('admin/stat',$results);	
+		$this->session->set_flashdata('name',$values);
+		$this->load->view('admin/statitem',$results);	
 
 
 
+	}
+	public function graph_item()
+	{
+		$result = $this->ChartModel->sum_Chart();
+	
+
+		$this->load->view('admin/stat',$result);
 	}
 
 

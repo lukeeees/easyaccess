@@ -20,24 +20,35 @@ class ChartModel extends CI_Model {
         $query = $this->db->get('item');
         $results['chart_data'] = $query->result();
 
-        $this->db->where('code',$values);
+/*        $this->db->select_sum('totalquantity');
         $query = $this->db->get('item');
-        $results['name'] = $query->row()->name;
+        $results['sum_of_qty'] = $query->result();
 
+        $this->db->select_sum('availablequantity');
+        $query = $this->db->get('item');
+        $results['sum_of_aqty'] = $query->result();
 
+        $this->db->select_sum('damagedquantity');
+        $query = $this->db->get('item');
+        $results['sum_of_dmg'] = $query->result();*/
 
-        //get min year
-/*        $this->db->select_min('performance_year');
-        $this->db->limit(1);
-        $query = $this->db->get($this->performance);
-        $results['min_year'] = $query->row()->performance_year;
+        return $results;
+    }
+
+    function sum_Chart()
+    {
+        $this->db->select_sum('totalquantity');
+        $query = $this->db->get('item');
+        $results['sqty'] = $query->row()->totalquantity;
+
+        $this->db->select_sum('availablequantity');
+        $query = $this->db->get('item');
+        $results['saq'] = $query->row()->availablequantity;
+
+        $this->db->select_sum('damagedquantity');
+        $query = $this->db->get('item');
+        $results['sdq'] = $query->row()->damagedquantity;
         
-        //get max year
-        $this->db->select_max('performance_year');
-        $this->db->limit(1);
-        $query = $this->db->get($this->performance);
-        $results['max_year'] = $query->row()->performance_year;*/
-
         return $results;
     }
 
