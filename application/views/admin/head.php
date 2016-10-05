@@ -20,7 +20,7 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="">Clearance</a>
+                        <a>Clearance</a>
                         <div class="dropdown-content">
                             <?php echo anchor('c_clear/clearance', 'Clearance');?> <!--<a href="#">View Clearance</a>-->
                             <a href="#">View Statistics</a>
@@ -47,15 +47,15 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="">Manage Laboratory</a>
+                         <?php echo anchor('admin/labSearch','Manage Laboratory')?>
                         <div class="dropdown-content">
-                          <?php echo anchor('admin/sUser','Add Laboratory')?>
-                          <?php echo anchor('admin/aUser','Edit Laboratory')?>
+                          <?php echo anchor('admin/aLab','Add Laboratory')?>
+                          
                         </div>
                     </li>
 
                     <li class="dropdown">
-                        <?php echo anchor('#','Violation')?>
+                        <?php echo anchor('c_clear/sVio','Violation')?>
                         <div class="dropdown-content">
                           <?php echo anchor('c_clear/violation', 'Add Violation'); ?><!--<a href="#">Add Violation</a>-->
                         </div>

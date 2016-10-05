@@ -36,13 +36,9 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>DEPARTMENT</td>";
-		$arrayName = array('CE'		 =>		'CIVIL ENGINEERING',
-						   'CPE'	 => 	'COMPUTER ENGINEERING',
-						   'CHE'	 =>		'CHEMICAL ENGINEERING',
-						   'EEE'	 =>		'ELECTRICAL AND ELECTRONIC ENGINEERING',
-						   'IE'		 =>		'INDUSTRIAL ENGINEERING',
-						   'ME'		 =>		'MECHANICAL ENGINEERING');
-		echo "<td>".form_dropdown('department',$arrayName,'class="form-control" placeholder="Department"')."</td>";
+		echo form_hidden('department','DCpE','class="form-control"  required');
+		echo "<td>".form_input('department','DCpE','class="form-control" disabled  required')."<td>";
+		//	echo "<td>".form_input('department','','class="form-control" placeholder="Department"')."</td>";
 	echo "</tr>";
     
     echo "<tr>";
