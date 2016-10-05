@@ -36,8 +36,14 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>DEPARTMENT</td>";
+<<<<<<< HEAD
 		echo form_hidden('owner','DCpE','class="form-control"  required');
 		echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
+=======
+		echo form_hidden('department','DCpE','class="form-control"  required');
+		echo "<td>".form_input('department','DCpE','class="form-control" disabled  required')."<td>";
+		//	echo "<td>".form_input('department','','class="form-control" placeholder="Department"')."</td>";
+>>>>>>> origin/master
 	echo "</tr>";
     
     echo "<tr>";

@@ -143,11 +143,20 @@ class accountsdb extends CI_Model {
             return $query;
           }
 
+
           public function get_labs()
           {
             $query = $this->db->get('laboratory');
             $result['laboratory'] = $query->result();
             return $result;
+          }
+          public function get_search($value, $ref)
+          {
+            $ref1=$ref;
+            $this->db->like($ref1,$value);
+            $query = $this->db->get('laboratory');
+            return $query->result();
+
           }
 
   }?>

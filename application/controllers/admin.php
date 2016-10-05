@@ -28,7 +28,11 @@ class admin extends CI_Controller {
                 if ($this->session->userdata('type')!='admin'){
                 	redirect('account/index');
                 }
+
               $this->load->view('admin/head');
+
+              	$this->load->view('admin/head');
+
                 $this->load->view('templates/header');
 
         }
@@ -63,14 +67,14 @@ class admin extends CI_Controller {
 	public function addLH()
 	{
 		$user  = array('id'			=>		$_POST['idnum'],
-					   'user'		=>		$_POST['name'],
-					   'lname'		=>		$_POST['lname'] ,
+					   'lname'		=>		$_POST['lname'],
 					   'fname'		=>		$_POST['fname'],
 					   'mname'		=>		$_POST['mname'],
-					   'password'	=>		do_hash($_POST['pass'],'md5'),
-					   'type'		=>		'head',
 					   'dept'		=>		$_POST['department'],
-					   'lab'		=>		'ceac');
+					   'user'		=>		$_POST['name'],
+					   'password'	=>		do_hash($_POST['pass'],'md5'),
+					   'type'		=>		'head');
+					 //  'lab'		=>		'ceac');
 
 		$data = $this->accountsdb->showusers();
 
@@ -89,8 +93,6 @@ class admin extends CI_Controller {
 		}
 
 	}
-
-	
 
 	public function addStaff()
 	{
@@ -175,10 +177,43 @@ class admin extends CI_Controller {
 
 	public function addLaboratory()
 	{
-		$lab = array('lab'		=>	$_POST['lab'],
-					'room'		=>	$_POST['room'],
-					'status'	=>	$_POST['status'] );
-		$this->clearancedb->addLab($lab);
+		$lab = array('labname'	=>	$_POST['labname'],
+					'room'		=>	$_POST['room']);
+					//'status'	=>	$_POST['status'] 
+		$this->accountsdb->addLab($lab);
+		redirect("admin/aLab");
+	}
+
+	public function labSearch()
+	{
+		$labname = $this->input->post('name_search');
+		$ref = $this->input->post('searchBy');
+		
+		if(!$ref)
+			$ref = 'name';
+		//$ref = 'owner';
+		$data['x'] = $this->accountsdb->get_search($labname,$ref);
+		$this->load->view('admin/searchlab',$data);
+	}
+ 	
+	public function updateLab($values)
+	{
+
+		$data['x'] = $this->accountsdb->solLab($values);
+		$this->load->view('admin/updateLab',$data);
+	}
+
+	public function LabUpdate()
+	{
+	$item  = array('code'						=>		$_POST['code'],
+					'labname'					=>		$_POST['labname'],
+					'labroom'					=>		$_POST['room']);
+	
+
+	
+		$this->accountsdb->upItem($item);
+		$msg="Successful";
+		redirect('admin/labSearch');
 	}
 
 	public function editLab($id)
@@ -224,6 +259,10 @@ class admin extends CI_Controller {
 		redirect('admin/sUser');
 	}
 
+
+	
+}?>
+
 	public function graph_Sitem($values)
 	{
 
@@ -244,3 +283,4 @@ class admin extends CI_Controller {
 
 
 }
+

@@ -20,7 +20,7 @@ class ChartModel extends CI_Model {
         $query = $this->db->get('item');
         $results['chart_data'] = $query->result();
 
-/*        $this->db->select_sum('totalquantity');
+/*       $this->db->select_sum('totalquantity');
         $query = $this->db->get('item');
         $results['sum_of_qty'] = $query->result();
 

@@ -47,10 +47,10 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="">Manage Laboratory</a>
+                         <?php echo anchor('admin/labSearch','Manage Laboratory')?>
                         <div class="dropdown-content">
-                          <?php echo anchor('admin/sUser','Add Laboratory')?>
-                          <?php echo anchor('admin/aUser','Edit Laboratory')?>
+                          <?php echo anchor('admin/aLab','Add Laboratory')?>
+                          
                         </div>
                     </li>
 
