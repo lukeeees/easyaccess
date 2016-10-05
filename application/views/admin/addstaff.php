@@ -36,15 +36,25 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>DEPARTMENT/LABORATORY</td>";
-				$arrayName = array('DCpE'	 	=> 	'Department of Computer Engineering',
+				/*$arrayName = array('DCpE'	 	=> 	'Department of Computer Engineering',
 								   'CEAC LAB'	=>	'CEAC LABORATORY',
 								   'CISCO LAB'	=>	'CISCO LABORATORY',
 								   'CN LAB'	 	=>	'CN LABORATORY',
 								   'DM LAB'		=>	'DM LABORATORY',
 								   'NCR LAB'	=>	'NCR LABORATORY',
 								   'PCB LAB'	=>	'PCB LABORATORY',
-								   'SE LAB'		=>	'SE LABORATORY');
-		echo "<td>".form_dropdown('department',$arrayName,'class="form-control" placeholder="Department"')."</td>";
+								   'SE LAB'		=>	'SE LABORATORY');*/
+		$values=array();
+		array_push($values,'Department of Computer Engineering');
+		foreach ($laboratory as $key) {
+			# code...
+			array_push($values,$key->name);
+		}
+		
+
+		echo '<div class="form-group">';
+		echo "<td>".form_dropdown('department',$values,'class="form-control" multiple')."</td>";
+		echo "</div>";
 	echo "</tr>";
 
 	echo "<tr>";

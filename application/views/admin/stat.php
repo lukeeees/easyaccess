@@ -16,7 +16,7 @@
                 var options = {
                     chart: {
                         title: 'Total Statistics of Items',
-                        subtitle:'luke',
+                        subtitle:'Luke is Awesome',
                     }
                 };
 

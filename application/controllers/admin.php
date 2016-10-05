@@ -28,7 +28,7 @@ class admin extends CI_Controller {
                 if ($this->session->userdata('type')!='admin'){
                 	redirect('account/index');
                 }
-              // $this->load->view('admin/head');
+              $this->load->view('admin/head');
                 $this->load->view('templates/header');
 
         }
@@ -51,12 +51,13 @@ class admin extends CI_Controller {
 	}
 	public function LUser(){
 
-		$this->load->view('admin/addLH');
+		$result = $this->accountsdb->get_labs();
+		$this->load->view('admin/addLH',$result);
 	}
 
 	public function stUser(){
-
-		$this->load->view('admin/addstaff');
+		$result = $this->accountsdb->get_labs();
+		$this->load->view('admin/addstaff',$result);
 	}
 
 	public function addLH()
@@ -70,7 +71,6 @@ class admin extends CI_Controller {
 					   'type'		=>		'head',
 					   'dept'		=>		$_POST['department'],
 					   'lab'		=>		'ceac');
-
 
 		$data = $this->accountsdb->showusers();
 
@@ -164,10 +164,8 @@ class admin extends CI_Controller {
 
 	public function updateuser($values)
 	{
-		$data['x'] = $this->accountsdb->solouser($values);
-		$this->load->view('admin/update',$data);
-
-
+		$data = $this->accountsdb->headandlab($values);
+		$this->load->view('admin/updateLH',$data);
 	}
 
 	public function showStat()

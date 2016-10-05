@@ -4,9 +4,11 @@
         <center><h1>Edit User</h1>  </center>
     </div>
      <?php
-      foreach ($x->result() as $key) {
+
+  foreach ($user as $key) {
     echo "<table>";
-      echo form_open('admin/dupdateuser');
+  echo form_open('admin/dupdateuser');
+
   echo form_hidden('id',$this->uri->segment(3));
   echo "<tr>";
     echo "<td>ID Number</td>";
@@ -48,13 +50,23 @@
 
   echo "<tr>";
     echo "<td>Department</td>";
-        $arrayName = array('CPE'   =>   'Computer Engineering',
+        /*$arrayName = array('CPE'   =>   'Computer Engineering',
                'CE'    =>   'Civil Engineering',
                'CHE'   =>   'Chemical Engineering',
                'EEE'   =>   'Electrical and Electronics Engineering',
                'IE'    =>   'Industrial Engineering',
-               'ME'    =>   'Mechanical Engineering');
-    echo "<td>".form_dropdown('department',$arrayName,$key->department,'class="form-control"')."</td>";
+               'ME'    =>   'Mechanical Engineering');*/
+    $values=array();
+    array_push($values,'Deparartment of Computer Engineering');
+    foreach ($lab as $key) {
+      # code...
+      array_push($values,$key->name);
+    }
+    
+
+    echo '<div class="form-group">';
+    echo "<td>".form_dropdown('department',$values,'class="form-control" multiple')."</td>";
+    echo "</div>";
   echo "</tr>";
 
   echo "<tr>";

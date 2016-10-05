@@ -81,14 +81,14 @@
         'screeny'     => 0,
         'window_name' => '_blank'
 );
-                   echo  anchor_popup('admin/graph_Sitem/'.$x[$i]->code,'<button class="btn-xs">Show Statistics</button>',$atts);
+                   echo  anchor_popup('charts/graph_Sitem/'.$x[$i]->code,'<button class="btn-xs">Show Statistics</button>',$atts);
                     ?></td>
                 </tr>
                 <?php } ?>
 
               </tbody>
             </table>
-         <?php echo  anchor_popup('admin/graph_item/','<button class="btn-xs">Show Statistics</button>',$atts);?>
+         <?php echo  anchor_popup('charts/graph_item/','<button class="btn-xs">Show Statistics</button>',$atts);?>
           </div>
    </div>
 </div><!-- /.container -->

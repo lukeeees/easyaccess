@@ -17,7 +17,8 @@ class accountsdb extends CI_Model {
               foreach ($query->result() as $row)
                 {       
                       $data = array('id'        =>     $row->id ,
-                                    'type'      =>     $row->type     );
+                                    'type'      =>     $row->type,
+                                    'department'=>     $row->department);
                 }
                 return $data;
 
@@ -123,11 +124,30 @@ class accountsdb extends CI_Model {
              $this->db->update('user',$data);
           }
 
+          public function headandlab($values)
+          {
+            $this->db->where('id',$values);
+            $query = $this->db->get('user');
+            $result['user'] = $query->result();
+
+            $query = $this->db->get('laboratory');
+            $result['lab'] = $query->result();
+
+            return $result;
+          } 
+
           public function g_item() 
           {
           
             $query = $this->db->get('item');
             return $query;
+          }
+
+          public function get_labs()
+          {
+            $query = $this->db->get('laboratory');
+            $result['laboratory'] = $query->result();
+            return $result;
           }
 
   }?>
