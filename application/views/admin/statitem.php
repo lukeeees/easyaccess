@@ -1,4 +1,5 @@
 
+
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
             google.load("visualization", "1.1", {packages: ["bar"]});
@@ -7,15 +8,15 @@
                 var data = google.visualization.arrayToDataTable([
                     ['Total Quantity', 'Available Quantity', 'Damaged Quantity'],
 <?php
-
-    echo '[' . $sqty. ',' . $saq . ',' . $sdq.'],';
-
+foreach ($chart_data as $data) {
+    echo '[' . $data->totalquantity. ',' . $data->availablequantity . ',' . $data->damagedquantity.'],';
+}
 ?>
                 ]);
 
                 var options = {
                     chart: {
-                        title: 'Total Statistics of Items',
+                        title: 'Item',
                         subtitle:'luke',
                     }
                 };

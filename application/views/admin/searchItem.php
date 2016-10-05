@@ -69,12 +69,26 @@
                     <td><?php echo $x[$i]->availablequantity; ?></td>
                     <td><?php echo $x[$i]->damagedquantity; ?></td>
                     <td><?php echo $x[$i]->owner; ?></td>
-                    <td><?php echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">Update</button>');?></td>
+                    <td><?php echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">Update</button>');?>
+                   <?php 
+                   $atts = array(
+        'width'       => 800,
+        'height'      => 600,
+        'scrollbars'  => 'yes',
+        'status'      => 'yes',
+        'resizable'   => 'yes',
+        'screenx'     => 0,
+        'screeny'     => 0,
+        'window_name' => '_blank'
+);
+                   echo  anchor_popup('admin/graph_Sitem/'.$x[$i]->code,'<button class="btn-xs">Show Statistics</button>',$atts);
+                    ?></td>
                 </tr>
                 <?php } ?>
 
               </tbody>
             </table>
+         <?php echo  anchor_popup('admin/graph_item/','<button class="btn-xs">Show Statistics</button>',$atts);?>
           </div>
    </div>
 </div><!-- /.container -->

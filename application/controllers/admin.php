@@ -28,7 +28,7 @@ class admin extends CI_Controller {
                 if ($this->session->userdata('type')!='admin'){
                 	redirect('account/index');
                 }
-               $this->load->view('admin/head');
+              	$this->load->view('admin/head');
                 $this->load->view('templates/header');
 
         }
@@ -257,5 +257,28 @@ class admin extends CI_Controller {
 		redirect('admin/sUser');
 	}
 
+<<<<<<< HEAD
 	
 }?>
+=======
+	public function graph_Sitem($values)
+	{
+
+		$results = $this->ChartModel->get_chart_data($values);
+		$this->session->set_flashdata('name',$values);
+		$this->load->view('admin/statitem',$results);	
+
+
+
+	}
+	public function graph_item()
+	{
+		$result = $this->ChartModel->sum_Chart();
+	
+
+		$this->load->view('admin/stat',$result);
+	}
+
+
+}
+>>>>>>> f11e2fdf6239ec83fa4d07ca4bbaba32d5b1f229
