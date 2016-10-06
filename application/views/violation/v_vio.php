@@ -8,28 +8,29 @@
 echo "<table>";
 	echo form_open('c_clear/addvio');
 	echo "<tr>";
-		echo "<td>ID NUMBER</td>";
-		echo "<td>".form_input('idnumber','','class="form-control" placeholder="ID NUMBER" required')."</td>";
+		echo "<td>ID Number</td>";
+		echo "<td>".form_input('idnumber','','class="form-control" placeholder="ID Number" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>LAST NAME</td>";
-		echo "<td>".form_input('lastname','','class="form-control" placeholder="LAST NAME" required')."</td>";
+		echo "<td>Last Name</td>";
+		echo "<td>".form_input('lastname','','class="form-control" placeholder="Last Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>FIRST NAME</td>";
-		echo "<td>".form_input('name','','class="form-control" placeholder="FIRST NAME" required')."</td>";
+		echo "<td>First Name</td>";
+		echo "<td>".form_input('name','','class="form-control" placeholder="First Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>MIDDLE NAME</td>";
-		echo "<td>".form_input('middlename','','class="form-control" placeholder="MIDDLE NAME" required')."</td>";
+		echo "<td>Middle Name</td>";
+		echo "<td>".form_input('middlename','','class="form-control" placeholder="Middle Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>YEAR LEVEL</td>";
-		$arrayName = array('1st Yr'	 => 	'FIRST YEAR',
+		echo "<td>Year Level</td>";
+		$arrayName = array('N/A'	 =>		'---N/A---',
+						   '1st Yr'	 => 	'FIRST YEAR',
 						   '2nd Yr'	 =>		'SECOND YEAR',
 						   '3rd Yr'	 =>		'THIRD YEAR',
 						   '4th Yr'	 =>		'FOURTH YEAR',
@@ -38,8 +39,9 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>COURSE</td>";
-		$arrayName = array('BS-CE'	 => 	'Civil Engineering',
+		echo "<td>Course</td>";
+		$arrayName = array(	'Faculty' =>	'Faculty',
+							'BS-CE'	 => 	'Civil Engineering',
 						   'BS-CHE'	 =>		'Chemical Engineering',
 						   'BS-CpE'	 =>		'Computer Engineering',
 						   'BS-ECE'	 =>		'Electronics Engineering',
@@ -50,7 +52,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>DEPARTMENT</td>";
+		echo "<td>Department</td>";
 		$arrayName = array('CpE'	 => 	'Department of Computer Engineering',
 						   'CE'		 =>		'Department of Civil Engineering',
 						   'CHE'	 =>		'Department of Chemical Engineering',
@@ -61,7 +63,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>VIOLATE AT</td>";
+		echo "<td>Room</td>";
 		$arrayName = array('DCpE'	 => 'Department of Computer Engineering',
 						   'LB264TC'	 => 	'LB264TC',
 						   'LB265TC'	 => 	'LB265TC',	
@@ -71,12 +73,12 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>VIOLATION</td>";
-		echo "<td>".form_input('violation','','class="form-control" placeholder="VIOLATION" required')."</td>";
+		echo "<td>Violation</td>";
+		echo "<td>".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>ACTION</td>";
+		echo "<td>Status</td>";
 		$arrayName= array('Pending' 	 => 'Pending',
 						  'For Approval' => 'For Approval');
 		echo "<td>".form_dropdown('status',$arrayName,'class="form-control" placeholder="Status" required')."</td>";

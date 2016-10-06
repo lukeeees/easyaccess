@@ -15,45 +15,43 @@ echo "<table>";
 	echo form_open('admin/adduser');
 
 	echo "<tr>";
-		echo "<td>ID NUMBER</td>";
-		echo "<td>".form_input('idnum','','class="form-control" placeholder="ID NUMBER" required')."</td>";
+		echo "<td>ID Number</td>";
+		echo "<td>".form_input('idnum','','class="form-control" placeholder="ID Number" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>LASTNAME</td>";
-		echo "<td>".form_input('lname','','class="form-control" placeholder="LAST NAME" required')."</td>";
+		echo "<td>Last Name</td>";
+		echo "<td>".form_input('lname','','class="form-control" placeholder="Last Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>FIRST NAME</td>";
-		echo "<td>".form_input('fname','','class="form-control" placeholder="FIRST NAME" required')."</td>";
+		echo "<td>First Name</td>";
+		echo "<td>".form_input('fname','','class="form-control" placeholder="First Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>MIDDLE NAME</td>";
-		echo "<td>".form_input('mname','','class="form-control" placeholder="MIDDLE NAME" required')."</td>";
+		echo "<td>Middle Name</td>";
+		echo "<td>".form_input('mname','','class="form-control" placeholder="Middle Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>DEPARTMENT</td>";
-<<<<<<< HEAD
+		echo "<td>Department</td>";
+
 		echo form_hidden('owner','DCpE','class="form-control"  required');
 		echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
-=======
-		echo form_hidden('department','DCpE','class="form-control"  required');
-		echo "<td>".form_input('department','DCpE','class="form-control" disabled  required')."<td>";
+		//echo form_hidden('department','DCpE','class="form-control"  required');
+		//echo "<td>".form_input('department','DCpE','class="form-control" disabled  required')."<td>";
 		//	echo "<td>".form_input('department','','class="form-control" placeholder="Department"')."</td>";
->>>>>>> origin/master
 	echo "</tr>";
     
     echo "<tr>";
-		echo "<td>USERNAME</td>";
-		echo "<td>".form_input('name','','class="form-control" placeholder="USERNAME" required')."</td>";
+		echo "<td>Username</td>";
+		echo "<td>".form_input('name','','class="form-control" placeholder="Username" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>PASSWORD</td>";
-		echo "<td>".form_password('pass','','class="form-control" placeholder="PASSWORD" required')."<td>";
+		echo "<td>Password</td>";
+		echo "<td>".form_password('pass','','class="form-control" placeholder="Password" required')."<td>";
 	echo "<tr>";
 
 	echo "<tr>";

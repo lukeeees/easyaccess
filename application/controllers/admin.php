@@ -70,11 +70,10 @@ class admin extends CI_Controller {
 					   'lname'		=>		$_POST['lname'],
 					   'fname'		=>		$_POST['fname'],
 					   'mname'		=>		$_POST['mname'],
-					   'dept'		=>		$_POST['department'],
+					   'dept'		=>		$_POST['dept'],
 					   'user'		=>		$_POST['name'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'head');
-					 //  'lab'		=>		'ceac');
 
 		$data = $this->accountsdb->showusers();
 
@@ -135,8 +134,7 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'admin',
-					   'dept'		=>		$_POST['department'],
-					   'lab'		=>		'department');
+					   'dept'		=>		$_POST['department']);
 		$data = $this->accountsdb->showusers();
 
 		foreach ($data as $key) {
@@ -177,8 +175,8 @@ class admin extends CI_Controller {
 
 	public function addLaboratory()
 	{
-		$lab = array('labname'	=>	$_POST['labname'],
-					'room'		=>	$_POST['room']);
+		$lab = array('lab'		=>	$_POST['lab'],
+					 'room'		=>	$_POST['room']);
 					//'status'	=>	$_POST['status'] 
 		$this->accountsdb->addLab($lab);
 		redirect("admin/aLab");
@@ -206,12 +204,12 @@ class admin extends CI_Controller {
 	public function LabUpdate()
 	{
 	$item  = array('code'						=>		$_POST['code'],
-					'labname'					=>		$_POST['labname'],
+					'labname'					=>		$_POST['name'],
 					'labroom'					=>		$_POST['room']);
 	
 
 	
-		$this->accountsdb->upItem($item);
+		$this->accountsdb->upLab($item);
 		$msg="Successful";
 		redirect('admin/labSearch');
 	}
@@ -251,17 +249,13 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		$_POST['type'],
-					   'dept'		=>		$_POST['department']);
+					   'dept'		=>		$_POST['dept']);
 
 	
 		$this->accountsdb->upuser($user);
 		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Table has been updated!</div>');
 		redirect('admin/sUser');
 	}
-
-
-	
-}?>
 
 	public function graph_Sitem($values)
 	{

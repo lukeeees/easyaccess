@@ -15,22 +15,22 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>ID Number</td>";
-		echo "<td>".form_input('idnum','','class="form-control" placeholder="ID NUMBER" required')."</td>";
+		echo "<td>".form_input('idnum','','class="form-control" placeholder="ID Number" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>Last Name</td>";
-		echo "<td>".form_input('lname','','class="form-control" placeholder="LAST NAME" required')."</td>";
+		echo "<td>".form_input('lname','','class="form-control" placeholder="Last Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>First Name</td>";
-		echo "<td>".form_input('fname','','class="form-control" placeholder="FIRST NAME" required')."</td>";
+		echo "<td>".form_input('fname','','class="form-control" placeholder="First Name" required')."</td>";
 	echo "</tr>";
 
  	echo "<tr>";
 		echo "<td>Middle Name</td>";
-		echo "<td>".form_input('mname','','class="form-control" placeholder="MIDDLE NAME" required')."</td>";
+		echo "<td>".form_input('mname','','class="form-control" placeholder="Middle Name" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
@@ -43,32 +43,33 @@ echo "<table>";
 								   'NCR LAB'	=>	'NCR LABORATORY',
 								   'PCB LAB'	=>	'PCB LABORATORY',
 								   'SE LAB'		=>	'SE LABORATORY');*/
+		//get from database from laboratory table
 		$values=array();
 		array_push($values,'Department of Computer Engineering');
 		foreach ($laboratory as $key) {
 			# code...
-			array_push($values,$key->name);
+			array_push($values,array($key->name => $key->name));
 		}
 		
 
 		echo '<div class="form-group">';
-		echo "<td>".form_dropdown('department',$values,'class="form-control" multiple')."</td>";
+		echo "<td>".form_dropdown('dept',$values,'class="form-control" multiple')."</td>";
 		echo "</div>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td>Password</td>";
-		echo "<td>".form_password('pass','','class="form-control" placeholder="PASSWORD" required')."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
 		echo "<td>Username</td>";
-		echo "<td>".form_input('name','','class="form-control" placeholder="USERNAME" required')."</td>";
+		echo "<td>".form_input('name','','class="form-control" placeholder="Username" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
+		echo "<td>Password</td>";
+		echo "<td>".form_password('pass','','class="form-control" placeholder="Password" required')."<td>";
+	echo "<tr>";
+
+	echo "<tr>";
 		echo "<td>&nbsp;</td>";
-		echo "<td>".form_submit('submit','ADD LAB Head','class="form-control"');
+		echo "<td>".form_submit('submit','Add LAB Head','class="form-control"');
 	echo "</tr>";
 
 	echo form_close();

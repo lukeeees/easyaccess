@@ -32,12 +32,11 @@ class accountsdb extends CI_Model {
                         'middlename'    =>    $values['mname'],
                         'password'      =>    $values['password'],
                         'type'          =>    $values['type'],
-                        'department'    =>    $values['dept'],
-                        'laboratory'    =>    $values['lab']);
+                        'department'    =>    $values['dept']);
           $this->db->insert('user',$user);
         }
 
-        public function addLH($values)
+        /*public function addLH($values)
         {
             $fac = array( 'name'        => $values['name'],
                           'rank'        => $values['rank'],
@@ -57,7 +56,7 @@ class accountsdb extends CI_Model {
 
 
             $this->db->insert('user',$user);
-        }
+        }*/
 
         public function deleteUser($x)
         {
@@ -70,8 +69,8 @@ class accountsdb extends CI_Model {
         public function addLab($values)
         {
           $lab = array('name'       =>  $values['lab'] ,
-                        'room'      =>  $values['room'],
-                        'status'    =>  $values['status'] );
+                        'room'      =>  $values['room']);
+                        //'status'    =>  $values['status'] );
 
           $this->db->insert('laboratory', $lab);
           echo "add laboratory is successful";
@@ -157,6 +156,20 @@ class accountsdb extends CI_Model {
             $query = $this->db->get('laboratory');
             return $query->result();
 
+          }
+
+          public function solLab($x){
+            $this->db->where('code', $x);
+            $query = $this->db->get('laboratory');
+            return $query;
+          }
+          public function upLab($values)
+          {
+            $item = array('name' => $values['labname'],
+                          'room'  =>  $values['labroom']);
+
+            $this->db->where('code',$values['code']);
+            $this->db->update('laboratory', $item);
           }
 
   }?>

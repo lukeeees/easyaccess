@@ -15,7 +15,7 @@
                   <th>Department</th>
                   <th>Violation</th>
                   <th>Room/Laboratory</th>
-                  <th>Action</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>

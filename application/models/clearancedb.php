@@ -1,7 +1,7 @@
 <?php
 class clearancedb extends CI_Model {
 
-		public function __construct()
+    public function __construct()
         {
                 // Call the CI_Model constructor
                 parent::__construct();
@@ -37,8 +37,8 @@ class clearancedb extends CI_Model {
                            'violation'  =>    $values['violation'],
                            'laboratory' =>    $values['laboratory'],
                            'status'     =>    $values['status']);
-
-          $this->db->insert('student',$student);
+         // echo $values['status'];
+         $this->db->insert('student',$student);
                  }
 
         public function showvio() //show violation
@@ -60,6 +60,12 @@ class clearancedb extends CI_Model {
          return $query->result(); 
         }
 
+         public function solItem($x){
+          $this->db->where('id', $x);
+          $query = $this->db->get('student');
+          return $query;
+          }
+
         public function upVio($values) //update violation
           {
             $student  = array('u_id'     =>    $values['idnumber'],
@@ -73,14 +79,10 @@ class clearancedb extends CI_Model {
                            'laboratory' =>    $values['laboratory'],
                            'status'     =>    $values['status']);
 
-             $this->db->where('student', $values['id']);
-             $this->db->update('student',$student);
+             $this->db->where('id', $values['id']);
+             $this->db->update('student', $student);
           }
 
-           public function solItem($x){
-          $this->db->where('id', $x);
-          $query = $this->db->get('student');
-          return $query;
-          }
+          
 }
 ?>
