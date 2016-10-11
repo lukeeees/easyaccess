@@ -61,28 +61,34 @@
 
 	echo "<tr>";
 		echo "<td>Total Quantity</td>";
-		echo "<td>".form_input('totalquantity',$key->totalquantity,'class="form-control"required')."</td>";
+		$totalquantity = array('name'=>'totalquantity','type'=>'number');
+		echo "<td>".form_input($totalquantity,$key->totalquantity,'class="form-control"required')."</td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Available Quantity</td>";
-		echo "<td>".form_input('availablequantity',$key->availablequantity,'class="form-control"required')."</td>";
+		$availablequantity = array('name'=>'availablequantity','type'=>'number');
+		echo "<td>".form_input($availablequantity,$key->availablequantity,'class="form-control"required')."</td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Damaged Quantity</td>";
-		echo "<td>".form_input('damagedquantity',$key->damagedquantity,'class="form-control"required')."</td>";
+		$damagedquantity = array('name'=>'damagedquantity','type'=>'number');
+		echo "<td>".form_input($damagedquantity,$key->damagedquantity,'class="form-control"required')."</td>";
 	echo "<tr>";
 
 	echo "<tr>";
-		echo "<td>Owner</td>";
-		echo form_hidden('owner','DCpE','class="form-control"  required');
-		echo "<td>".form_input('hjk','DCpE','class="form-control" disabled  required')."<td>";
+		echo "<td>Custodian</td>";
+		echo "<td>".form_input('custodian',$key->custodian,'class="form-control"required')."</td>";
 	echo "<tr>";
 
- 
-    
-    echo "<td>".form_submit('submit','Update User','class="form-control"');
+	echo "<tr>";
+		//echo "<td>Owner</td>";
+		echo form_hidden('owner',$key->owner,'class="form-control"  required');
+		//echo "<td>".form_input('hjk',$key->owner,'class="form-control" disabled  required')."<td>";
+	echo "<tr>";
+
+    echo "<td>".form_submit('submit','Update Item','class="form-control"');
  
 
   echo form_close();

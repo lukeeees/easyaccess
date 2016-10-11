@@ -4,8 +4,10 @@
         <center><h1>Add User</h1>  </center>
     </div>
   <ul class="nav nav-tabs">
-  <li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
-  <li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
+  	<?php if($this->session->userdata('type')=="admin"): ?>
+  		<li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
+  		<li role="presentation" ><?php echo anchor('admin/LUser','Lab Head');?></li>
+  	<?php endif ?>  
   <li role="presentation" class="active"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php echo $this->session->flashdata('msg');?>
@@ -36,24 +38,23 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>Department/Laboratory</td>";
-				/*$arrayName = array('DCpE'	 	=> 	'Department of Computer Engineering',
-								   'CEAC LAB'	=>	'CEAC LABORATORY',
-								   'CISCO LAB'	=>	'CISCO LABORATORY',
-								   'CN LAB'	 	=>	'CN LABORATORY',
-								   'DM LAB'		=>	'DM LABORATORY',
-								   'NCR LAB'	=>	'NCR LABORATORY',
-								   'PCB LAB'	=>	'PCB LABORATORY',
-								   'SE LAB'		=>	'SE LABORATORY');*/
-		$values=array();
-		array_push($values,'Department of Computer Engineering');
-		foreach ($laboratory as $key) {
-			# code...
-			array_push($values,$key->name);
-		}
+				$values=array();
+
+      	foreach ($laboratory as $key) {    
+      		if($this->session->userdata('type')=="head")
+      		{
+      			if(strtolower($key->name )== strtolower($this->session->userdata('lab')))  
+	        		$values[$key->name] = $key->name;
+      		}      	
+      		else
+      		{
+	        	$values[$key->name] = $key->name;
+      		}	
+      	}  
 		
 
 		echo '<div class="form-group">';
-		echo "<td>".form_dropdown('department',$values,'class="form-control" multiple')."</td>";
+		echo "<td>".form_dropdown('department',$values,'','class="form-control"')."</td>";
 		echo "</div>";
 	echo "</tr>";
 

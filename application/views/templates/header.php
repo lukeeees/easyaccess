@@ -8,7 +8,7 @@
   	<script src="<?php echo base_url("assets/jquery.js") ?>"></script>
 	<script src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url("assets/js/chart.js"); ?>"></script>
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 

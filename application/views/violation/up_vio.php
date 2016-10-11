@@ -36,23 +36,28 @@
   echo "</tr>";
 
   echo "<tr>";
-    echo "<td>Year Level</td>";
-    echo "<td>".form_input('yearlevel',$key->year,'class="form-control"required')."</td>";
+    echo "<td>Year</td>";
+    echo "<td>".form_input('yearlevel',$key->year,'class="form-control" disabled required')."</td>";
+    echo "<td>".form_hidden('yearlevel',$key->year,'class="form-control" required')."</td>";
   echo "<tr>";
 
   echo "<tr>";
     echo "<td>Course</td>";
-    echo "<td>".form_input('course',$key->course,'class="form-control"required')."</td>";
+    echo "<td>".form_input('course',$key->course,'class="form-control" disabled required')."</td>";
+    echo form_hidden('course',$key->course,'class="form-control" required');
   echo "<tr>";
 
   echo "<tr>";
     echo "<td>Department</td>";
-    echo "<td>".form_input('department',$key->department,'class="form-control"required')."</td>";
+    echo "<td>".form_input('department',$key->department,'class="form-control" disabled required' )."</td>";
+    echo form_hidden('department',$key->department,'class="form-control" required');
   echo "<tr>";
 
   echo "<tr>";
     echo "<td>Room</td>";
-    echo "<td>".form_input('laboratory',$key->laboratory,'class="form-control"required')."</td>";
+    echo "<td>".form_input('laboratory',$this->session->userdata('lab'),'class="form-control" disabled  required')."<td>";
+    echo form_hidden('laboratory',$this->session->userdata('lab') ,'class="form-control"  required');
+    //echo "<td>".form_input('laboratory',$key->laboratory,'class="form-control"required')."</td>";
   echo "<tr>";
 
   echo "<tr>";
@@ -60,18 +65,16 @@
     echo "<td>".form_input('violation',$key->violation,'class="form-control"required')."</td>";
   echo "<tr>";
 
-  echo "<tr>";
-    echo "<td>Status</td>";
-    
-    $arrayName= array('Pending'    => 'Pending',
-                      'Cleared' => 'Cleared');
-    echo "<td>".form_dropdown('status',$arrayName,'class="form-control" placeholder="Status" required')."</td>";
-   // echo "<td>".form_input('status',$key->status,'class="form-control"required')."</td>";
+  
+  echo "<td>Status</td>";
+   $arrayName= array('Pending'    => 'Pending',
+                     'Cleared' => 'Cleared');
+   echo "<td>".form_dropdown('status',$arrayName,'','class="form-control" placeholder="Status" required')."</td>";
   echo "<tr>";
 
   echo "<tr>";
     echo "<td>&nbsp;</td>";  
-    echo "<td>".form_submit('submit','UPDATE','class="form-control"');
+    echo "<td>".form_submit('submit','Update','class="form-control"');
   echo "</tr>";
 
   echo form_close();

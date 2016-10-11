@@ -1,0 +1,23 @@
+Item Code,Available Quantity,Item Name,Description,Serial Number, Date Acquired,Owner,Remarks 
+23, , , , ,2016-12-31,DCpE, 
+5,2, , ,  ,2016-10-07,DCpE, 
+6,3, , ,  ,2016-10-07,DCpE, 
+7,10, ,tost,tost,2016-10-07,DCpE,tost
+11,1,1,1,1,2016-10-12,DCpE,1
+18,2,2,2,2,2016-10-09,DCpE,2
+12,2,2,22,2,2016-10-09,DCpE,2
+19,3,3,3,3,2016-10-09,DCpE,3
+20,3,3,3,3,2016-10-09,DCpE,3
+13,33,3,3,3,2016-10-09,DCpE,3
+14,4,4,4,4,2016-10-09,DCpE,4
+16,5,5,5,5,2016-10-09,DCpE,5
+15,5,5,5,5,2016-10-09,DCpE,5
+17,6,6,66,6666,2016-10-09,DCpE,6
+22,a,a,a,a,1293-12-31,DCpE,a
+3,3,adf,adf,456789,2016-10-05,DCpE,adf
+2,0,bottle,1liter,45678,2016-10-05,DCpE,empty
+4,4,dfghjk,fjk,23456789,2016-10-07,DCpE,dfghjk
+10,1,KI,assodifl,asdfjaso,2016-10-07,DCpE,asdfjasoij
+1,13456ss,sdfasdf,oh yeah,zxcvbn1234,2016-10-03,DCpE,asdf
+9,4,TAAAST,tyst,tyst,2016-10-07,DCpE,tyst
+8,6,tust, ,tust,2016-10-07,DCpE,tust

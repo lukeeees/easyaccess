@@ -50,22 +50,19 @@
 
   echo "<tr>";
     echo "<td>Department</td>";
-        /*$arrayName = array('CPE'   =>   'Computer Engineering',
-               'CE'    =>   'Civil Engineering',
-               'CHE'   =>   'Chemical Engineering',
-               'EEE'   =>   'Electrical and Electronics Engineering',
-               'IE'    =>   'Industrial Engineering',
-               'ME'    =>   'Mechanical Engineering');*/
+
     $values=array();
-    array_push($values,'Deparartment of Computer Engineering');
-    foreach ($lab as $key) {
-      # code...
-      array_push($values,$key->name);
+    if ($this->session->userdata('type')=="admin") {
+      $values['DCpE'] = 'Department of Computer Engineering';
     }
-    
+    else {
+      foreach ($lab as $key) {      
+        $values[$key->name] = $key->name;
+      }
+    }  
 
     echo '<div class="form-group">';
-    echo "<td>".form_dropdown('department',$values,'class="form-control" multiple')."</td>";
+    echo "<td>".form_dropdown('dept',$values,'','class="form-control"')."</td>";
     echo "</div>";
   echo "</tr>";
 

@@ -15,22 +15,7 @@ echo "<table>";
 	echo "<tr>";
 		echo "<td>Room</td>";
 		echo "<td>".form_input('room','','class="form-control" placeholder="Room" required')."</td>";
-	echo "</tr>";
-
-	/*echo "<tr>";
-		echo "<td>Assign Laboratory Head</td>";
-		echo "<td>".$row['laboratory']."</td>";
-	echo "</tr>";*/
-
-	/*echo "<tr>";
-		echo "<td>Status</td>";
-		$arrayName = array('Active'	 => 	'Active',
-						   'Non-Active'	 =>		'Non-Active');		   
-						   
-		echo "<td>".form_dropdown('status',$arrayName,'class="form-control" placeholder="Status"')."</td>";
-	echo "</tr>";*/
-
-	
+	echo "</tr>";	
 
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";

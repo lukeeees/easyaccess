@@ -5,7 +5,7 @@
     </div>
 
      <?php
-      foreach ($x->result() as $key) {
+      foreach ($x as $key) {
     echo "<table>";
       echo form_open('admin/LabUpdate');
   echo form_hidden('id',$this->uri->segment(3));
@@ -16,7 +16,7 @@
 
 	echo "<tr>";
 		echo "<td>Laboratory Name</td>";
-		echo "<td>".form_input('labname',$key->name,'class="form-control"required')."</td>";
+		echo "<td>".form_input('name',$key->name,'class="form-control"required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";

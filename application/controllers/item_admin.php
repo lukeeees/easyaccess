@@ -24,9 +24,9 @@ class item_admin extends CI_Controller {
                 // Your own constructor codein!
  			  $user = $this->session->userdata('user');
 
-                if ($this->session->userdata('type')!='admin'){
-                	redirect('account/index');
-                }
+                // if ($this->session->userdata('type')!='admin'){
+                // 	redirect('account/index');
+                // }
                 $this->load->view('admin/head');
                 $this->load->view('templates/header');
         }
@@ -43,7 +43,7 @@ class item_admin extends CI_Controller {
 		
 		if(!$ref)
 			$ref = 'name';
-		//$ref = 'owner';
+		
 		$data['x'] = $this->itemdb->get_search($item,$ref);
 		$this->load->view('admin/searchItem',$data);
 	}
@@ -55,8 +55,8 @@ class item_admin extends CI_Controller {
 
 	public function ItemAdd()
 	{
-		$item  = array('itemCode'					=>		$_POST['itemCode'],
-					   'itemName'					=>		$_POST['itemName'],
+
+		$item  = array('itemName'					=>		$_POST['itemName'],
 					   'description'				=>		$_POST['description'] ,
 					   'previousStatus'				=>		$_POST['previousStatus'],
 					   'currentStatus'				=>		$_POST['currentStatus'],
@@ -68,26 +68,26 @@ class item_admin extends CI_Controller {
 					   'totalQuantity'				=>		$_POST['totalQuantity'],
 					   'availableQuantity'			=>		$_POST['availableQuantity'],
 					   'damagedQuantity'			=>		$_POST['damagedQuantity'],
+					   'custodian'					=>		$_POST['custodian'],
 					   'owner'						=>		$_POST['owner']);
 
-	
-		$this->itemdb->addItem($item);
-		echo "alert('Successful')";
-		$msg="Successful";
-		$this->load->view('admin/addItem',$msg);
+
+			$this->itemdb->addItem($item);
+			$this->session->set_flashdata('msg','<div class="alert-success text-center">Item has been recorded!</div>');
+			redirect('item_admin/addItem',$msg);
 
 	}
 
 
 	public function updateItem($values)
-	{
-		$data['x'] = $this->itemdb->solItem($values);
-		$this->load->view('admin/updateItem',$data);
+	{		
+		$data['x'] = $this->itemdb->solItem($values);		
+		$this->load->view('admin/updateItem',$data);		
 	}
 
 	public function ItemUpdate()
 	{
-	$item  = array('itemCode'					=>		$_POST['code'],
+	$item  = array(	   'itemCode'					=>		$_POST['code'],
 					   'itemName'					=>		$_POST['itemname'],
 					   'description'				=>		$_POST['description'] ,
 					   'previousStatus'				=>		$_POST['previousstatus'],
@@ -100,10 +100,14 @@ class item_admin extends CI_Controller {
 					   'totalQuantity'				=>		$_POST['totalquantity'],
 					   'availableQuantity'			=>		$_POST['availablequantity'],
 					   'damagedQuantity'			=>		$_POST['damagedquantity'],
+					   'custodian'					=>		$_POST['custodian'],
 					   'owner'						=>		$_POST['owner']);
 
 	
 		$this->itemdb->upItem($item);
+		$this->session->set_flashdata('msg', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Success!</strong> Data updated.
+        </div>');
 		$msg="Successful";
 		redirect('item_admin/ItemSearch');
 	}

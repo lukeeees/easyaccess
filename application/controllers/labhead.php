@@ -28,7 +28,7 @@ class labhead extends CI_Controller {
                 if ($this->session->userdata('user')!=$user['type']){
                 	redirect('account/index');
                 }
-             	$this->load->view('labhead/head');
+             	$this->load->view('admin/head');
                 $this->load->view('templates/header');
 
         }

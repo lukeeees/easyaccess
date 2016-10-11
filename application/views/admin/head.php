@@ -1,3 +1,25 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.post("/easyaccess/index.php/c_clear/notif",'',function(data){
+      if(data!=0)
+      {
+        $('#notif').html(data);        
+      }
+      else
+      {
+        $('#notif').html("");
+      }       
+    });
+
+    setInterval(function(){ $.post("/easyaccess/index.php/c_clear/notif",'',function(data){
+      if(data!=0)
+        $('#notif').html(data);
+      else
+        $('#notif').html("");
+    }); }, 500);
+  });
+</script>
 <body id="page-top" class="index">
 
     <!-- Navigation -->
@@ -19,40 +41,65 @@
                         <a href="#page-top"></a>
                     </li>
 
-                    <li class="dropdown">
-                        <a>Clearance</a>
-                        <div class="dropdown-content">
-                            <?php echo anchor('c_clear/clearance', 'Clearance');?> <!--<a href="#">View Clearance</a>-->
-                            <a href="#">View Statistics</a>
-                        </div>
-                    </li>
+                    <?php if ($this->session->userdata['type']=="staff"): ?>
+                        <li class="dropdown">
+                          <a style="cursor:pointer;">Transactions</a>
+                          <div class="dropdown-content">
+                              <?php echo anchor('/borrow/ItemSearch', 'Borrow Items');?>
+                              <?php echo anchor('borrow/userlist', 'Return Items');?>                              
+                          </div>
+                        </li>
+                    <?php endif; ?>
+
+
+                    <?php if ($this->session->userdata['type']!="staff"): ?>
+                        <li class="">
+                          <a href="/easyaccess/index.php/c_clear/notifications"><span id="notif" class="badge" style="vertical-align:top;margin-right:5px;"></span> Notification</a></li>
+                        <li class="dropdown">
+                          <a>Clearance</a>
+                          <div class="dropdown-content">
+                              <?php //echo anchor('c_clear/clearance', 'Clearance');?>
+                              <?php echo anchor('c_clear/viewall', 'View All');?>
+                              <a href="#">View Statistics</a>
+                          </div>
+                        </li>
+                    <?php endif; ?>
 
                     <li class="dropdown">
                         <?php echo anchor('item_admin/ItemSearch','Inventory')?>
                         <div class="dropdown-content">
                           <?php echo anchor('item_admin/addItem','Add Item')?>
-                          <?php echo anchor('','Create Report')?>
-                          <?php echo anchor('','Edit Report')?>
-                          <?php echo anchor('','Search Report')?>
-                          <?php echo anchor('','View Statistics')?>
+                          <?php if ($this->session->userdata['type']!="staff"): ?>
+                            <?php echo anchor('inventory_admin/addInventory','Create Report')?>
+                            <?php echo anchor('inventory_admin/viewInventory','Manage Report')?>
+                            <?php echo anchor('','View Statistics')?>
+                          <?php endif; ?>
                         </div>
                     </li>
                    
-                    <li class="dropdown">
-                        <a>Manage Accounts</a>
-                        <div class="dropdown-content">
-                          <?php echo anchor('admin/sUser','Manage Users')?>
-                          <?php echo anchor('admin/aUser','Add Users')?>
-                        </div>
-                    </li>
+                    <?php if ($this->session->userdata['type']!="staff"): ?>
+                        <li class="dropdown">
+                            <a>Manage Accounts</a>
+                            <div class="dropdown-content">
+                              <?php echo anchor('admin/sUser','Manage Users')?>
 
-                    <li class="dropdown">
-                         <?php echo anchor('admin/labSearch','Manage Laboratory')?>
-                        <div class="dropdown-content">
-                          <?php echo anchor('admin/aLab','Add Laboratory')?>
-                          
-                        </div>
-                    </li>
+                              <?php if ($this->session->userdata('type')=="admin"): ?>
+                                <?php echo anchor('admin/aUser','Add Users')?>
+                              <?php elseif($this->session->userdata('type')=="head"): ?>
+                                <?php echo anchor('admin/stUser','Add Users')?>     
+                              <?php endif; ?>                     
+                            </div>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if ($this->session->userdata('type')=="admin"): ?>
+                        <li class="dropdown">
+                             <?php echo anchor('admin/labSearch','Manage Laboratory')?>
+                            <div class="dropdown-content">
+                              <?php echo anchor('admin/aLab','Add Laboratory')?>                          
+                            </div>
+                        </li>
+                    <?php endif ?>                    
 
                     <li class="dropdown">
                         <?php echo anchor('c_clear/sVio','Violation')?>

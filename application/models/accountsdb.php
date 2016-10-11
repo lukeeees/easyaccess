@@ -8,6 +8,17 @@ class accountsdb extends CI_Model {
            
         }
 
+        public function addtologs($msg)
+        {
+          if ($this->session->userdata('type')=="staff") {
+            $msg = "Staff ".$this->session->userdata('name')." has ".$msg;
+          }
+            $item  = array('action'  => $msg,
+                       'laboratory' => $this->session->userdata('lab'));
+
+            $this->db->insert('logs',$item);
+        }
+
         public function checktype($values)
         {
               $this->db->where('name', $values['un']);
@@ -18,7 +29,8 @@ class accountsdb extends CI_Model {
                 {       
                       $data = array('id'        =>     $row->id ,
                                     'type'      =>     $row->type,
-                                    'department'=>     $row->department);
+                                    'department'=>     $row->department,
+                                    'name'      =>     $row->name);
                 }
                 return $data;
 
@@ -34,36 +46,18 @@ class accountsdb extends CI_Model {
                         'type'          =>    $values['type'],
                         'department'    =>    $values['dept']);
           $this->db->insert('user',$user);
+          $this->addtologs("successfully added user(".$user['idnumber'].").");
         }
-
-        /*public function addLH($values)
-        {
-            $fac = array( 'name'        => $values['name'],
-                          'rank'        => $values['rank'],
-                          'department'  => $values['dept']);
-            $query = $this->db->get('faculty');
-
-            $this->db->insert('faculty', $fac);
-            foreach ($query->result() as $row)
-            {
-                $x = $row->id;              
-            }
-        
-            $user = array( 'id' => $x,
-                           'name' => $values['name'] ,
-                           'password' =>  $values['password'],
-                           'type'  => 'Head');
-
-
-            $this->db->insert('user',$user);
-        }*/
 
         public function deleteUser($x)
         {
+          $tmp = $this->solouser($x)->result();
 
-          $this->db->where('id', $x);
+          $this->db->where('id', $x);          
+
           $this->db->delete('user');
 
+          $this->addtologs("successfully deleted user(".$tmp[0]->idnumber.").");
         }
 
         public function addLab($values)
@@ -74,6 +68,7 @@ class accountsdb extends CI_Model {
 
           $this->db->insert('laboratory', $lab);
           echo "add laboratory is successful";
+          $this->addtologs("successfully added laboratory(".$lab['name'].").");
         }
 
         public function editLab($values)
@@ -84,7 +79,7 @@ class accountsdb extends CI_Model {
 
         $this->db->set($lab);
         $this->db->where('code',$values['code']);
-        $this->db->update('laboratory');
+        $this->db->update('laboratory');        
 
         }
 
@@ -97,7 +92,12 @@ class accountsdb extends CI_Model {
         public function showusers()
         {
           $data=array();
-          $query = $this->db->get('user');
+          if ($this->session->userdata('type')=="head")
+          {
+            $this->db->where('department',$this->session->userdata('lab'));
+            $this->db->where('type','staff');
+          }
+          $query = $this->db->get('user');          
           $data = $query->result_array();
           return $data;
         }
@@ -142,6 +142,12 @@ class accountsdb extends CI_Model {
             return $query;
           }
 
+         public function get_laboratory()
+          {
+            $query = $this->db->get('laboratory');
+            return $query;
+          }
+
 
           public function get_labs()
           {
@@ -161,7 +167,7 @@ class accountsdb extends CI_Model {
           public function solLab($x){
             $this->db->where('code', $x);
             $query = $this->db->get('laboratory');
-            return $query;
+            return $query->result();
           }
           public function upLab($values)
           {
@@ -170,6 +176,23 @@ class accountsdb extends CI_Model {
 
             $this->db->where('code',$values['code']);
             $this->db->update('laboratory', $item);
+            $this->addtologs("successfully updated laboratory(".$lab['name'].").");
+          }
+
+          public function updateuser($arr)
+          {
+            $item = array('idnumber' => $arr['idnum'],
+                          'firstname'  =>  $arr['fname'],
+                          'middlename'  =>  $arr['mname'],
+                          'lastname'  =>  $arr['lname'],
+                          'department'  =>  $arr['dept'],
+                          'name'  =>  $arr['name'],
+                          'password'  =>  md5($arr['pass']),
+                    );
+            $this->db->where('id',$arr['id']);
+            $this->db->update('user', $item); 
+
+            $this->addtologs("successfully updated user(".$item['idnumber'].").");
           }
 
   }?>

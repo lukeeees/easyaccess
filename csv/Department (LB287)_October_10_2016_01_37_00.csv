@@ -1,0 +1,21 @@
+Item Code,Available Quantity,Item Name,Description,Serial Number, Date Acquired,Owner,Remarks 
+11,1,1,1,1,2016-10-12,DCpE,1
+18,2,2,2,2,2016-10-09,DCpE,2
+12,2,2,22,2,2016-10-09,DCpE,2
+19,3,3,3,3,2016-10-09,DCpE,3
+13,33,3,3,3,2016-10-09,DCpE,3
+20,3,3,3,3,2016-10-09,DCpE,3
+14,4,4,4,4,2016-10-09,DCpE,4
+16,5,5,5,5,2016-10-09,DCpE,5
+15,5,5,5,5,2016-10-09,DCpE,5
+17,6,6,66,6666,2016-10-09,DCpE,6
+3,3,adf,adf,456789,2016-10-05,DCpE,adf
+10,1,asdfjo,assodifl,asdfjaso,2016-10-07,SE LABORATORY,asdfjasoij
+2,0,bottle,1liter,45678,2016-10-05,DCpE,empty
+4,4,dfghjk,fjk,23456789,2016-10-07,DCpE,dfghjk
+1,13456,sdfasdf,oh yeah,zxcvbn1234,2016-10-03,DCpE,asdf
+5,1,test,test,test,2016-10-07,SE LABORATORY,test
+6,9,tist,tist,tist,2016-10-07,SE LABORATORY,tist
+7,8,tost,tost,tost,2016-10-07,SE LABORATORY,tost
+8,5,tust,tust,tust,2016-10-07,SE LABORATORY,tust
+9,41,tyst,tyst,tyst,2016-10-07,SE LABORATORY,tyst

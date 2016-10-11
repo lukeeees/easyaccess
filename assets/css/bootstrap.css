@@ -7073,3 +7073,110 @@ a.list-group-item-danger.active:focus {
 td.done {
   background-color: red;
 }
+
+
+@media print{
+
+  @page {
+        size: letter;
+        margin: 0.5cm;
+  }
+
+  #printing{
+    margin-top: 0px;
+  }
+
+  #head{
+    display:none;
+  }
+
+  #label{
+    margin-top: 0px;
+    display: block;
+    margin: 0;
+  } 
+
+  #label2{
+    margin-top: 0px;
+    display: block;
+    margin: 0;
+  } 
+
+  #tableReport{
+      display: block;
+      border: 1px;
+  }
+
+  #headerprint{
+    display: none;
+  }
+
+  #print{
+    display: none;
+  }
+
+  #dataprint{
+    display: block;
+    text-align: center;
+  }
+ #dataprint1{
+    display: block;
+    text-align: center;
+  }
+   #dataprint2{
+    display: block;
+    text-align: center;
+  }
+
+  #dataprint table{
+    border: 1px solid black;
+  }
+
+  #dataprint th{
+    border: 1px solid black;
+  }
+
+  #dataprint td{
+    border: 1px solid black;
+  }
+
+  table#tableReport1,th#tableReport1,td#tableReport1{ 
+    font-size: 90%;
+    padding: 5px;
+    border: 2px solid black;
+  }
+
+}
+
+
+.form-control1{
+  width: 130%;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+}
+
+.form-control2{
+  width: 60%;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+}
+
+.label1{
+  width: 22%;
+  margin-left: 0px;
+  padding: 5px;
+}
+
+.label2{
+  width: 10%;
+  margin-left: 0px;
+  padding: 5px;
+}
+
+.label3{
+  width: 6%;
+  margin-left: 0px;
+  padding: 5px;
+}

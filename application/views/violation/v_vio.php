@@ -3,6 +3,7 @@
 	<div class="jumbotron">
         <center><h1>Add Violation</h1>  </center>
     </div>
+    <?php echo $this->session->flashdata('msg');?>
  <?php
                     
 echo "<table>";
@@ -35,7 +36,7 @@ echo "<table>";
 						   '3rd Yr'	 =>		'THIRD YEAR',
 						   '4th Yr'	 =>		'FOURTH YEAR',
 						   '5th Yr'	 =>		'FIFTH YEAR');
-		echo "<td>".form_dropdown('yearlevel',$arrayName,'class="form-control" placeholder="Year Level"')."</td>";
+		echo "<td>".form_dropdown('yearlevel',$arrayName,'','class="form-control" placeholder="Year Level"')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
@@ -48,42 +49,36 @@ echo "<table>";
 						   'BS-EE'	 =>		'Electrical Engineering',
 						   'BS-IE'	 =>		'Industrial Engineering',
 						   'BS-ME'	 =>		'Mechanical Engineering');
-		echo "<td>".form_dropdown('course',$arrayName,'class="form-control" placeholder="Course"')."</td>";
+		echo "<td>".form_dropdown('course',$arrayName,'','class="form-control" placeholder="Course"')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>Department</td>";
-		$arrayName = array('CpE'	 => 	'Department of Computer Engineering',
-						   'CE'		 =>		'Department of Civil Engineering',
-						   'CHE'	 =>		'Department of Chemical Engineering',
-						   'EEE'	 =>		'Department of Electrical and Electronics Engineering',
-						   'IE'		 =>		'Department of Industrial Engineering',
-						   'ME'		 =>		'Department of Mechanical Engineering');
-		echo "<td>".form_dropdown('department',$arrayName,'class="form-control" placeholder="Department"')."</td>";
+		$arrayName = array('DCpE'	 => 	'Department of Computer Engineering',
+						   'DCE'		 =>		'Department of Civil Engineering',
+						   'DCHE'	 =>		'Department of Chemical Engineering',
+						   'DEEE'	 =>		'Department of Electrical and Electronics Engineering',+
+						   'DIE'		 =>		'Department of Industrial Engineering',
+						   'DME'		 =>		'Department of Mechanical Engineering');
+		echo "<td>".form_dropdown('department',$arrayName,'','class="form-control" placeholder="Department"')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>Room</td>";
-		$arrayName = array('DCpE'	 => 'Department of Computer Engineering',
-						   'LB264TC'	 => 	'LB264TC',
-						   'LB265TC'	 => 	'LB265TC',	
-						   'LB266TC'	 =>		'LB266TC',
-						   'LB267TC'	 =>		'LB267TC');
-		echo "<td>".form_dropdown('laboratory',$arrayName,'class="form-control" placeholder="Laboratory"')."</td>";
+		echo "<td>".form_input('laboratory',$this->session->userdata('lab'),'class="form-control" disabled  required')."<td>";
+		echo form_hidden('laboratory',$this->session->userdata('lab'),'class="form-control"  required');
+		/*$values=array();
+		foreach ($laboratory->result() as $key) {
+					 $values[$key->name] = $key->name;
+				}		
+		*/
+		//echo "<td>".form_dropdown('laboratory',$values,'','class="form-control" placeholder="Laboratory"')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>Violation</td>";
 		echo "<td>".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
 	echo "</tr>";
-
-	echo "<tr>";
-		echo "<td>Status</td>";
-		$arrayName= array('Pending' 	 => 'Pending',
-						  'For Approval' => 'For Approval');
-		echo "<td>".form_dropdown('status',$arrayName,'class="form-control" placeholder="Status" required')."</td>";
-	echo "</tr>";
-
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";
 		echo "<td>".form_submit('submit','Add Violation','class="form-control"');

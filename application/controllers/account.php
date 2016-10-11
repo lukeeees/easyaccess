@@ -41,11 +41,14 @@ class account extends CI_Controller {
 					$this->load->view('admin/splash');
 
 				}elseif ($this->session->userdata('type')== 'head') {
-					$this->load->view('labhead/head');
-					$this->load->view('labhead/splash');
+					$this->load->view('admin/head');
+					$this->load->view('admin/splash');
+					// $this->load->view('labhead/head');
+					// $this->load->view('labhead/splash');
 				}elseif ($this->session->userdata('type') =='staff') {
-				
-					$this->load->view('staff/splash');
+					$this->load->view('admin/head');
+					$this->load->view('admin/splash');
+					// $this->load->view('staff/splash');
 			
 				}else{
 
@@ -66,7 +69,9 @@ class account extends CI_Controller {
 			@$x = $this->accountsdb->checktype($data);
 
 			@$sesh = array('id' 	=>	$x['id'] ,
-					  		'type'	=>	$x['type']);
+					  		'type'	=>	$x['type'],
+					  		'lab' 	=>  $x['department'],
+					  		'name'	=>  $x['name']);
 
 				if ($x['type']=='admin') {
 					$this->session->set_userdata($sesh);
@@ -75,12 +80,16 @@ class account extends CI_Controller {
 
 				}elseif ($x['type'] == 'head') {
 					$this->session->set_userdata($sesh);
-					$this->load->view('labhead/head');
-					$this->load->view('labhead/splash');
+					$this->load->view('admin/head');
+					$this->load->view('admin/splash');
+					// $this->load->view('labhead/head');
+					// $this->load->view('labhead/splash');
 				}elseif ($x['type'] =='staff') {
 					$this->session->set_userdata($sesh);
-					$this->load->view('staff/head');
-					$this->load->view('staff/splash');
+					$this->load->view('admin/head');
+					$this->load->view('admin/splash');
+					// $this->load->view('staff/head');
+					// $this->load->view('staff/splash');
 			
 				}else{
 
@@ -98,3 +107,4 @@ class account extends CI_Controller {
 
 	
 }
+	

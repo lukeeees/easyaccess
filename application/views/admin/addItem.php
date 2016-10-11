@@ -3,15 +3,11 @@
 	<div class="jumbotron">
         <center><h1>Add Item</h1>  </center>
     </div>
+    <?php echo $this->session->flashdata('msg');?>
 <?php
 echo @$msg;                       
 echo "<table>";
 	echo form_open('item_admin/ItemAdd');
-
-	echo "<tr>";
-		echo "<td>Item Code</td>";
-		echo "<td>".form_input('itemCode','','class="form-control" placeholder="Item Code" required')."</td>";
-	echo "</tr>";
 
 	echo "<tr>";
 		echo "<td>Item Name</td>";
@@ -55,29 +51,47 @@ echo "<table>";
 	
 	echo "<tr>";
 		echo "<td>Remarks</td>";
-		echo "<td>".form_input('remarks','','class="form-control" placeholder="Remarks" required')."<td>";
+		$remarksarr = array('consumable'=>"Consumable", 'non-consumable'=>"Non-Consumable");
+		echo "<td>".form_dropdown('remarks',$remarksarr,'','class="form-control"')."</td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Total Quantity</td>";
-		echo "<td>".form_input('totalQuantity','','class="form-control" placeholder="Total Quantity" required')."<td>";
+		$totalQuantity = array('name'=>'totalQuantity','type'=>'number');
+		echo "<td>".form_input($totalQuantity,'','class="form-control" placeholder="Total Quantity" required')."<td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Available Quantity</td>";
-		echo "<td>".form_input('availableQuantity','','class="form-control" placeholder="Available Quantity" required')."<td>";
+		$availableQuantity = array('name'=>'availableQuantity','type'=>'number');
+		echo "<td>".form_input($availableQuantity,'','class="form-control" placeholder="Available Quantity" required')."<td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Damaged Quantity</td>";
-		echo "<td>".form_input('damagedQuantity','','class="form-control" placeholder="Damaged Quantity" required')."<td>";
+		$damagedQuantity = array('name'=>'damagedQuantity','type'=>'number');
+		echo "<td>".form_input($damagedQuantity,'','class="form-control" placeholder="Damaged Quantity" required')."<td>";
 	echo "<tr>";
 
 	echo "<tr>";
-		echo "<td>Owner</td>";
-		echo form_hidden('owner','DCpE','class="form-control"  required');
-		echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
+		echo "<td>Custodian</td>";
+		echo "<td>".form_input('custodian','','class="form-control" placeholder="Custodian" required')."<td>";
 	echo "<tr>";
+
+	if($this->session->userdata('type')=="admin"):
+		echo "<tr>";
+			//echo "<td>Owner</td>";
+			echo form_hidden('owner','DCpE','class="form-control"  required');
+			//echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
+		echo "<tr>";
+	else:
+		echo "<tr>";
+			//echo "<td>Owner</td>";
+			echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
+			//echo "<td>".form_input('owner',$this->session->userdata('lab'),'class="form-control" disabled  required')."<td>";
+		echo "<tr>";
+	endif;
+
 
 //echo "<tr><td><button type='button' class='btn-xl btn-danger'>Submit</button></td></tr>";
 	echo "<tr><td>".form_submit('submit','submit','class="form-control"')."</td></tr>";

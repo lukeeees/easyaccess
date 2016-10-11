@@ -25,11 +25,9 @@ class admin extends CI_Controller {
 
                 $user = $this->session->userdata('user');
 
-                if ($this->session->userdata('type')!='admin'){
-                	redirect('account/index');
-                }
-
-              $this->load->view('admin/head');
+                if ($this->session->userdata('type')=="staff"){
+					redirect('account/index');
+				}
 
               	$this->load->view('admin/head');
 
@@ -42,11 +40,18 @@ class admin extends CI_Controller {
 	}
 	public function aLab()
 	{
-		$this->load->view('admin/addlab');
+		if ($this->session->userdata('type')=="admin") {
+			$this->load->view('admin/addlab');
+		}
+		else
+		{
+			redirect("account/index");
+		}
 	}
 	public function sUser()
 	{
-		$data['x'] = $this->accountsdb->showusers();
+		$data['x'] = $this->accountsdb->showusers();	
+
 		$this->load->view('admin/showusers',$data);
 	}
 	public function aUser(){
@@ -134,7 +139,7 @@ class admin extends CI_Controller {
 					   'mname'		=>		$_POST['mname'],
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'admin',
-					   'dept'		=>		$_POST['department']);
+					   'dept'		=>		$_POST['owner']);
 		$data = $this->accountsdb->showusers();
 
 		foreach ($data as $key) {
@@ -154,8 +159,6 @@ class admin extends CI_Controller {
 	
 	public function deleteuser($id)
 	{
-		//delete labhead
-		//$this->load->view('delete');
 		$this->accountsdb->deleteUser($id);
 		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Table has been updated.!</div>');
 		redirect('admin/sUser');
@@ -164,8 +167,18 @@ class admin extends CI_Controller {
 
 	public function updateuser($values)
 	{
+		if($this->input->post('submit'))
+		{			
+			$this->accountsdb->updateuser($this->input->post());
+			$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Record is successfully added!</div>');
+			redirect('admin/sUser');
+		}
+
 		$data = $this->accountsdb->headandlab($values);
-		$this->load->view('admin/updateLH',$data);
+		$data['userinfo'] = $data['user'][0];
+		$r = $this->accountsdb->get_labs();
+		$data['laboratory'] = $r['laboratory'];
+		$this->load->view('admin/edituser',$data);
 	}
 
 	public function showStat()
@@ -184,21 +197,28 @@ class admin extends CI_Controller {
 
 	public function labSearch()
 	{
-		$labname = $this->input->post('name_search');
-		$ref = $this->input->post('searchBy');
-		
-		if(!$ref)
-			$ref = 'name';
-		//$ref = 'owner';
-		$data['x'] = $this->accountsdb->get_search($labname,$ref);
-		$this->load->view('admin/searchlab',$data);
+		if($this->session->userdata('type')=="admin")
+		{
+			$labname = $this->input->post('name_search');
+			$ref = $this->input->post('searchBy');
+			
+			if(!$ref)
+				$ref = 'name';
+			
+			$data['x'] = $this->accountsdb->get_search($labname,$ref);
+			$this->load->view('admin/searchlab',$data);
+		}		
+		else
+		{
+			redirect("account/index");
+		}
 	}
  	
 	public function updateLab($values)
 	{
 
-		$data['x'] = $this->accountsdb->solLab($values);
-		$this->load->view('admin/updateLab',$data);
+		$data['x'] = $this->accountsdb->solLab($values);		
+		$this->load->view('admin/updatLab',$data);
 	}
 
 	public function LabUpdate()
