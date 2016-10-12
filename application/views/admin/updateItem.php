@@ -88,7 +88,7 @@
 		//echo "<td>".form_input('hjk',$key->owner,'class="form-control" disabled  required')."<td>";
 	echo "<tr>";
 
-    echo "<td>".form_submit('submit','Update Item','class="form-control"');
+    echo "<td>".form_submit('submit','Update','class="form-control"');
  
 
   echo form_close();

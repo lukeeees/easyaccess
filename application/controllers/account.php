@@ -40,7 +40,7 @@ class account extends CI_Controller {
 					$this->load->view('admin/head');
 					$this->load->view('admin/splash');
 
-				}elseif ($this->session->userdata('type')== 'head') {
+				}elseif ($this->session->userdata('type')=='head') {
 					$this->load->view('admin/head');
 					$this->load->view('admin/splash');
 					// $this->load->view('labhead/head');

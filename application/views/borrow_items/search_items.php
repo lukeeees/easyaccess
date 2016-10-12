@@ -21,7 +21,7 @@
 
   <div class="starter-template">
     <?php if (!$x): ?>
-      <h2 style="margin-top:50px;text-align:center">No Items Found</h2>
+      <h2 style="margin-top:50px;text-align:center">No Item/s Found</h2>
         <?php else: ?>
           <div class="table">
           <h3><?php echo $this->session->userdata('lab'); ?></h3>
@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Id Number</label>
+                      <label>ID Number</label>
                       <input type="text" name = "borrowers_idnumber" id = "borrowers_idnumber" class = "form-control" required placeholder="ID Number"></input>
                     </div>
                     <div class="form-group">
@@ -74,6 +74,55 @@
                       <label>Last Name</label>
                       <input type="text" name = "borrowers_lname" id = "borrowers_lname" class = "form-control" required placeholder="Last Name"></input>
                     </div>
+                       <div class="form-group">
+                   <input type="submit" value="Submit" name="borrowbtn" class="btn btn-primary">
+                </div>
+                </div>
+
+                 <div class="column">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Year</label>
+                      <?php $arrayName = array('N/A'   =>   '---N/A---',
+                                               '1st Yr'  =>   'FIRST YEAR',
+                                               '2nd Yr'  =>   'SECOND YEAR',
+                                               '3rd Yr'  =>   'THIRD YEAR',
+                                               '4th Yr'  =>   'FOURTH YEAR',
+                                               '5th Yr'  =>   'FIFTH YEAR');
+                      echo form_dropdown('yearlevel',$arrayName,'','class="form-control" placeholder="Year Level"'); ?>
+                   <!--   <input type="text" name = "year" id = "year" class = "form-control" required placeholder="Year Level"></input> -->
+                    </div>
+                    <div class="form-group">
+                      <label>Course</label>
+                       <?php $arrayName = array( 'Faculty' =>  'Faculty',
+                                                  'BS-CE'  =>   'Civil Engineering',
+                                                  'BS-CHE'  =>   'Chemical Engineering',
+                                                  'BS-CpE'  =>   'Computer Engineering',
+                                                  'BS-ECE'  =>   'Electronics Engineering',
+                                                  'BS-EE'   =>   'Electrical Engineering',
+                                                  'BS-IE'   =>   'Industrial Engineering',
+                                                  'BS-ME'   =>   'Mechanical Engineering');
+                      echo form_dropdown('course',$arrayName,'','class="form-control" placeholder="Course"'); ?>
+                  <!--     <input type="text" name = "course" id = "course" class = "form-control" required placeholder="First Name"></input> -->
+                    </div>
+                    <div class="form-group">
+                      <label>Department</label>
+                       <?php $arrayName = array( 'DCE'   =>   'Department of Civil Engineering',
+                                                 'DCHE'  =>   'Department of Chemical Engineering',
+                                                 'DCpE'  =>   'Department of Computer Engineering',
+                                                 'DEEE'  =>   'Department of Electrical and Electronics Engineering',+
+                                                 'DIE'   =>   'Department of Industrial Engineering',
+                                                 'DME'   =>   'Department of Mechanical Engineering');
+                      echo form_dropdown('department',$arrayName,'','class="form-control" placeholder="Department"'); ?>
+                  <!--    <input type="text" name = "department" id = "department" class = "form-control" required placeholder="Middle Name"></input> -->
+                    </div>
+                    <div class="form-group">
+                      <label>Instructor</label>
+                      <input type="text" name = "instructor" id = "instructor" class = "form-control" required placeholder="Instructor"></input>
+                    </div>
+                    <div>
+                    <input type="hidden" name = "code" id = "code" class = "form-control" value="<?php echo $row_x->code; ?>"></input>
+                  </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -88,18 +137,16 @@
                       <label>Table Number</label>
                       <input type="text" name = "tablenumber" id = "tablenumber" class = "form-control" required placeholder="Table Number"></input>
                     </div>
-                    <div class="form-group">
-                      <label>Instruction</label>
-                      <input type="text" name = "instructor" id = "instructor" class = "form-control" required placeholder="Instruction"></input>
-                    </div>
-                    <input type="hidden" name = "code" id = "code" class = "form-control" value="<?php echo $row_x->code; ?>"></input>
-                  </div>
-                </div>        
-                <div class="form-group">
-                   <input type="submit" value="Borrow Items" name="borrowbtn" class="btn btn-primary">
+                    <div> <class="form-group">
+                      
+                      <?php echo form_hidden('custodian',$this->session->userdata('name'),'class="form-control"  required'); ?>
+                       
+                    </div>                    
                 </div>
-            </div>
+              
+               </div>
           </form>
+
         </div>
     <?php endif ?>
   </div>

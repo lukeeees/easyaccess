@@ -5,7 +5,7 @@
     </div>
   <ul class="nav nav-tabs">
   <li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
-  <li role="presentation" class="active"><?php echo anchor('admin/LUser','Lab Head');?></li>
+  <li role="presentation" class="active"><?php echo anchor('admin/LUser','Laboratory Head');?></li>
   <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php
@@ -59,7 +59,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";
-		echo "<td>".form_submit('submit','Add LAB Head','class="form-control"');
+		echo "<td>".form_submit('submit','Add Laboratory Head','class="form-control"');
 	echo "</tr>";
 
 	echo form_close();

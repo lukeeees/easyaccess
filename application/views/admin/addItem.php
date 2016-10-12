@@ -8,7 +8,7 @@
 echo @$msg;                       
 echo "<table>";
 	echo form_open('item_admin/ItemAdd');
-
+	echo "<th>";
 	echo "<tr>";
 		echo "<td>Item Name</td>";
 		echo "<td>".form_input('itemName','','class="form-control" placeholder="Item Name" required')."</td>";
@@ -16,7 +16,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>Description</td>";
-		echo "<td>".form_input('description','','class="form-control" placeholder="Descriptiion" required')."</td>";
+		echo "<td>".form_input('description','','class="form-control" placeholder="Description" required')."</td>";
 	echo "</tr>";
 
 	echo "<tr>";
@@ -58,19 +58,19 @@ echo "<table>";
 	echo "<tr>";
 		echo "<td>Total Quantity</td>";
 		$totalQuantity = array('name'=>'totalQuantity','type'=>'number');
-		echo "<td>".form_input($totalQuantity,'','class="form-control" placeholder="Total Quantity" required')."<td>";
+		echo "<td>".form_input($totalQuantity,'0','class="form-control" placeholder="0" required min="0"'  )."<td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Available Quantity</td>";
 		$availableQuantity = array('name'=>'availableQuantity','type'=>'number');
-		echo "<td>".form_input($availableQuantity,'','class="form-control" placeholder="Available Quantity" required')."<td>";
+		echo "<td>".form_input($availableQuantity,'0','class="form-control" placeholder="0" required min="0"')."<td>";
 	echo "<tr>";
 
 	echo "<tr>";
 		echo "<td>Damaged Quantity</td>";
 		$damagedQuantity = array('name'=>'damagedQuantity','type'=>'number');
-		echo "<td>".form_input($damagedQuantity,'','class="form-control" placeholder="Damaged Quantity" required')."<td>";
+		echo "<td>".form_input($damagedQuantity,'0','class="form-control" placeholder="Damaged Quantity" required min="0"')."<td>";
 	echo "<tr>";
 
 	echo "<tr>";
@@ -81,7 +81,7 @@ echo "<table>";
 	if($this->session->userdata('type')=="admin"):
 		echo "<tr>";
 			//echo "<td>Owner</td>";
-			echo form_hidden('owner','DCpE','class="form-control"  required');
+			echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
 			//echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
 		echo "<tr>";
 	else:
@@ -94,7 +94,11 @@ echo "<table>";
 
 
 //echo "<tr><td><button type='button' class='btn-xl btn-danger'>Submit</button></td></tr>";
-	echo "<tr><td>".form_submit('submit','submit','class="form-control"')."</td></tr>";
+	
+	echo "<tr>
+			<td> </td>
+			<td>".form_submit('submit','Add Item','class="form-control"')."</td>
+		 </tr>";
 	echo form_close();
 echo "</table>";
 

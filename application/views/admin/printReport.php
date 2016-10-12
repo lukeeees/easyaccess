@@ -16,7 +16,7 @@
 
 foreach ($x->result() as $key) {
 
-echo "<table>";
+echo "<table class='table table-striped'>";
     
     echo "<tr>";
         echo "<td class='label1'>Department:</td>";

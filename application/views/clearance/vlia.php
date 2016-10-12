@@ -5,7 +5,7 @@
         
         <?php 
         $attributes = array("class" => "form-horizontal", "role" => "form", "id" => "searchform", "name" => "searchform");
-        echo form_open("c_clear/sVio", $attributes);?>
+        echo form_open("c_clear/sLia", $attributes);?>
             <div class="form-group">
                 <div class="col-md-4 col-sm-offset-2" style="padding:0;">
                     <input class="form-control" id="name_search" name="name_search" placeholder="Search..." type="text" value="<?php echo set_value('name_search'); ?>" />
@@ -37,12 +37,12 @@
 <?php echo $this->session->flashdata('msg');?>
 
   <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><?php echo anchor('c_clear/sVio','Violations');?></li>
-  <li role="presentation" ><?php echo anchor('c_clear/sLia','Liabilities');?></li>
+  <li role="presentation" ><?php echo anchor('c_clear/sVio','Violations');?></li>
+  <li role="presentation" class="active"><?php echo anchor('c_clear/sLia','Liabilities');?></li>
  </ul>
 <div class="starter-template">
         <?php if (!$x): ?>
-            <h2 style="margin-top:50px;text-align:center">No Violations Found</h2>
+            <h2 style="margin-top:50px;text-align:center">No Liabilities Found</h2>
         <?php else: ?>        
           <div class="table-responsive">
             <table class="table table-striped">
@@ -54,7 +54,7 @@
                   <th>Year Level</th>
                   <th>Course</th>
                   <th>Department</th>
-                  <th>Violation</th>
+                  <th>Liabilities</th>
                   <th>Room/Laboratory</th>
                   <th>Status</th>
                   <th>Action</th> 

@@ -3,7 +3,7 @@
 	<div class="jumbotron">
         <center><h1>Add Violation</h1>  </center>
     </div>
-    <?php echo $this->session->flashdata('msg');?>
+    <?php //echo $this->session->flashdata('msg');?>
  <?php
                     
 echo "<table>";
@@ -81,7 +81,7 @@ echo "<table>";
 	echo "</tr>";
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";
-		echo "<td>".form_submit('submit','Add Violation','class="form-control"');
+		echo "<td>".form_submit('submit','Submit','class="form-control"'	);
 	echo "</tr>";
 
 	echo form_close();

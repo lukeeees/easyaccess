@@ -1,7 +1,7 @@
 <div class="container">
 <div class="starter-template">
   <div class="jumbotron">
-        <center><h1>Show Violation</h1>  </center>
+        <center><h1>Liabilities and Violation</h1>  </center>
     </div>
     <div class="panel">
         <div class="panel-body">
@@ -72,6 +72,10 @@
               $c=1;
 
               foreach ($x as $row) {
+                if($row['status']=="Cleared")
+                    $txt = "success";
+                  else
+                    $txt = "danger";
               echo "<tr>
 
                   <td>".$c."</td>
@@ -82,8 +86,9 @@
                   <td>".$row['department']."</td>
                   <td>".$row['violation']."</td>
                   <td>".$row['laboratory']."</td>
-                  <td>".$row['status']."</td>
+                  <td class='text-".$txt."'>".$row['status']."</td>
                   <td><form class='violations' action='' method='post'><input type='hidden' name='id' value='".$row['id']."'><input type='submit' name='clear' class='btn btn-danger btn-xs' value='Clear'></form></td>
+
                 </tr>";
                  //a data-toggle="modal" data-target="#myModal" href="#">Logout</a>
                 $c++;

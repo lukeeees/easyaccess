@@ -60,7 +60,7 @@
 
 <div class="starter-template">
     <?php if (!$x): ?>
-        <h2 style="margin-top:50px;text-align:center">No Items Found</h2>
+        <h2 style="margin-top:50px;text-align:center">No Item/s Found</h2>
     <?php else: ?>
         <?php echo $this->session->flashdata('msg'); ?>        
               <div class="table-responsive">

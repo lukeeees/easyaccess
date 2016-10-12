@@ -51,7 +51,7 @@
 <script>
 function doconfirm()
 {
-    job = confirm("Are you sure you want to delete this item?");
+    job = confirm("Are you sure you want to delete this User?");
     if(job!=true)
     {
         return false;

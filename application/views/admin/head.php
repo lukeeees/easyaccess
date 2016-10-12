@@ -43,10 +43,10 @@
 
                     <?php if ($this->session->userdata['type']=="staff"): ?>
                         <li class="dropdown">
-                          <a style="cursor:pointer;">Transactions</a>
+                         <?php echo anchor('borrow/userlist', 'Transactions');?> <!-- <a>Transactions</a>-->
                           <div class="dropdown-content">
                               <?php echo anchor('/borrow/ItemSearch', 'Borrow Items');?>
-                              <?php echo anchor('borrow/userlist', 'Return Items');?>                              
+                              <?php// echo anchor('borrow/userlist', 'Return Items');?>                              
                           </div>
                         </li>
                     <?php endif; ?>
@@ -54,24 +54,26 @@
 
                     <?php if ($this->session->userdata['type']!="staff"): ?>
                         <li class="">
-                          <a href="/easyaccess/index.php/c_clear/notifications"><span id="notif" class="badge" style="vertical-align:top;margin-right:5px;"></span> Notification</a></li>
+                          <a href="/easyaccess/index.php/c_clear/notifications"><span id="notif" class="badge" style="vertical-align:top;margin-right:5px;"></span> Notifications</a></li>
                         <li class="dropdown">
-                          <a>Clearance</a>
+                          <?php echo anchor('c_clear/sVio', 'Clearance');?><!--<a>Clearance</a>-->
                           <div class="dropdown-content">
+
+                             <?php echo anchor('c_clear/violation', 'Add Violation'); ?>
                               <?php //echo anchor('c_clear/clearance', 'Clearance');?>
-                              <?php echo anchor('c_clear/viewall', 'View All');?>
+                              
                               <a href="#">View Statistics</a>
                           </div>
                         </li>
                     <?php endif; ?>
 
                     <li class="dropdown">
-                        <?php echo anchor('item_admin/ItemSearch','Inventory')?>
+                        <?php echo anchor('item_admin/ItemSearch','Manage Items')?>
                         <div class="dropdown-content">
                           <?php echo anchor('item_admin/addItem','Add Item')?>
                           <?php if ($this->session->userdata['type']!="staff"): ?>
-                            <?php echo anchor('inventory_admin/addInventory','Create Report')?>
-                            <?php echo anchor('inventory_admin/viewInventory','Manage Report')?>
+                            <?php echo anchor('inventory_admin/addInventory','Create Inventory Report')?>
+                            <?php echo anchor('inventory_admin/viewInventory','Manage Inventory Report')?>
                             <?php echo anchor('','View Statistics')?>
                           <?php endif; ?>
                         </div>
@@ -79,14 +81,12 @@
                    
                     <?php if ($this->session->userdata['type']!="staff"): ?>
                         <li class="dropdown">
-                            <a>Manage Accounts</a>
+                            <?php echo anchor('admin/sUser','Manage Accounts')?><!--<a>Manage Accounts</a>-->
                             <div class="dropdown-content">
-                              <?php echo anchor('admin/sUser','Manage Users')?>
-
                               <?php if ($this->session->userdata('type')=="admin"): ?>
-                                <?php echo anchor('admin/aUser','Add Users')?>
+                                <?php echo anchor('admin/aUser','Add User')?>
                               <?php elseif($this->session->userdata('type')=="head"): ?>
-                                <?php echo anchor('admin/stUser','Add Users')?>     
+                                <?php echo anchor('admin/stUser','Add User')?>     
                               <?php endif; ?>                     
                             </div>
                         </li>
@@ -100,14 +100,14 @@
                             </div>
                         </li>
                     <?php endif ?>                    
-
-                    <li class="dropdown">
-                        <?php echo anchor('c_clear/sVio','Violation')?>
+                    <?php if ($this->session->userdata['type']=="staff"): ?>
+                    <li class="dropdown"> 
+                        <?php echo anchor('c_clear/sVio', 'Violation'); ?><?//php echo anchor('c_clear/sVio','Violation')?>
                         <div class="dropdown-content">
                           <?php echo anchor('c_clear/violation', 'Add Violation'); ?><!--<a href="#">Add Violation</a>-->
                         </div>
                     </li>
-
+                  <?php endif; ?>
                     <li class="page-scroll">
                <!--  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> -->
                   <a data-toggle="modal" data-target="#myModal" href="#">Logout</a>

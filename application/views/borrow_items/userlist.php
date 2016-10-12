@@ -2,6 +2,11 @@
   <?php echo br(4); ?>
   <div class="panel panel-primary">
   </div>
+
+   <ul class="nav nav-tabs">
+  <li role="presentation" class="active"><?php echo anchor('borrow/userlist','Borrowed Item/s');?></li>
+  <li role="presentation" ><?php echo anchor('borrow/userlist','Returned Item/s');?></li>
+ </ul>
   <div class="starter-template">
     <?php if (!$item): ?>
 
@@ -9,15 +14,17 @@
 
     <?php else: ?>
     <div class="table-responsive">
-      <h3><?php echo $this->session->userdata('lab'); ?></h3>
+      <h3>Borrow Transactions in <?php echo $this->session->userdata('lab'); ?></h3>
       <table class="table table-striped">
-        <thead>
+        <thead> 
           <tr>
             <th><center>#</center></th>
             <th><center>Id Number</th>
             <th><center>Name</center></th>     
             <th><center>Subject</center></th> 
-            <th><center>Schedule</center></th> 
+            <th><center>Schedule</center></th>
+            <th><center>Date/Time Borrowed</center></th>
+            <th><center>Released By</center></th> 
             <th><center>Action</center></th>
           </tr>
         </thead>
@@ -32,7 +39,9 @@
               <td><center><?php echo $row->borrowers_idnumber; ?></center></td>              
               <td><center><?php echo $row->borrowers_lname.", ".$row->borrowers_fname." ".$row->borrowers_mname; ?></center></td>
               <td><center><?php echo $row->subject; ?></center></td>              
-              <td><center><?php echo $row->schedule; ?></center></td>              
+              <td><center><?php echo $row->schedule; ?></center></td> 
+              <td><center><?php echo $row->schedule; ?></center></td>
+              <td><center><?php echo $this->session->userdata('name'); ?></center></td>             
               <td><center><?php echo anchor('/borrow/list_borrowed?idnum='.$row->borrowers_idnumber, 'View');?></center></td>              
             </tr>
           <?php

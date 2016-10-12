@@ -1,7 +1,7 @@
 <div class="container">
 <div class="starter-template">
   <div class="jumbotron">
-        <center><h1>Show Violation</h1>  </center>
+        <center><h1>Liabilities and Violations</h1>  </center>
     </div>
     <div class="panel">
         <div class="panel-body">
@@ -36,6 +36,7 @@
           <?php echo form_close(); ?>
           </div>
     </div>
+    
           <?php if (!$x): ?>
               <h2 style="margin-top:50px;text-align:center">No Violations Found</h2>
           <?php else: ?>
@@ -46,7 +47,7 @@
                     <th>#</th>
                     <th>ID Number</th>
                     <th>Name</th>
-                    <th>Year Level</th>
+                    <th>Yr</th>
                     <th>Course</th>
                     <th>Department</th>
                     <th>Violation</th>

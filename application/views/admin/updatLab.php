@@ -27,7 +27,7 @@
 
  
     
-    echo "<td>".form_submit('submit','Update User','class="form-control"');
+    echo "<td>".form_submit('submit','Update Laboratory','class="form-control"');
  
 
   echo form_close();

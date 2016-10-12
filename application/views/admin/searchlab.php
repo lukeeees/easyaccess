@@ -17,14 +17,9 @@
                           <?php
                           $data = array(
                                       'name'  => 'By Laboratory Name',
-                                      'room' => 'By Room',
-                                      'code'  => 'By Code'
-                            );
-                            
-
-                            echo form_dropdown('searchBy',$data,set_value('searchBy'),'class="form-control"');
-                   
-                          ?>
+                                      'room' => 'By Room' );
+                          echo form_dropdown('searchBy',$data,set_value('searchBy'),'class="form-control"');
+                   ?>
                 </div>
                 <div class="col-xs-2" style="padding:0;">
                   <input id="btn_search" name="btn_search" type="submit" class="btn btn-danger" value="Search"/>

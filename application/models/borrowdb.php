@@ -25,9 +25,9 @@ class borrowdb extends CI_Controller {
 
                 $user = $this->session->userdata('user');
 
-                if ($this->session->userdata('type')!='staff'){
-                	redirect('account/index');
-                }
+                //if ($this->session->userdata('type')!='staff'){
+                //	redirect('account/index');
+                //}
                 $this->load->view('borrow_items/head');
                 $this->load->view('templates/header');
 
@@ -114,7 +114,8 @@ class borrowdb extends CI_Controller {
 						'purpose' => $value['purpose'],
 						'table_number' => $value['table_number'],
 						'laboratory' => $value['laboratory'],
-						'instructor' => $value['instructor'])
+						'instructor' => $value['instructor'],
+						'custodian'	=> $value['custodian']);
 
 		$this->db->insert('borrow_test',$items_itemlist);
 		

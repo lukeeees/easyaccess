@@ -74,8 +74,35 @@ class clearancedb extends CI_Model {
                'status' => "Cleared"
             );
 
+            $this->addtologs("successfully added violation(".$student['u_id'].").");
+
             $this->db->where('id', $id);
             $this->db->update('student', $data); 
+        }
+
+        public function add2logs($msg)
+        {
+          if ($this->session->userdata('type')=="admin" || $this->session->userdata('type')=="head") {
+            $msg = "".$this->session->userdata('type')." ".$this->session->userdata('name')." has ".$msg;
+          }
+            $item  = array('action'  => $msg,
+                       'laboratory' => $this->session->userdata('lab'));
+
+            $this->db->insert('logs',$item);
+        }
+
+        public function clearedvio($id)
+        {
+            if ($this->session->userdata('type')=="admin" || $this->session->userdata('type')=="head")
+            {
+            $data = array(
+               'status' => "Cleared"
+            );
+            }
+            $this->add2logs( "successfully updated violation(".$student['u_id'].").");
+            $this->db->where('id', $id);
+            $this->db->update('student', $data); 
+            
         }
 
           public function addvio($values) //add violation
@@ -91,7 +118,7 @@ class clearancedb extends CI_Model {
                            'laboratory' =>    $values['laboratory'],
                            'status'     =>    $values['status']);
 
-            $this->addtologs("successfully added violation(".$student['u_id'].").");
+            $this->add2logs("successfully added violation(".$student['u_id'].").");
           
             $this->db->insert('student',$student);
         }
@@ -100,16 +127,40 @@ class clearancedb extends CI_Model {
         {
           $data=array();
 
-          if ($this->session->userdata('type')=="head")
+          if ($this->session->userdata('type')=="head" || $this->session->userdata('type')=="staff")
           {
               $this->db->where('laboratory',$this->session->userdata('lab'));
           }
 
-          if($status=="")          
+          if($status==""){          
+              $this->db->or_where_not_in('violation','Unreturned Item');
               $query = $this->db->get('student');
-          else
+          }else
+
               $query = $this->db->get_where('student', array('status' => $status));
           
+          $data = $query->result_array();
+          return $data;
+        }
+
+        public function showlia($status) //show liabilities
+        {
+          $data=array();
+
+          if ($this->session->userdata('type')=="head" || $this->session->userdata('type')=="staff")
+          {
+              $this->db->where('laboratory',$this->session->userdata('lab'));
+          }
+          $lia = array('status'     =>  $status,
+                        'violation'  =>  'Unreturned Item');
+          if($status==""){  
+              $this->db->where('violation','Unreturned Item');        
+              $query = $this->db->get('student');
+          }else{
+           
+              $this->db->where($lia);
+              $query = $this->db->get('student');
+          }
           $data = $query->result_array();
           return $data;
         }
@@ -159,6 +210,54 @@ class clearancedb extends CI_Model {
           
           return $data;
         }
+
+      public function searchViolate($value,$ref,$status) //show violation
+        {                    
+          if($ref == "name")
+          {            
+              if($value!="")
+              {                 
+                
+                if ($this->session->userdata('type')=="head")
+                {                  
+                    $lab = $this->session->userdata('lab');
+                    echo $where = "laboratory LIKE '$lab' AND 
+                        (name LIKE '%$value%' OR middlename LIKE '%$value%' 
+                        OR lastname LIKE '%$value%') AND status LIKE '$status'";
+                      
+                    $this->db->where($where);
+                    exit;
+                }
+                else
+                {                             
+                    $where = "status LIKE '$status' AND 
+                        (name LIKE '%$value%' OR middlename LIKE '%$value%' 
+                        OR lastname LIKE '%$value%') AND status LIKE '$status'";
+                    $this->db->where($where);
+                }                  
+              }
+              else{
+                $this->db->where('laboratory',$this->session->userdata('lab'));
+              }      
+          }          
+          else
+          {            
+            $this->db->like($ref,$value);
+          }        
+
+          if($status != "")
+            $this->db->where('status',$status);                     
+
+          if ($this->session->userdata('type')=="head") {
+            $this->db->where('laboratory',$this->session->userdata('lab'));
+          }
+          $this->db->or_where_not_in('violation','Unreturned Item');
+          $query = $this->db->get('student');
+          $data = $query->result_array();
+          
+          return $data;
+        }
+
 
         public function get_search($value,$ref)
         {                              
@@ -220,7 +319,7 @@ class clearancedb extends CI_Model {
              $this->db->where('id', $values['id']);
              $this->db->update('student', $student);
 
-             $this->addtologs("successfully updated violation(".$student['u_id'].").");
+             $this->add2logs("successfully updated violation(".$student['u_id'].").");
           }
 
           

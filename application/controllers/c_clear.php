@@ -25,13 +25,13 @@ class c_clear extends CI_Controller {
 
 				$user = $this->session->userdata('user');
 
-				if ($this->session->has_userdata('user')!=$user['type']){
-					redirect('account/index');
-				}
+				//if ($this->session->has_userdata('user')!=$user['type']){
+				//	redirect('account/index');
+				//}
 
-				if ($this->session->userdata('type')=="staff"){
-					redirect('account/index');
-				}
+			//	if ($this->session->userdata('type')=="staff"){
+			//		redirect('account/index');
+			//	}
 
 				$this->load->view('admin/head');
 				$this->load->view('templates/header');
@@ -125,16 +125,23 @@ class c_clear extends CI_Controller {
 					   'laboratory'	=>		$_POST['laboratory'],
 					   'status'		=>		'Pending');
 
-	
-		$this->clearancedb->addvio($student);	
-
 		$this->session->set_flashdata('msg', '<div class=alert-success text-center">Violation is successfully added!</div>');
-		
-		redirect('c_clear/violation');
+		$this->clearancedb->addvio($student);	
+		redirect('c_clear/sVio');
 	}
 
 	public function sVio() //show violation search
 	{
+		$data['x'] = $this->clearancedb->showvio('');
+
+		if($this->input->post('btn_search')!==null)
+		{
+			$data['x'] = $this->clearancedb->searchstudent($this->input->post('name_search'),$this->input->post('searchBy'),'');			
+		}
+		
+		$this->load->view('clearance/vs_clear',$data);
+
+/*
 		$student = $this->input->post('name_search');
 		$ref = $this->input->post('searchBy');
 		
@@ -142,7 +149,31 @@ class c_clear extends CI_Controller {
 			$ref = 'id';
 		
 		$data['x'] = $this->clearancedb->get_search($student,$ref);
-		$this->load->view('clearance/vs_clear',$data);
+		//$this->session->set_flashdata('msg', '<div class=alert-success text-center">Violation is successfully added!</div>');
+		$this->load->view('clearance/vs_clear',$data);*/
+	}
+
+	public function sLia() //show liabilities
+	{
+		$data['x'] = $this->clearancedb->showlia('');
+
+		if($this->input->post('btn_search')!==null)
+		{
+			$data['x'] = $this->clearancedb->showlia($this->input->post('name_search'),$this->input->post('searchBy'),'');			
+		}
+		
+		$this->load->view('clearance/vlia',$data);
+
+/*
+		$student = $this->input->post('name_search');
+		$ref = $this->input->post('searchBy');
+		
+		if(!$ref)
+			$ref = 'id';
+		
+		$data['x'] = $this->clearancedb->get_search($student,$ref);
+		//$this->session->set_flashdata('msg', '<div class=alert-success text-center">Violation is successfully added!</div>');
+		$this->load->view('clearance/vs_clear',$data);*/
 	}
 	 
 	public function upVio($values)//view update vioalation
@@ -165,9 +196,17 @@ class c_clear extends CI_Controller {
 						   'laboratory'	=>		$_POST['laboratory'],
 						   'status'		=>		$_POST['status']);
 		
-		$this->clearancedb->upVio($student);
 		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Record has been updated!</div>');
-		redirect('c_clear/svio');
+		$this->clearancedb->upVio($student);
+		redirect('c_clear/sVio');
+	}
+
+	public function clearedvio($id)
+	{
+		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Violation has been updated.!</div>');
+		$this->clearancedb->clearedvio($id);
+		redirect('c_clear/sVio');
+
 	}
 }
 ?>

@@ -1,7 +1,7 @@
 <div class="container">
 <div class="starter-template">
 	<div class="jumbotron">
-        <center><h1>Edit User Info</h1>  </center>
+        <center><h1>Edit User</h1>  </center>
     </div>
 <?php
 echo $this->session->flashdata('msg');          
@@ -67,7 +67,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";
-		echo "<td>".form_submit('submit','Add LAB Head','class="form-control"');
+		echo "<td>".form_submit('submit','Update','class="form-control"');
 	echo "</tr>";
 
 	echo form_close();

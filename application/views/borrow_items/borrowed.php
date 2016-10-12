@@ -49,7 +49,7 @@
                       <input type="hidden" name="itemcode[]" value="<?php echo $row->item_code; ?>">
                       <input type="hidden" name="borrowedquantity[]" value="<?php echo $row->quantity; ?>">
                     </td>
-                    <td><center><input class="quantity form-control" type="number" name="quantity[]" min="0" max="<?php echo $row->quantity; ?>" value="<?php echo $row->quantity; ?>" style="width:100px;"></center></td>
+                    <td><center><input class="quantity form-control" type="number" name="quantity[]" min="0" max="<?php echo $row->quantity; ?>" value="0" style="width:100px;"></center></td>
                   </tr>
                 <?php
                     $count += $row->quantity;
@@ -60,7 +60,7 @@
         
           <div style="clear:both;height:30px;"></div>
           <div class="form-group">
-             <input type="submit" value="Return Items" name="returnbtn" class="btn btn-primary">
+             <input type="submit" value="Return Items" name="returnbtn" class="btn btn-primary" >
              <?php echo anchor('/borrow/userlist', 'Back','class="btn btn-default"');?>
           </div>
         </form> 
@@ -101,5 +101,5 @@
 
     // });
   });
-</script>
+
 

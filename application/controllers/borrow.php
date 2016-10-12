@@ -110,6 +110,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$borrowers_info['borrowers_fname'] = $_POST['borrowers_fname'];
 						$borrowers_info['borrowers_mname'] = $_POST['borrowers_mname'];
 						$borrowers_info['borrowers_lname'] = $_POST['borrowers_lname'];
+						$borrweres_info['yearlevel']	   = $_POST['yearlevel'];
+					   	$borrowers_info['course']		   = $_POST['course'];
+					   	$borrowers_info ['department']	   = $_POST['department'];
 						$borrowers_info['subject'] = $_POST['subject'];
 						$borrowers_info['tablenumber'] = $_POST['tablenumber'];
 						$borrowers_info['schedule'] = $_POST['schedule'];
@@ -118,15 +121,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$borrowers_info['item_name'] = $tmp[1];
 						$borrowers_info['quantity'] = $value[0];
 						$borrowers_info['laboratory'] = $this->session->userdata('lab');
+						$borrowers_info['custodian'] = $this->session->userdata('name');
 						$this->db->insert('borrowers_info', $borrowers_info);						
 
 						$student[$_POST['borrowers_idnumber']]  = array(
 					   'lastname'	=>		$_POST['borrowers_lname'],
 					   'name'		=>		$_POST['borrowers_fname'],
 					   'middlename'	=>		$_POST['borrowers_mname'],
-					   'yearlevel'	=>		"",
-					   'course'		=>		"",
-					   'department'	=>		"",
+					   'yearlevel'	=>		$_POST['yearlevel'],
+					   'course'		=>		$_POST['course'],
+					   'department'	=>		$_POST['department'],
 					   'violation'	=>		"Unreturned Item",
 					   'laboratory'	=>		$this->session->userdata('lab'),
 					   'status'		=>		'Pending');
@@ -155,9 +159,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					   'lastname'	=>		$value['lastname'],
 					   'name'		=>		$value['name'],
 					   'middlename'	=>		$value['middlename'],
-					   'yearlevel'	=>		"",
-					   'course'		=>		"",
-					   'department'	=>		"",
+					   'yearlevel'	=>		$value['yearlevel'],
+					   'course'		=>		$value['course'],
+					   'department'	=>		$value['department'],
 					   'violation'	=>		"Unreturned Item",
 					   'laboratory'	=>		$this->session->userdata('lab'),
 					   'status'		=>		'Pending');

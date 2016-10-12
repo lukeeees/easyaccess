@@ -94,9 +94,11 @@ class accountsdb extends CI_Model {
           $data=array();
           if ($this->session->userdata('type')=="head")
           {
+            
             $this->db->where('department',$this->session->userdata('lab'));
             $this->db->where('type','staff');
           }
+          $this->db->order_by('type', 'asc');
           $query = $this->db->get('user');          
           $data = $query->result_array();
           return $data;

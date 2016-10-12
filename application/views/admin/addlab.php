@@ -19,7 +19,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";
-		echo "<td>".form_submit('submit','Add Laboratory','class="form-control"');
+		echo "<td>".form_submit('submit','Submit','class="form-control"');
 	echo "</tr>";
 
 	echo form_close();

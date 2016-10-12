@@ -1,7 +1,7 @@
 <div class="container">
 <div class="starter-template">
   <div class="jumbotron">
-        <center><h1>Show Notifications</h1>  </center>
+        <center><h1>Notifications</h1>  </center>
     </div>
           <?php if (!$x): ?>
               <h2 style="margin-top:50px;text-align:center">No Notifications Found</h2>
@@ -10,8 +10,8 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Action</th>
-                    <th>Laboratory</th>
+                    <th>Details</th>
+                    <th>Station</th>
                     <th>Time</th>
                     <th>Date</th>
                   </tr>

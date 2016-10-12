@@ -28,7 +28,7 @@ class admin extends CI_Controller {
                 if ($this->session->userdata('type')=="staff"){
 					redirect('account/index');
 				}
-
+		
               	$this->load->view('admin/head');
 
                 $this->load->view('templates/header');
