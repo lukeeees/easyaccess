@@ -41,7 +41,7 @@
                         <a href="#page-top"></a>
                     </li>
 
-                    <?php if ($this->session->userdata['type']=="staff"): ?>
+                        <?php if ($this->session->userdata['type']=="staff"): ?>
                         <li class="dropdown">
                          <?php echo anchor('borrow/userlist', 'Transactions');?> <!-- <a>Transactions</a>-->
                           <div class="dropdown-content">
@@ -49,25 +49,23 @@
                               <?php// echo anchor('borrow/userlist', 'Return Items');?>                              
                           </div>
                         </li>
-                    <?php endif; ?>
+                         <?php endif; ?>
 
 
-                    <?php if ($this->session->userdata['type']!="staff"): ?>
+                        <?php if ($this->session->userdata['type']!="staff"): ?>
                         <li class="">
                           <a href="/easyaccess/index.php/c_clear/notifications"><span id="notif" class="badge" style="vertical-align:top;margin-right:5px;"></span> Notifications</a></li>
                         <li class="dropdown">
                           <?php echo anchor('c_clear/sVio', 'Clearance');?><!--<a>Clearance</a>-->
                           <div class="dropdown-content">
-
-                             <?php echo anchor('c_clear/violation', 'Add Violation'); ?>
+                              <?php echo anchor('c_clear/violation', 'Add Violation'); ?>
                               <?php //echo anchor('c_clear/clearance', 'Clearance');?>
-                              
                               <a href="#">View Statistics</a>
                           </div>
                         </li>
-                    <?php endif; ?>
+                        <?php endif; ?>
 
-                    <li class="dropdown">
+                         <li class="dropdown">
                         <?php echo anchor('item_admin/ItemSearch','Manage Items')?>
                         <div class="dropdown-content">
                           <?php echo anchor('item_admin/addItem','Add Item')?>
@@ -77,9 +75,9 @@
                             <?php echo anchor('','View Statistics')?>
                           <?php endif; ?>
                         </div>
-                    </li>
+                        </li>
                    
-                    <?php if ($this->session->userdata['type']!="staff"): ?>
+                        <?php if ($this->session->userdata['type']!="staff"): ?>
                         <li class="dropdown">
                             <?php echo anchor('admin/sUser','Manage Accounts')?><!--<a>Manage Accounts</a>-->
                             <div class="dropdown-content">

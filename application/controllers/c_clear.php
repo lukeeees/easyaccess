@@ -125,7 +125,7 @@ class c_clear extends CI_Controller {
 					   'laboratory'	=>		$_POST['laboratory'],
 					   'status'		=>		'Pending');
 
-		$this->session->set_flashdata('msg', '<div class=alert-success text-center">Violation is successfully added!</div>');
+		$this->session->set_flashdata('msg', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Violation is successfully added!</div>');
 		$this->clearancedb->addvio($student);	
 		redirect('c_clear/sVio');
 	}
@@ -196,14 +196,14 @@ class c_clear extends CI_Controller {
 						   'laboratory'	=>		$_POST['laboratory'],
 						   'status'		=>		$_POST['status']);
 		
-		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Record has been updated!</div>');
+		$this->session->set_flashdata('msg', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Record has been updated!</div>');
 		$this->clearancedb->upVio($student);
 		redirect('c_clear/sVio');
 	}
 
 	public function clearedvio($id)
 	{
-		$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Violation has been updated.!</div>');
+		$this->session->set_flashdata('msg', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Violation has been updated.!</div>');
 		$this->clearancedb->clearedvio($id);
 		redirect('c_clear/sVio');
 
