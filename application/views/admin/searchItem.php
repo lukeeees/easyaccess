@@ -67,7 +67,7 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>#</th>
+                      
                       <th>Item Code</th>
                       <th>Item Name</th>
                       <th>Description</th>
@@ -84,7 +84,7 @@
 
                   <?php for ($i = 0; $i < count($x); ++$i) { ?>
                     <tr>
-                        <td><?php echo $i+1?></td>
+                        
                         <td><?php echo $x[$i]->code; ?></td>
                         <td><?php echo $x[$i]->name; ?></td>
                         <td><?php echo $x[$i]->description; ?></td>

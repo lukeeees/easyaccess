@@ -1,7 +1,7 @@
 <div class="container">
 <div class="starter-template">
 	<div class="jumbotron">
-        <center><h1 id="head">Create Report in <?php echo $this->session->userdata('lab');?></h1>  </center>
+        <center><h1 id="head">Create Report for <?php echo $this->session->userdata('lab');?></h1>  </center>
     </div>
 
 <form id="selrem" action="" method="POST">
@@ -70,7 +70,7 @@ echo "<table id='tableReport' class='table1'>";
 ?>
 <tr>
 	<td class="label1">
-		Item To Display
+		Items To Display
 	</td>
 	<td>		
 		<select class="form-control1" name="remarks">
@@ -84,7 +84,7 @@ echo "<table id='tableReport' class='table1'>";
             <table  id="dataprinttable" class="table table-striped">
               <thead >
                 <tr>
-                  <th>#</th>
+                  
                   <th>Item Code</th>
                   <th>Available Quantity</th>
                   <th>Item Name</th>
@@ -100,7 +100,7 @@ echo "<table id='tableReport' class='table1'>";
 
               <?php for ($i = 0; $i < count($x); ++$i) { ?>
                 <tr>
-                    <td><?php echo $i+1?></td>
+                    
                     <td><?php echo $x[$i]->code; ?></td>
                     <td><?php echo $x[$i]->availablequantity; ?></td>
                     <td><?php echo $x[$i]->name; ?></td>

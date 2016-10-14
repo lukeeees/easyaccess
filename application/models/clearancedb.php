@@ -137,21 +137,23 @@ class clearancedb extends CI_Model {
         public function showvio($status) //show violation
         {
           $data=array();
-
+          $lab = $this->session->userdata('lab');
           if ($this->session->userdata('type')=="head" || $this->session->userdata('type')=="staff")
           {
-              $this->db->where('laboratory',$this->session->userdata('lab'));
+            echo $lab;
+              $this->db->where('laboratory',$lab);
           }
 
           if($status==""){          
-              $this->db->or_where_not_in('violation','Unreturned Item');
+              $this->db->where('violation !=','Unreturned Item');
+              $query = $this->db->get('student');   
+          }else{
+              $this->db->where('status',$status);
               $query = $this->db->get('student');
-          }else
+          }
 
-              $query = $this->db->get_where('student', array('status' => $status));
-          
           $data = $query->result_array();
-          return $data;
+        return $data;
         }
 
         public function showlia($status) //show liabilities
@@ -177,7 +179,8 @@ class clearancedb extends CI_Model {
         }
 
         public function searchstudent($value,$ref,$status) //show violation
-        {                    
+        {     
+        $lab = $this->session->userdata('lab');               
           if($ref == "name")
           {            
               if($value!="")
@@ -185,7 +188,7 @@ class clearancedb extends CI_Model {
                 
                 if ($this->session->userdata('type')=="head")
                 {                  
-                    $lab = $this->session->userdata('lab');
+                    
                          $where = "laboratory LIKE '$lab' AND 
                         (name LIKE '%$value%' OR middlename LIKE '%$value%' 
                         OR lastname LIKE '%$value%') AND violation !='Unreturned Item'";
@@ -213,6 +216,7 @@ class clearancedb extends CI_Model {
           }          
           else
           {
+            $this->db->where('laboratory = ',$lab);
             $this->db->where('violation !=','Unreturned Item');         
             $this->db->like($ref,$value);
           }        
@@ -226,7 +230,7 @@ class clearancedb extends CI_Model {
             $this->db->where('laboratory',$this->session->userdata('lab'));
           }
           
-          $this->db->where($where);
+          
           $query = $this->db->get('student');
           $data = $query->result_array();
           

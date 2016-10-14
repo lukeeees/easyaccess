@@ -3,7 +3,7 @@
 
 <div class="starter-template">
   <div id="headerprint" class="jumbotron">
-        <center><h1>Manage Report in <?php echo $this->session->userdata('lab');?></h1>  </center>
+        <center><h1>Manage Report for <?php echo $this->session->userdata('lab');?></h1>  </center>
     </div>
     <div class="panel">
         <div class="panel-body">
