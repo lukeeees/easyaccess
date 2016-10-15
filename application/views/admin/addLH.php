@@ -4,9 +4,9 @@
         <center><h1>Add User</h1>  </center>
     </div>
   <ul class="nav nav-tabs">
-  <li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
+  <li role="presentation" ><?php echo anchor('admin/aUser','Admin');?></li>
   <li role="presentation" class="active"><?php echo anchor('admin/LUser','Laboratory Head');?></li>
-  <li role="presentation"><?php echo anchor('admin/stUser','Staff');?></li>
+  <li role="presentation" ><?php echo anchor('admin/stUser','Staff');?></li>
 </ul>
 <?php
 echo $this->session->flashdata('msg');                     
@@ -34,7 +34,7 @@ echo "<table>";
 	echo "</tr>";
 
 	echo "<tr>";
-		echo "<td><label>Station</label></td>";		
+		echo "<td>Station</td>";		
 
 		$values=array();
 

@@ -1,4 +1,4 @@
-<?php
+g<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class borrowdb extends CI_Controller {

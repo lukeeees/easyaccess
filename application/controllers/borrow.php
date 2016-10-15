@@ -42,11 +42,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         		$data['item'][$value->borrowers_idnumber] = $value;
         	}
 
-        	$this->load->view('borrow_items/userlist',$data);
+	      	$this->load->view('borrow_items/userlist',$data);
         }
+
+        public function searchlist() //search borrowed items
+        {
+        	if($this->input->post('btn_search')!==null)
+			{
+			$data['x'] = $this->itemdb->show_all_borrowed($this->input->post('name_search'),$this->input->post('searchBy'),'');			
+			}
+			$this->load->view('borrow_items/userlist', $data);
+		}
+
          public function returnitems()//show return items
         {
-        	$tmp = $this->itemdb->show_all_borrowed('')->result();
+        	$tmp = $this->itemdb->borrowers_idnumber('')->result();
 
         	$data['item'] = array();
 
@@ -76,7 +86,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$x = $this->itemdb->get_search($item);
 			$y = $this->itemdb->get_borrowers();
 			$z = array('x' => $x, 'y' =>$y);
-			$this->load->view('borrow_items/return_items',$z);	
+			$this->load->view('borrow_items/items_return',$z);
+			//$this->load->view('borrow_items/return_items',$z);	
 		}
 
 
@@ -151,15 +162,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$quantity = $this->itemdb->get_item($code);	
 
 						if($quantity != 0){
-							$sql = "update item set availablequantity = availablequantity-'".$borrowers_info['quantity']."' where code = '".$borrowers_info['item_code']."'";
-							$this->db->query($sql);
-							$borrowers_id = $this->db->insert_id();
-						
-							$borrowers_transaction['item_code'] = $_POST['code'];
-							$borrowers_transaction['date_borrowed'] = date('Y-m-d H:i:s',time());
-							$borrowers_transaction['releasedby'] = $this->session->userdata('id');
+						//	$sql = "update item set availablequantity = availablequantity-'".$borrowers_info['quantity']."' where code = '".$borrowers_info['item_code']."'";
+						//	$this->db->query($sql);
+						//	$borrowers_id = $this->db->insert_id();
+							
+							$return_transaction['borrowers_id'] = $_POST['borrowers_idnumber'];
+							$return_transaction['laboratory_id'] = $this->session->userdata('lab');
+							$return_transaction['item_code'] = $_POST['code'];
+							$return_transaction['date_borrowed'] = date('Y-m-d H:i:s',time());
+							$return_transaction['releasedby'] = $this->session->userdata('name');
 
-							$this->db-> insert('borrowers_transaction', $borrowers_transaction);
+							$this->itemdb-> insert_return_trans($return_transaction);
 						}else{
 							echo "<script>alert('Not Available!')</script>";		
 						}
@@ -220,10 +233,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$this->itemdb->updateborrow($data);	
 				}
 			}
-		//	redirect('/borrow/ItemSearchReturn');
-		//	redirect('/borrow/list_borrow?idnum='.$_POST['idnumber']);
 			redirect('borrow/userlist');
 			exit;
+
+			if(!isset($_POST['idnumber']))
+			{
+				redirect('borrow/returnitems');
+			}
+
+		//	redirect('/borrow/ItemSearchReturn');
+		//	redirect('/borrow/list_borrow?idnum='.$_POST['idnumber']);
+			
 			// $id = $_POST['borrowers_id'];
 			// $status = $_POST['status'];
 

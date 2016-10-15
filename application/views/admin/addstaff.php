@@ -5,7 +5,7 @@
     </div>
   <ul class="nav nav-tabs">
   	<?php if($this->session->userdata('type')=="admin"): ?>
-  		<li role="presentation"><?php echo anchor('admin/aUser','Admin');?></li>
+  		<li role="presentation" ><?php echo anchor('admin/aUser','Admin');?></li>
   		<li role="presentation" ><?php echo anchor('admin/LUser','laboratory Head');?></li>
   	<?php endif ?>  
   <li role="presentation" class="active"><?php echo anchor('admin/stUser','Staff');?></li>

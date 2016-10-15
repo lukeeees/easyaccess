@@ -106,7 +106,7 @@ echo "<table id='tableReport' class='table1'>";
                     <td><?php echo $x[$i]->name; ?></td>
                     <td><?php echo $x[$i]->description; ?></td>
                     <td><?php echo $x[$i]->serialnumber; ?></td>
-                    <td><?php echo date("d-m-Y",strtotime($x[$i]->dateacquired)); ?></td>         
+                    <td><?php echo $x[$i]->dateacquired; ?></td>         
                     <td><?php echo $x[$i]->custodian; ?></td>
                     <td><?php echo $x[$i]->currentstatus; ?></td>
                     

@@ -64,7 +64,7 @@ class itemdb extends CI_Model {
               $this->db->where('owner',$this->session->userdata('lab'));
           }
 
-          $query = $this->db->order_by($ref,'ASC')->get('item');
+          $query = $this->db->get('item');
           
          return $query->result();
         }
@@ -145,6 +145,19 @@ class itemdb extends CI_Model {
 
           $query = $this->db->get('borrowers_info');
           return $query;
+        }
+
+        public function insert_return_trans($arr)
+        {
+          $this->db->insert('return_transaction', 'borrowers_id');
+
+          $query = $this->db->get('return_transaction');
+           return $query->result_array();
+        }
+        public function get_return($id= FALSE)
+        {
+          $query = $this->db->get_where('borrowers_info', array('borrowers_id'=>$id));
+          return $query->result_array();
         }
 
         public function clearborrow($arr)

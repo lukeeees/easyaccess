@@ -48,17 +48,17 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>ID Number</th>
-                  <th>Name</th>
-                  <th>Year Level</th>
-                  <th>Course</th>
-                  <th>Department</th>
-                  <th>Violation</th>
-                  <th>Room/Laboratory</th>
-                  <th>Date/Time</th>
-                  <th>Status</th>
-                  <th>Action</th> 
+                  <th><center>#</center></th>
+                  <th><center>ID Number</center></th>
+                  <th><center>Name</center></th>
+                  <th><center>Year Level</center></th>
+                  <th><center>Course</center></th>
+                  <th><center>Department</center></th>
+                  <th><center>Violation</center></th>
+                  <th><center>Room/Laboratory</center></th>
+                  <th><center>Date/Time</center></th>
+                  <th><center>Status</center></th>
+                  <th><center>Action</center></th> 
                   <th></th>
                 </tr>
               </thead>
@@ -75,12 +75,12 @@
                     <td>".$c."</td>
                     <td>".$row['u_id']."</td>
                     <td>".$row['lastname'].","." ".$row['name']." ".$row['middlename']."</td>
-                    <td>".$row['year']."</td>
+                    <td><center>".$row['year']."</center> </td>
                     <td>".$row['course']."</td>
-                    <td>".$row['department']."</td>
+                    <td><center>".$row['department']."</center></td>
                     <td>".$row['violation']."</td>
                     <td>".$row['laboratory']."</td>
-                    <td>".date("m-d-Y h:i a", strtotime($row['dateviolate']))."</td>
+                    <td><center>".date("F d,Y h:i a", strtotime($row['dateviolate']))."</center></td>
                     <td class='text-".$txt."'>".$row['status']."</td>
                     <td>" .anchor('c_clear/clearedvio/'.$row['id'],'<button type="button" class="btn-xs btn-danger" data-togg le="modal" data-target="update">Clear</button>', 'onclick="return doconfirm()"')."".anchor('c_clear/upVio/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                      </tr>";

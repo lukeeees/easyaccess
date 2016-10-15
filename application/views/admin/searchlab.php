@@ -35,7 +35,7 @@
 
 <div class="starter-template">
 	   <?php if (!$x): ?>
-            <h2 style="margin-top:50px;text-align:center">No Results Found</h2>
+            <h2 style="margin-top:50px;text-align:center">No Laboratories Found</h2>
       <?php else: ?>      
           <div class="table-responsive">
             <table class="table table-striped">

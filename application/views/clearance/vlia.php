@@ -48,17 +48,17 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>ID Number</th>
-                  <th>Name</th>
-                  <th>Year Level</th>
-                  <th>Course</th>
-                  <th>Department</th>
-                  <th>Liabilities</th>
-                  <th>Room/Laboratory</th>
-                  <th>Date/Time</th>
-                  <th>Status</th>
-                  <th>Action</th> 
+                  <th><center>#</center></th>
+                  <th><center>ID Number</center></th>
+                  <th><center>Name</center></th>
+                  <th><center>Year Level</center></th>
+                  <th><center>Course</center></center></th>
+                  <th><center>Department</th>
+                  <th><center>Liabilities</center></th>
+                  <th><center>Room/Laboratory</center></th>
+                  <th><center>Date/Time</center></th>
+                  <th><center>Status</center></th>
+                  <th><center>Action</center></th> 
                   <th></th>
                 </tr>
               </thead>
@@ -80,7 +80,7 @@
                     <td>".$row['department']."</td>
                     <td>".$row['violation']."</td>
                     <td>".$row['laboratory']."</td>
-                    <td>".date("m-d-Y h:i a", strtotime($row['dateviolate']))."</td>
+                    <td><center>".date("F d,Y h:i a", strtotime($row['dateviolate']))."</center></td>
                     <td class='text-".$txt."'>".$row['status']."</td>
                     <td>" .anchor('c_clear/clearedvio/'.$row['id'],'<button type="button" class="btn-xs btn-danger" data-togg le="modal" data-target="update">Clear</button>', 'onclick="return doconfirm()"')."".anchor('c_clear/upVio/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                      </tr>";
