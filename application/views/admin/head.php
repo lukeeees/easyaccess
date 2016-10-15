@@ -46,7 +46,7 @@
                          <?php echo anchor('borrow/userlist', 'Transactions');?> <!-- <a>Transactions</a>-->
                           <div class="dropdown-content">
                               <?php echo anchor('/borrow/ItemSearch', 'Borrow Items');?>
-                              <?php// echo anchor('borrow/userlist', 'Return Items');?>                              
+                              <?php// echo anchor('borrow/ItemSearchReturn', 'Return Items');?>                              
                           </div>
                         </li>
                          <?php endif; ?>

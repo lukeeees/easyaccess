@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2016 at 03:21 AM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Generation Time: Oct 15, 2016 at 04:35 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -43,17 +43,6 @@ CREATE TABLE `borroweditemlist` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `borrowerlist`
---
-
-CREATE TABLE `borrowerlist` (
-  `transactionid` int(11) NOT NULL,
-  `borrowersid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `borrowers_info`
 --
 
@@ -63,6 +52,9 @@ CREATE TABLE `borrowers_info` (
   `borrowers_fname` varchar(45) NOT NULL,
   `borrowers_mname` varchar(45) NOT NULL,
   `borrowers_lname` varchar(45) NOT NULL,
+  `year` varchar(45) NOT NULL,
+  `course` varchar(45) NOT NULL,
+  `department` varchar(45) NOT NULL,
   `subject` varchar(45) NOT NULL,
   `schedule` varchar(45) NOT NULL,
   `instructor` varchar(45) NOT NULL,
@@ -71,24 +63,25 @@ CREATE TABLE `borrowers_info` (
   `damaged_item` int(20) NOT NULL,
   `item_code` varchar(45) NOT NULL,
   `item_name` varchar(100) NOT NULL,
-  `laboratory` varchar(45) NOT NULL
+  `laboratory` varchar(45) NOT NULL,
+  `custodian` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `borrowers_info`
 --
 
-INSERT INTO `borrowers_info` (`borrowers_id`, `borrowers_idnumber`, `borrowers_fname`, `borrowers_mname`, `borrowers_lname`, `subject`, `schedule`, `instructor`, `tablenumber`, `quantity`, `damaged_item`, `item_code`, `item_name`, `laboratory`) VALUES
-(22, '06031111', 'juliet', 'secret', 'mendez', 'cpe415', 'mwf 7:30-10:10', 'engr. pana', '04', '2', 0, '5', '', ''),
-(23, '06305105', 'juliet', 'secret', 'mendez', 'cpe415', 'mwf 7:30-10:10', 'engr. pana', '05', '1', 0, '6', '', ''),
-(24, '06305105', 'juliet', 'secret', 'mendez', 'cpe415', 'mwf 7:30-10:10', 'engr. uno', '04', '1', 0, '6', '', ''),
-(25, '999', 'jj', 'jj', 'jj', 'jj', 'jj', 'jj', '09', '0', 0, '6', '', ''),
-(26, '12121', 'kk', 'kk', 'kk', 'kk', 'kk', 'kk', '9', '2', 0, '3', '', ''),
-(27, 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', '1', '1', 0, '3', '', ''),
-(28, '11', '232', 'asdw', 'asd', 'sdf', 'fdsf', 'sfds', '31', '1', 0, '3', '', ''),
-(29, '11', '232', 'asdw', 'asd', 'sdf', 'fdsf', 'sfds', '31', '1', 0, '3', '', ''),
-(30, '111111', '111111', '111111', '111111111111', '111111', '111111', '111111', '111111', '1', 0, '9', '', ''),
-(72, '1003', 'kit', 'kit', 'kit', 'kit', 'kit', 'kit', 'kit', '5', 0, '21', 'Resistor', 'SE LABORATORY');
+INSERT INTO `borrowers_info` (`borrowers_id`, `borrowers_idnumber`, `borrowers_fname`, `borrowers_mname`, `borrowers_lname`, `year`, `course`, `department`, `subject`, `schedule`, `instructor`, `tablenumber`, `quantity`, `damaged_item`, `item_code`, `item_name`, `laboratory`, `custodian`) VALUES
+(22, '06031111', 'juliet', 'secret', 'mendez', '', '', '', 'cpe415', 'mwf 7:30-10:10', 'engr. pana', '04', '2', 0, '5', '', '', ''),
+(23, '06305105', 'juliet', 'secret', 'mendez', '', '', '', 'cpe415', 'mwf 7:30-10:10', 'engr. pana', '05', '1', 0, '6', '', '', ''),
+(24, '06305105', 'juliet', 'secret', 'mendez', '', '', '', 'cpe415', 'mwf 7:30-10:10', 'engr. uno', '04', '1', 0, '6', '', '', ''),
+(25, '999', 'jj', 'jj', 'jj', '', '', '', 'jj', 'jj', 'jj', '09', '0', 0, '6', '', '', ''),
+(26, '12121', 'kk', 'kk', 'kk', '', '', '', 'kk', 'kk', 'kk', '9', '2', 0, '3', '', '', ''),
+(27, 'dd', 'dd', 'dd', 'dd', '', '', '', 'dd', 'dd', 'dd', '1', '1', 0, '3', '', '', ''),
+(28, '11', '232', 'asdw', 'asd', '', '', '', 'sdf', 'fdsf', 'sfds', '31', '1', 0, '3', '', '', ''),
+(29, '11', '232', 'asdw', 'asd', '', '', '', 'sdf', 'fdsf', 'sfds', '31', '1', 0, '3', '', '', ''),
+(30, '111111', '111111', '111111', '111111111111', '', '', '', '111111', '111111', '111111', '111111', '1', 0, '9', '', '', ''),
+(92, '12312', 'luffy', 'D.', 'monkey', '', 'BS-CHE', 'DCpE', 'qwiipw', 'qwepo', 'Ms. Juliet Mendez', '2', '1', 0, '1', 'sdfasdf', 'DCpE', 'milky');
 
 -- --------------------------------------------------------
 
@@ -178,7 +171,28 @@ INSERT INTO `borrowers_transaction` (`transaction_id`, `borrowers_id`, `item_cod
 (0, 0, '21', 32, '2016-10-10 23:37:49', '', NULL, NULL, '', 0),
 (0, 0, '21', 32, '2016-10-10 23:43:46', '', NULL, NULL, '', 0),
 (0, 0, '21', 32, '2016-10-10 23:49:45', '', NULL, NULL, '', 0),
-(0, 0, '28', 32, '2016-10-11 01:03:08', '', NULL, NULL, '', 0);
+(0, 0, '28', 32, '2016-10-11 01:03:08', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:11:23', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:11:23', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:13:33', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:13:33', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:21:32', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:21:32', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:24:21', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:24:21', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:35:25', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:35:25', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:36:06', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 08:36:06', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 09:31:53', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 09:31:53', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 10:39:06', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 10:39:06', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 10:47:01', '', NULL, NULL, '', 0),
+(0, 0, '33', 32, '2016-10-12 10:47:01', '', NULL, NULL, '', 0),
+(0, 0, '36', 42, '2016-10-13 11:04:08', '', NULL, NULL, '', 0),
+(0, 0, '37', 32, '2016-10-15 13:37:54', '', NULL, NULL, '', 0),
+(0, 0, '37', 32, '2016-10-15 13:37:54', '', NULL, NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -269,7 +283,8 @@ INSERT INTO `inventory` (`inventoryid`, `department`, `departmenthead`, `laborat
 (49, 'COMPUTER ENGINEERING', '23', 'DCpE', 'DCpE', 'BUNZEL', '32', '213', 'Talamban Campus', '2016-10-11', '32', '123', '213', 'DCpE_October_11_2016_02_06_23', '30'),
 (50, 'COMPUTER ENGINEERING', 'rex', 'DCpE', 'DCpE', 'BUNZEL', 'rex', 'rex', 'Talamban Campus', '2016-10-11', 'rex', 'rex', 'rex', 'DCpE_October_11_2016_06_21_46', '30'),
 (51, 'COMPUTER ENGINEERING', 'xxxx', 'DCpE', 'DCpE', 'BUNZEL', 'xxxx', 'xxxx', 'Talamban Campus', '2016-10-11', 'xxxx', 'xxxx', 'xxxx', 'DCpE_October_11_2016_06_26_44', '30'),
-(52, 'COMPUTER ENGINEERING', '3pops man', 'DCpE', 'DCpE', 'BUNZEL', '3p', '3p', 'Talamban Campus', '2016-10-11', '3p', '3p', '3p', 'DCpE_October_11_2016_07_27_06', '30');
+(52, 'COMPUTER ENGINEERING', '3pops man', 'DCpE', 'DCpE', 'BUNZEL', '3p', '3p', 'Talamban Campus', '2016-10-11', '3p', '3p', '3p', 'DCpE_October_11_2016_07_27_06', '30'),
+(53, 'COMPUTER ENGINEERING', '1234', 'SE LABORATORY', 'SE LABORATORY', 'BUNZEL', '23', '213', 'Talamban Campus', '2016-10-14', '1123', '12345', '234', 'SE LABORATORY_October_14_2016_07_02_45', '31');
 
 -- --------------------------------------------------------
 
@@ -311,7 +326,7 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`code`, `name`, `description`, `previousstatus`, `currentstatus`, `serialnumber`, `partnumber`, `manufacturenumber`, `dateacquired`, `remarks`, `totalquantity`, `availablequantity`, `damagedquantity`, `custodian`, `owner`) VALUES
-(1, 'sdfasdf', 'oh yeah', 'asdfg', 'asdf', 'zxcvbn1234', '1234567', '1234567', '2016-10-03', 'consumable', '2', '2', '2', '1', 'DCpE'),
+(1, 'sdfasdf', 'oh yeah', 'asdfg', 'asdf', 'zxcvbn1234', '1234567', '1234567', '2016-10-03', 'consumable', '2', '1', '2', '1', 'DCpE'),
 (2, 'bottle', '1liter', 'none', 'empty', '45678', '78', '0987', '2016-10-05', 'consumable', '1', '0', 'ok', '', 'DCpE'),
 (3, 'adf', 'adf', 'adf', 'adf', '456789', '456789', '6789', '2016-10-05', 'consumable', '1', '3', '3', '', 'DCpE'),
 (4, 'dfghjk', 'fjk', 'fghjk', 'dfghjk', '23456789', '345678', '345678', '2016-10-07', 'consumable', '4', '4', 'none', '', 'DCpE'),
@@ -331,7 +346,7 @@ INSERT INTO `item` (`code`, `name`, `description`, `previousstatus`, `currentsta
 (18, '2', '2', '2', '2', '2', '2', '2', '2016-10-09', '2', '2', '2', '2', '', 'DCpE'),
 (19, '3', '3', '3', '3', '3', '3', '3', '2016-10-09', '3', '3', '3', '3', '123', 'DCpE'),
 (20, '3', '3', '3', '3', '3', '3', '3', '2016-10-09', '3', '3', '3', '3', '', 'DCpE'),
-(21, 'Resistor', '300 Ohms', 'Good', 'Good', '1212', '1212', '1212', '2016-10-10', 'Good Condition', '20', '15', '0', '123456', 'SE LABORATORY'),
+(21, 'Resistor', '300 Ohms', 'Good', 'Good', '1212', '1212', '1212', '2016-10-10', 'Good Condition', '20', '20', '0', '123456', 'SE LABORATORY'),
 (22, 'a', 'a', 'a', 'a', 'a', 'a', 'a', '1293-12-31', 'a', 'a', 'a', 'a', '', 'DCpE'),
 (23, ' 1234', ' 2345', ' 234', ' 2345', ' 4235', ' 5', ' 3245', '2016-12-31', ' 324354', ' 32435', ' 12435', ' 55', '', 'DCpE'),
 (24, 'laptop1', 'lenovo12', 'new', 'good condition', '123456', '76543', 'lenovo', '2016-10-12', 'not consomable', '1', '1', '0', 'engr. patrick uno`12', 'DCpE'),
@@ -343,9 +358,11 @@ INSERT INTO `item` (`code`, `name`, `description`, `previousstatus`, `currentsta
 (30, '3 pops', '3 pops', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2016-10-12', 'consumable', '3', '3', '0', 'Kit', 'DCpE'),
 (31, 'test paper', 'test paper', 'NA', 'NA', 'NA', 'NA', 'NA', '2016-09-28', 'consumable', '12', '12', '0', 'kit', 'SE LABORATORY'),
 (32, 'Euls Scepter', 'Euls Scepter', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2016-10-11', 'consumable', '2', '2', '0', 'Kit', 'SE LABORATORY'),
-(33, 'Euls Scepter', 'Euls Scepter', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2016-10-11', 'consumable', '2', '2', '0', 'Kit', 'SE LABORATORY'),
+(33, 'Euls Scepter', 'Euls Scepter', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2016-10-11', 'consumable', '3', '2', '0', 'Kit', 'SE LABORATORY'),
 (34, 'mar roxas', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '2016-10-12', 'non-consumable', '1', '1', '0', 'Kit', 'DCpE'),
-(35, '5pops', '5pops', '5pops', '5pops', '5pops', '5pops', '5pops', '2016-10-19', 'consumable', '2', '2', '0', '1', 'DCpE');
+(35, '5pops', '5pops', '5pops', '5pops', '5pops', '5pops', '5pops', '2016-10-19', 'consumable', '2', '2', '0', '1', 'DCpE'),
+(36, ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2015-12-31', 'consumable', '0', '0', '0', ' ', 'DCpE'),
+(37, '1022831', 'for cleaning', 'new', 'functional', '194y1lk', '102310', '12318', '2016-10-14', 'consumable', '20', '20', '0', 'trikshot', 'SE Laboratory');
 
 -- --------------------------------------------------------
 
@@ -373,7 +390,8 @@ INSERT INTO `laboratory` (`code`, `name`, `room`, `head`) VALUES
 (15, 'DM Laboratory', 'DML', ''),
 (16, 'PCB Laboratory', 'PCB Lab', ''),
 (19, 'DCpE', 'DCpE', ''),
-(20, 'testingan2', 'testingan2', '');
+(20, 'testingan2', 'testingan2', ''),
+(21, 'asdfh', 'asdf', '');
 
 -- --------------------------------------------------------
 
@@ -407,13 +425,117 @@ INSERT INTO `logs` (`id`, `action`, `laboratory`, `date_added`, `seen`) VALUES
 (11, 'Successfully updated laboratory().', 'DCpE', '2016-10-10 23:41:56', 1),
 (12, 'Successfully added violation(3003).', 'DCpE', '2016-10-10 23:44:19', 1),
 (13, 'Successfully updated violation(1030341).', 'DCpE', '2016-10-10 23:45:08', 1),
-(14, 'Successfully added item(test paper).', 'SE LABORATORY', '2016-10-10 23:46:31', 0),
-(15, 'Staff neil3 has successfully added item(Euls Scepter).', 'SE LABORATORY', '2016-10-11 00:30:14', 0),
+(14, 'Successfully added item(test paper).', 'SE LABORATORY', '2016-10-10 23:46:31', 1),
+(15, 'Staff neil3 has successfully added item(Euls Scepter).', 'SE LABORATORY', '2016-10-11 00:30:14', 1),
 (16, 'successfully added user(5001).', 'DCpE', '2016-10-11 00:31:26', 1),
 (17, 'Staff pinoy has successfully added item(mar roxas).', 'DCpE', '2016-10-11 00:32:00', 1),
 (18, 'successfully added item(5pops).', 'DCpE', '2016-10-11 00:54:41', 1),
 (19, 'successfully updated user(141F74).', 'DCpE', '2016-10-11 00:55:46', 1),
-(20, 'successfully updated user(141F7).', 'DCpE', '2016-10-11 01:20:48', 0);
+(20, 'successfully updated user(141F7).', 'DCpE', '2016-10-11 01:20:48', 1),
+(21, 'successfully added laboratory(asdfh).', 'DCpE', '2016-10-11 01:27:16', 1),
+(22, 'successfully updated user(5001).', 'DCpE', '2016-10-11 01:27:45', 1),
+(23, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 06:14:46', 1),
+(24, 'successfully added item( ).', 'DCpE', '2016-10-11 06:16:03', 1),
+(25, 'successfully updated user(333333).', 'SE LABORATORY', '2016-10-11 06:16:53', 1),
+(26, 'successfully updated violation(1003).', 'SE LABORATORY', '2016-10-11 09:50:03', 1),
+(27, 'successfully updated violation(1003).', 'SE LABORATORY', '2016-10-11 09:50:20', 1),
+(28, 'successfully updated user(333333).', 'DCpE', '2016-10-11 09:52:33', 1),
+(29, 'successfully updated user(333333).', 'SE LABORATORY', '2016-10-11 09:52:59', 1),
+(30, 'successfully updated user(333333).', 'DCpE', '2016-10-11 10:26:29', 1),
+(31, 'successfully added violation(56789).', 'DCpE', '2016-10-11 15:13:29', 1),
+(32, 'successfully added violation(567890).', 'DCpE', '2016-10-11 15:15:15', 1),
+(33, 'successfully added violation(567890).', 'DCpE', '2016-10-11 15:17:34', 1),
+(34, 'successfully updated violation(567890).', 'DCpE', '2016-10-11 15:18:06', 1),
+(35, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 15:18:39', 1),
+(36, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 15:18:52', 1),
+(37, 'successfully added violation(740118).', 'DCpE', '2016-10-11 15:20:05', 1),
+(38, 'successfully added violation(1234098).', 'DCpE', '2016-10-11 15:22:15', 1),
+(39, 'successfully updated violation(1234098).', 'DCpE', '2016-10-11 15:22:38', 1),
+(40, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 15:22:46', 1),
+(41, 'successfully updated violation(1234098).', 'DCpE', '2016-10-11 15:22:53', 1),
+(42, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 16:33:25', 1),
+(43, 'successfully added violation().', 'DCpE', '2016-10-11 17:04:38', 1),
+(44, 'successfully added violation().', 'DCpE', '2016-10-11 17:05:23', 1),
+(45, 'successfully updated violation().', 'DCpE', '2016-10-11 17:16:45', 1),
+(46, 'successfully updated violation().', 'DCpE', '2016-10-11 17:25:08', 1),
+(47, 'DCpE', 'DCpE', '2016-10-11 17:26:53', 1),
+(48, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 17:29:26', 1),
+(49, '.->userdata(''lab'').', 'DCpE', '2016-10-11 17:29:38', 1),
+(50, 'successfully updated violation().', 'DCpE', '2016-10-11 17:30:28', 1),
+(51, 'successfully updated violation().', 'DCpE', '2016-10-11 17:30:30', 1),
+(52, 'successfully updated violation().', 'DCpE', '2016-10-11 17:30:54', 1),
+(53, 'successfully updated violation().', 'DCpE', '2016-10-11 17:32:46', 1),
+(54, 'successfully updated violation().', 'DCpE', '2016-10-11 17:32:50', 1),
+(55, 'successfully updated violation().', 'DCpE', '2016-10-11 17:33:20', 1),
+(56, 'successfully updated violation().', 'DCpE', '2016-10-11 17:34:24', 1),
+(57, 'successfully updated violation().', 'DCpE', '2016-10-11 17:39:48', 1),
+(58, 'Staff neil1 has successfully updated violation().', 'DCpE', '2016-10-11 17:41:57', 1),
+(59, 'successfully updated violation(1030341).', 'DCpE', '2016-10-11 17:44:36', 1),
+(60, 'Administratorneil1 has successfully updated violation().', 'DCpE', '2016-10-11 17:48:02', 1),
+(61, '(DCpE)', 'DCpE', '2016-10-11 17:48:41', 1),
+(62, 'Administrator neil1 has successfully updated violation().', 'DCpE', '2016-10-11 17:49:48', 1),
+(63, '.->userdata(''lab'').', 'DCpE', '2016-10-11 17:50:03', 1),
+(64, 'Administrator neil1 has successfully updated violation().', 'DCpE', '2016-10-11 17:52:29', 1),
+(65, 'DCpE', 'DCpE', '2016-10-11 17:52:39', 1),
+(66, 'Administrator neil1 has successfully updated violation().', 'DCpE', '2016-10-11 17:54:11', 1),
+(67, 'Administrator neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-11 17:54:29', 1),
+(68, 'Administrator neil1 has successfully updated violation).', 'DCpE', '2016-10-11 17:56:35', 1),
+(69, 'Administrator neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-11 17:57:30', 1),
+(70, 'Administrator neil1 has successfully updated violation().', 'DCpE', '2016-10-11 17:57:47', 1),
+(71, 'successfully added violation(3456789).', 'DCpE', '2016-10-11 17:58:39', 1),
+(72, 'successfully added violation(18301283).', 'DCpE', '2016-10-11 18:01:46', 1),
+(73, 'successfully added violation(tyuiop).', 'DCpE', '2016-10-11 18:11:01', 1),
+(74, 'Administrator neil1 has successfully added violation(1203u).', 'DCpE', '2016-10-11 18:12:50', 1),
+(75, 'successfully updated violation().', 'SE LABORATORY', '2016-10-11 18:13:17', 1),
+(76, 'successfully updated violation().', 'SE LABORATORY', '2016-10-11 18:16:45', 1),
+(77, 'Administrator neil2 has successfully updated violation(050517).', 'SE LABORATORY', '2016-10-11 18:18:14', 1),
+(78, 'Administrator neil2 has successfully updated violation().', 'SE LABORATORY', '2016-10-11 18:18:23', 1),
+(79, 'SE LABORATORYneil2 has successfully updated violation(050517).', 'SE LABORATORY', '2016-10-11 18:20:56', 1),
+(80, 'SE LABORATORY neil2 has successfully updated violation(050517).', 'SE LABORATORY', '2016-10-11 18:21:37', 1),
+(81, 'successfully updated violation().', 'SE LABORATORY', '2016-10-11 18:24:22', 1),
+(82, 'head neil2 has successfully updated violation(050517).', 'SE LABORATORY', '2016-10-11 18:24:49', 1),
+(83, 'head neil2 has successfully updated violation().', 'SE LABORATORY', '2016-10-11 18:25:41', 1),
+(84, 'successfully updated violation(050517).', 'SE Laboratory', '2016-10-12 01:52:20', 1),
+(85, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:27:29', 1),
+(86, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:28:40', 1),
+(87, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:28:55', 1),
+(88, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:29:03', 1),
+(89, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:30:51', 1),
+(90, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:30:54', 1),
+(91, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:42:23', 1),
+(92, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:42:30', 1),
+(93, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:42:42', 1),
+(94, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:48:02', 1),
+(95, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:48:11', 1),
+(96, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:48:16', 1),
+(97, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:48:19', 1),
+(98, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:48:23', 1),
+(99, 'admin neil1 has successfully updated violation(29384).', 'DCpE', '2016-10-12 04:48:28', 1),
+(100, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:48:41', 1),
+(101, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:50:32', 1),
+(102, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:52:30', 1),
+(103, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-12 04:53:19', 1),
+(104, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-12 04:55:26', 1),
+(105, 'successfully added violation(924098).', 'SE Laboratory', '2016-10-12 06:35:25', 1),
+(106, 'successfully added violation(924098).', 'SE Laboratory', '2016-10-12 06:36:06', 1),
+(107, 'successfully added violation(456789).', 'SE Laboratory', '2016-10-12 06:42:15', 1),
+(108, 'successfully added violation(873005).', 'SE Laboratory', '2016-10-12 07:31:53', 1),
+(109, 'successfully added violation(4569).', 'SE Laboratory', '2016-10-12 08:39:06', 1),
+(110, 'successfully added violation(567890).', 'SE Laboratory', '2016-10-12 08:47:01', 1),
+(111, 'admin neil1 has successfully updated violation().', 'DCpE', '2016-10-13 04:50:55', 1),
+(112, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-13 05:08:14', 1),
+(113, 'admin neil1 has successfully updated violation()', 'DCpE', '2016-10-13 05:08:38', 1),
+(114, 'admin neil1 has successfully updated violation(1030341).', 'DCpE', '2016-10-13 05:11:35', 1),
+(115, 'admin neil1 has successfully updated violation()', 'DCpE', '2016-10-13 05:11:59', 1),
+(116, 'admin neil1 has successfully updated violation()', 'DCpE', '2016-10-13 05:13:43', 1),
+(117, 'successfully added user(141F141).', 'DCpE', '2016-10-13 08:58:23', 1),
+(118, 'successfully added violation(0940312).', 'DCpE', '2016-10-13 09:01:42', 1),
+(119, 'successfully added violation(12312).', 'DCpE', '2016-10-13 09:04:08', 1),
+(120, 'successfully added report.', 'SE LABORATORY', '2016-10-14 11:03:05', 1),
+(121, 'Staff neil3 has successfully added item(1022831).', 'SE Laboratory', '2016-10-14 12:20:28', 1),
+(122, 'successfully added violation(456789).', 'SE Laboratory', '2016-10-15 11:37:54', 1),
+(123, 'admin neil1 has successfully added violation(567890).', 'DCpE', '2016-10-15 11:59:06', 1),
+(124, 'admin neil1 has successfully updated violation()', 'DCpE', '2016-10-15 12:00:02', 1);
 
 -- --------------------------------------------------------
 
@@ -443,47 +565,66 @@ CREATE TABLE `student` (
   `department` varchar(45) NOT NULL,
   `violation` varchar(45) NOT NULL,
   `laboratory` varchar(45) NOT NULL,
-  `status` varchar(45) NOT NULL
+  `status` varchar(45) NOT NULL,
+  `dateviolate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `u_id`, `lastname`, `name`, `middlename`, `year`, `course`, `department`, `violation`, `laboratory`, `status`) VALUES
-(41, '1030341', 'locsin', 'cherl', 'mordeno', '1st Yr', 'BS-CpE', 'CpE', 'vga cable broken', 'DCpE', 'Pending'),
-(42, '56789', 'roullo', 'christian', 'b', '1st Yr', 'BS-CE', 'CpE', 'reckless driving', 'CEAC LAB', 'Pending'),
-(43, '141241', 'roullo', 'jennylyn', 'mercado', '1st Yr', 'BS-CE', 'CpE', 'student teacher relationship', 'DCpE', 'Pending'),
-(44, '8888', 'roullo', 'arci', 'munoz', '1st Yr', 'BS-CE', 'CpE', 'student teacher relationship', 'CEAC LAB', 'Pending'),
-(45, '29384', 'ojjflskjf', 'ldajfs', 'lkjjdf', 'N/A', 'Faculty', 'CpE', 'spitting on the ground', 'DCpE', 'Pending'),
-(46, 'zxc', 'zxc', 'zxc', 'zxc', '1st Yr', 'Faculty', 'CpE', 'orin', 'DCpE', 'Cleared'),
-(47, '123', '123', '123', '123', '1st Yr', 'BS-CE', 'CE', '123', 'DCpE', 'Pending'),
-(48, '123', '123', '123', '123', '1st Yr', 'BS-CE', 'CE', '123', 'DCpE', 'Pending'),
-(49, '87654', 'lkjhgf', 'lkjhgf', 'kjhgfd', 'N/A', 'Faculty', 'CpE', 'kjhgfd', 'DCpE', 'Cleared'),
-(50, '050517', 'Reyes', 'Kristie', 'B', 'N/A', 'Faculty', 'CpE', 'reckless driving', 'SE LABORATORY', 'Cleared'),
-(51, '23456', 'fghjk', 'ghjk', 'kghjk', 'N/A', 'Faculty', 'CpE', 'hjkl', 'SE LABORATORY', 'Cleared'),
-(52, '345678', 'ertyuio', 'tyuiop', 'ghjk', 'N/A', 'Faculty', 'CpE', 'fghjkl', 'DCpE', 'Cleared'),
-(53, '56789', 'Mendez', 'Juliet', 'S', 'N/A', 'Faculty', 'CpE', 'break glass', 'DCpE', 'Pending'),
-(54, '56789', 'Uno', 'Patrick', 'G', 'N/A', 'Faculty', 'CpE', 'sliding tackle', 'DCpE', 'Pending'),
-(55, '12312312', 'lukas', 'flukas', 'lukas', '1st Yr', 'BS-CHE', 'CHE', '213', 'CISCO Laboratory', 'Pending'),
-(56, '123123', 'qwe', 'qwe', 'qwe', '2nd Yr', 'BS-CHE', 'CE', 'samok', 'CN Laboratory', 'Pending'),
-(57, 'aasd', 'asd', 'asd', 'asd', '2nd Yr', 'BS-CHE', 'CpE', 'okay ah', 'DCpE', 'Cleared'),
-(58, '646468', 'Messi', 'Leonil', 'R', 'N/A', 'Faculty', 'CpE', 'handball sa camot', 'SE LABORATORY', 'Cleared'),
-(59, '46486', 'Ronlado', 'Christiano', 'M', 'N/A', 'Faculty', 'DCpE', 'tackle from behind', 'DCpE', 'Cleared'),
-(60, '98431', 'Do Silva', 'Neymar', 'M', 'N/A', 'Faculty', 'DCpE', 'nutmeg', 'DCpE', 'Cleared'),
-(61, '586465', 'Zidane', 'Zenidine', 'Z', 'N/A', 'Faculty', 'DCpE', 'head butt', 'DCpE', 'Pending'),
-(62, '222', 'David', 'Neil', 'Angelo', '', '', '', '', 'SE LABORATORY', 'Cleared'),
-(63, ' ', ' ', ' ', ' ', ' ', ' ', ' ', '  ', 'DCpE', 'Cleared'),
-(64, '2222', '2222', '2222', '2222', '', '', '', 'Unreturned Item', 'SE LABORATORY', 'Cleared'),
-(71, 'rex', 'rex', 'rex', 'rex', '', '', '', '', 'SE LABORATORY', 'Cleared'),
-(72, 'john', 'john', 'john', 'john', 'asdfa', 'fasdfa', 'fasdf', 'asdfads', 'DCpE', 'Cleared'),
-(73, ' ', ' ', ' ', ' ', '2nd Yr', 'BS-CE', 'DCE', ' ', 'SE LABORATORY', 'Pending'),
-(74, '1001', 'kit', 'kit', 'kit', '', '', '', '', 'SE LABORATORY', 'Cleared'),
-(75, '1001', 'tik', 'tik', 'tik', '', '', '', '', 'SE LABORATORY', 'Cleared'),
-(76, '1002', 'rex', 'rex', 'rex', '', '', '', '', 'SE LABORATORY', 'Cleared'),
-(77, '1002', 'rex', 'rex', 'rex', '', '', '', '', 'SE LABORATORY', 'Cleared'),
-(78, '1003', 'kit', 'kit', 'kit', '', '', '', 'Unreturned Item', 'SE LABORATORY', 'Pending'),
-(79, '3003', 'kit', 'kit', 'kit', '5th Yr', 'Faculty', 'DCpE', '2 pops student', 'DCpE', 'Pending');
+INSERT INTO `student` (`id`, `u_id`, `lastname`, `name`, `middlename`, `year`, `course`, `department`, `violation`, `laboratory`, `status`, `dateviolate`) VALUES
+(41, '1030341', 'locsin', 'cherl', 'mordeno', '1st Yr', 'BS-CpE', 'CpE', 'broken catalog', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(42, '56789', 'roullo', 'christian', 'b', '1st Yr', 'BS-CE', 'CpE', 'reckless driving', 'CEAC LAB', 'Cleared', '2016-10-15 11:55:59'),
+(43, '141241', 'roullo', 'jennylyn', 'mercado', '1st Yr', 'BS-CE', 'CpE', 'student teacher relationship', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(44, '8888', 'roullo', 'arci', 'munoz', '1st Yr', 'BS-CE', 'CpE', 'student teacher relationship', 'CEAC LAB', 'Cleared', '2016-10-15 11:55:59'),
+(45, '29384', 'ojjflskjf', 'ldajfs', 'lkjjdf', 'N/A', 'Faculty', 'CpE', 'spitting on the ground', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(46, 'zxc', 'zxc', 'zxc', 'zxc', '1st Yr', 'Faculty', 'CpE', 'orin', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(47, '123', '123', '123', '123', '1st Yr', 'BS-CE', 'CE', '123', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(48, '123', '123', '123', '123', '1st Yr', 'BS-CE', 'CE', '123', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(49, '87654', 'lkjhgf', 'lkjhgf', 'kjhgfd', 'N/A', 'Faculty', 'CpE', 'kjhgfd', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(50, '050517', 'Reyes', 'Kristie', 'B', 'N/A', 'Faculty', 'CpE', 'reckless driving', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(51, '23456', 'fghjk', 'ghjk', 'kghjk', 'N/A', 'Faculty', 'CpE', 'hjkl', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(52, '345678', 'ertyuio', 'tyuiop', 'ghjk', 'N/A', 'Faculty', 'CpE', 'fghjkl', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(53, '56789', 'Mendez', 'Juliet', 'S', 'N/A', 'Faculty', 'CpE', 'break glass', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(54, '56789', 'Uno', 'Patrick', 'G', 'N/A', 'Faculty', 'CpE', 'sliding tackle', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(55, '12312312', 'lukas', 'flukas', 'lukas', '1st Yr', 'BS-CHE', 'CHE', '213', 'CISCO Laboratory', 'Pending', '2016-10-15 11:55:59'),
+(56, '123123', 'qwe', 'qwe', 'qwe', '2nd Yr', 'BS-CHE', 'CE', 'samok', 'CN Laboratory', 'Pending', '2016-10-15 11:55:59'),
+(57, 'aasd', 'asd', 'asd', 'asd', '2nd Yr', 'BS-CHE', 'CpE', 'okay ah', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(58, '646468', 'Messi', 'Leonil', 'R', 'N/A', 'Faculty', 'CpE', 'handball sa camot', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(59, '46486', 'Ronlado', 'Christiano', 'M', 'N/A', 'Faculty', 'DCpE', 'tackle from behind', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(60, '98431', 'Do Silva', 'Neymar', 'M', 'N/A', 'Faculty', 'DCpE', 'nutmeg', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(61, '586465', 'Zidane', 'Zenidine', 'Z', 'N/A', 'Faculty', 'DCpE', 'head butt', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(62, '222', 'David', 'Neil', 'Angelo', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(63, ' ', ' ', ' ', ' ', ' ', ' ', ' ', '  ', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(64, '2222', '2222', '2222', '2222', '', '', '', 'Unreturned Item', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(71, 'rex', 'rex', 'rex', 'rex', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(72, 'john', 'john', 'john', 'john', 'asdfa', 'fasdfa', 'fasdf', 'asdfads', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(73, ' ', ' ', ' ', ' ', '2nd Yr', 'BS-CE', 'DCE', ' ', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(74, '1001', 'kit', 'kit', 'kit', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(75, '1001', 'tik', 'tik', 'tik', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(76, '1002', 'rex', 'rex', 'rex', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(77, '1002', 'rex', 'rex', 'rex', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(78, '1003', 'kit', 'kit', 'kit', '', '', '', '', 'SE LABORATORY', 'Cleared', '2016-10-15 11:55:59'),
+(79, '3003', 'kit', 'kit', 'kit', '5th Yr', 'Faculty', 'DCpE', '2 pops student', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(80, '56789', 'Alba', 'Jordi', 'S', 'N/A', 'Faculty', 'DCpE', 'bicycle kick', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(81, '567890', 'Alves', 'Dani', 'S', 'N/A', 'Faculty', 'DCpE', '', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(82, '567890', 'Puyol', 'Carles', 'B', 'N/A', 'Faculty', 'DCpE', '', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(83, '740118', 'Abidal', 'Eric', 'B', 'N/A', 'Faculty', 'DCpE', 'Knee injury', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(84, '1234098', 'Rooney', 'Wayne', 'M', 'N/A', 'Faculty', 'DCpE', 'bicycle kick', 'DCpE', 'Cleared', '2016-10-15 11:55:59'),
+(85, '3456789', 'Costa', 'Diego', 'B', 'N/A', 'Faculty', 'DCpE', 'bati ug nawong', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(86, '18301283', 'Mourniho', 'Jose', 'I', 'N/A', 'Faculty', 'DCpE', 'read between the lines', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(87, 'tyuiop', 'lasjdf', 'oaidj', 'oijsjdf', 'N/A', 'Faculty', 'DCpE', 'oiadsjf', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(88, '1203u', 'lkksjf', 'sljsfii', 'sdooifj', 'N/A', 'Faculty', 'DCpE', 'asdoifj', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(89, '924098', 'Mata', 'Jose', 'S', 'N/A', 'Faculty', 'DCpE', '', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(90, '456789', 'Labio', 'Krystle', 'M', 'N/A', 'Faculty', 'DCE', '', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(91, '873005', 'Uno', 'Patrick', 'G', 'N/A', 'Faculty', 'DCE', '', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(92, '4569', 'Locsin', 'Cherl', 'M', 'N/A', 'Faculty', 'DCE', '', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(93, '567890', 'shot', 'trik', 's', 'N/A', 'Faculty', 'DCE', '', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(94, '0940312', 'mokey', 'luffy', 'D.', '1st Yr', 'BS-CHE', 'DCpE', 'eating while the teacher is discussing', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(95, '12312', 'monkey', 'luffy', 'D.', '1st Yr', 'BS-CHE', 'DCpE', 'Unreturned Item', 'DCpE', 'Pending', '2016-10-15 11:55:59'),
+(96, '456789', 'Zorro', 'Roronoa', 'O', 'N/A', 'Faculty', 'DCE', '', 'SE Laboratory', 'Cleared', '2016-10-15 11:55:59'),
+(97, '567890', 'Chopper', 'Tony-Tony', 'O', 'N/A', 'Faculty', 'DCpE', 'Rumble', 'DCpE', 'Cleared', '2016-10-15 11:59:06');
 
 -- --------------------------------------------------------
 
@@ -517,12 +658,13 @@ INSERT INTO `user` (`id`, `name`, `password`, `type`, `idnumber`, `firstname`, `
 (26, 'rosana', '827ccb0eea8a706c4c34a16891f84e7b', 'head', '345678', 'Rosana', 'F', 'Feroline', 'CISCO LAB'),
 (30, 'neil1', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '111111', 'Neil', 'test', 'David', 'DCpE'),
 (31, 'neil2', 'e10adc3949ba59abbe56e057f20f883e', 'head', '222222', 'NEIL', 'test', 'DAVID', 'SE LABORATORY'),
-(32, 'neil3', 'e10adc3949ba59abbe56e057f20f883e', 'staff', '333333', 'NEIL', 'test', 'DAVID', 'SE LABORATORY'),
+(32, 'neil3', 'e10adc3949ba59abbe56e057f20f883e', 'staff', '333333', 'NEIL', 'test', 'DAVID', 'SE Laboratory'),
 (33, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '123', 'admin', 'admin', 'admin', 'DCpE'),
 (34, 'lab', 'f9664ea1803311b35f81d07d8c9e072d', 'head', 'lab', 'lab', 'lab', 'lab', 'CISCO Laboratory'),
 (39, 'test', '098f6bcd4621d373cade4e832627b4f6', 'head', '6969', 'test', 'test', 'test', 'CISCO Laboratory'),
 (40, '007', '9e94b15ed312fa42232fd87a55db0d39', 'staff', '007', '007', '007', '007', 'DM Laboratory'),
-(41, 'pinoy', 'e10adc3949ba59abbe56e057f20f883e', 'staff', '5001', 'pinoy', 'pinoy', 'pinoy', 'DCpE');
+(41, 'pinoy', '827ccb0eea8a706c4c34a16891f84e7b', 'staff', '5001', 'pinoy', 'pinoy', 'pinoy', 'DCpE'),
+(42, 'milky', '5844a15e76563fedd11840fd6f40ea7b', 'staff', '141F141', 'Milky Jane', 'B.', 'Balcado', 'DCpE');
 
 --
 -- Indexes for dumped tables
@@ -532,12 +674,6 @@ INSERT INTO `user` (`id`, `name`, `password`, `type`, `idnumber`, `firstname`, `
 -- Indexes for table `borroweditemlist`
 --
 ALTER TABLE `borroweditemlist`
-  ADD PRIMARY KEY (`transactionid`);
-
---
--- Indexes for table `borrowerlist`
---
-ALTER TABLE `borrowerlist`
   ADD PRIMARY KEY (`transactionid`);
 
 --
@@ -612,15 +748,10 @@ ALTER TABLE `user`
 ALTER TABLE `borroweditemlist`
   MODIFY `transactionid` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `borrowerlist`
---
-ALTER TABLE `borrowerlist`
-  MODIFY `transactionid` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `borrowers_info`
 --
 ALTER TABLE `borrowers_info`
-  MODIFY `borrowers_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `borrowers_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 --
 -- AUTO_INCREMENT for table `faculty`
 --
@@ -630,7 +761,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `inventoryid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `inventoryitemlist`
 --
@@ -640,17 +771,17 @@ ALTER TABLE `inventoryitemlist`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `laboratory`
 --
 ALTER TABLE `laboratory`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 --
 -- AUTO_INCREMENT for table `staff`
 --
@@ -660,12 +791,12 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

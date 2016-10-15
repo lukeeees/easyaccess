@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $this->load->view('templates/header');
         }
 
-        public function userlist()
+        public function userlist() //show borrowed items
         {
         	$tmp = $this->itemdb->show_all_borrowed('')->result();
 
@@ -43,6 +43,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         	}
 
         	$this->load->view('borrow_items/userlist',$data);
+        }
+         public function returnitems()//show return items
+        {
+        	$tmp = $this->itemdb->show_all_borrowed('')->result();
+
+        	$data['item'] = array();
+
+        	foreach ($tmp as $value) {
+        		$data['item'][$value->borrowers_idnumber] = $value;
+        	}
+
+        	$this->load->view('borrow_items/items_return',$data);
         }
 
 		public function ItemSearch(){		
@@ -208,7 +220,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$this->itemdb->updateborrow($data);	
 				}
 			}
-			redirect('/borrow/list_borrowed?idnum='.$_POST['idnumber']);
+		//	redirect('/borrow/ItemSearchReturn');
+		//	redirect('/borrow/list_borrow?idnum='.$_POST['idnumber']);
+			redirect('borrow/userlist');
 			exit;
 			// $id = $_POST['borrowers_id'];
 			// $status = $_POST['status'];

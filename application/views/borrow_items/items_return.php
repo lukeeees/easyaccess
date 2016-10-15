@@ -14,7 +14,7 @@
 
     <?php else: ?>
     <div class="table-responsive">
-      <h3>Borrow Transactions in <?php echo $this->session->userdata('lab'); ?></h3>
+      <h3>Return Transactions in <?php echo $this->session->userdata('lab'); ?></h3>
       <table class="table table-striped">
         <thead> 
           <tr>
@@ -23,8 +23,8 @@
             <th><center>Name</center></th>     
             <th><center>Subject</center></th> 
             <th><center>Schedule</center></th>
-            <th><center>Date/Time Borrowed</center></th>
-            <th><center>Released By</center></th> 
+            <th><center>Date/Time Returned</center></th>
+            <th><center>Received By</center></th> 
             <th><center>Action</center></th>
           </tr>
         </thead>

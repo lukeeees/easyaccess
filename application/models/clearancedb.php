@@ -143,7 +143,7 @@ class clearancedb extends CI_Model {
             echo $lab;
               $this->db->where('laboratory',$lab);
           }
-
+          $this->db->order_by('dateviolate','desc');
           if($status==""){          
               $this->db->where('violation !=','Unreturned Item');
               $query = $this->db->get('student');   
@@ -152,6 +152,7 @@ class clearancedb extends CI_Model {
               $query = $this->db->get('student');
           }
 
+
           $data = $query->result_array();
         return $data;
         }
@@ -159,7 +160,7 @@ class clearancedb extends CI_Model {
         public function showlia($status) //show liabilities
         {
           $data=array();
-
+          $this->db->order_by('dateviolate','desc');
           if ($this->session->userdata('type')=="head" || $this->session->userdata('type')=="staff")
           {
               $this->db->where('laboratory',$this->session->userdata('lab'));
@@ -180,6 +181,8 @@ class clearancedb extends CI_Model {
 
         public function searchstudent($value,$ref,$status) //show violation
         {     
+
+          $this->db->order_by('dateviolate','desc');
         $lab = $this->session->userdata('lab');               
           if($ref == "name")
           {            
@@ -238,7 +241,9 @@ class clearancedb extends CI_Model {
         }
 
       public function searchViolate($value,$ref,$status) //show violation
-        {                    
+        {       
+
+          $this->db->order_by('dateviolate','desc');             
           if($ref == "name")
           {            
               if($value!="")
@@ -287,7 +292,7 @@ class clearancedb extends CI_Model {
 
         public function get_search($value,$ref)
         {                              
-
+          $this->db->order_by('dateviolate','desc');
           if($value!="")
           {            
               if ($this->session->userdata('type')!="admin")
