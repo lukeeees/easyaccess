@@ -50,9 +50,26 @@ class admin extends CI_Controller {
 	}
 	public function sUser()
 	{
-		$data['x'] = $this->accountsdb->showusers();	
+		//$data['x'] = $this->accountsdb->showusers();	
 
-		$this->load->view('admin/showusers',$data);
+		//$this->load->view('admin/showusers',$data);
+
+		if($this->session->userdata('type')=="admin")
+		{
+			$name = $this->input->post('name_search');
+			$ref = $this->input->post('searchBy');
+			
+			if(!$ref)
+				$ref = 'name';
+			
+			$data['x'] = $this->accountsdb->showusers($name,$ref);
+			$this->load->view('admin/showusers',$data);
+		}		
+		else
+		{
+			redirect("account/index");
+		}
+
 	}
 	public function aUser(){
 
@@ -181,10 +198,7 @@ class admin extends CI_Controller {
 		$this->load->view('admin/edituser',$data);
 	}
 
-	public function showStat()
-	{
 
-	}
 
 	public function addLaboratory()
 	{

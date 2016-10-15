@@ -89,17 +89,19 @@ class accountsdb extends CI_Model {
            $query = $this->db->get('laboratory');
           return $query;
         }
-        public function showusers()
+        public function showusers($name,$ref)
         {
           $data=array();
+
           if ($this->session->userdata('type')=="head")
           {
-            
+
             $this->db->where('department',$this->session->userdata('lab'));
             $this->db->where('type','staff');
           }
-          $this->db->order_by('type', 'asc');
-          $query = $this->db->get('user');          
+         
+          $this->db->like($ref,$name);
+          $query = $this->db->order_by($ref,'asc')->get('user');          
           $data = $query->result_array();
           return $data;
         }
@@ -161,7 +163,7 @@ class accountsdb extends CI_Model {
           {
             $ref1=$ref;
             $this->db->like($ref1,$value);
-            $query = $this->db->get('laboratory');
+            $query = $this->db->order_by('name','asc')->get('laboratory');
             return $query->result();
 
           }
