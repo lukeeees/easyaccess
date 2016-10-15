@@ -114,18 +114,18 @@ echo "</table>";
 echo "<div style='clear:both;height:50px;'></div>";
 echo "<table id='tableReport'>";
     echo "<tr>";
-        echo "<td>Prepared By: </td>";
+        echo "<td>Prepared By: &nbsp;&nbsp; </td>";
         echo "<td><u> ".$key->preparedby."</u><td>";
 
         echo "<td width='100px'></td>";
         echo "<td width='100px'></td>";
 
-        echo "<td>Approved By: </td>";
+        echo "<td>Approved By: &nbsp;&nbsp;</td>";
         echo "<td><u> ".$key->departmenthead."</u><td>";
     echo "</tr>";
     echo "<tr>";
         echo "<td></td>";
-        echo "<td>".$key->position.",".$key->laboratory."<td>";
+        echo "<td>".$key->position.", ".$key->laboratory."<td>";
 
         echo "<td width='100px'></td>";
         echo "<td width='100px'></td>";

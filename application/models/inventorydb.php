@@ -56,7 +56,14 @@ class inventorydb extends CI_Model {
 
           $this->db->where('createdby_id',$this->session->userdata('id'));
 
-          $query = $this->db->order_by('inventoryid','DESC')->get('inventory');
+          if($ref == 'inventorydate'){
+              $query = $this->db->order_by($ref,'DESC')->get('inventory');
+          }else{
+              $query = $this->db->order_by($ref,'ASC')->get('inventory');
+          }
+
+
+          
           
           return $query->result();
         }

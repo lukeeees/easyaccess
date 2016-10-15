@@ -80,7 +80,7 @@
                     <td>".$row['department']."</td>
                     <td>".$row['violation']."</td>
                     <td>".$row['laboratory']."</td>
-                    <td><center>".date("F d,Y h:i a", strtotime($row['dateviolate']))."</center></td>
+                    <td><center>".date("m-d-Y h:i a", strtotime($row['dateviolate']))."</center></td>
                     <td class='text-".$txt."'>".$row['status']."</td>
                     <td>" .anchor('c_clear/clearedvio/'.$row['id'],'<button type="button" class="btn-xs btn-danger" data-togg le="modal" data-target="update">Clear</button>', 'onclick="return doconfirm()"')."".anchor('c_clear/upVio/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                      </tr>";

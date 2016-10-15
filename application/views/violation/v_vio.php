@@ -55,11 +55,11 @@ echo "<table>";
 	echo "<tr>";
 		echo "<td>Department</td>";
 		$arrayName = array('DCpE'	 => 	'Department of Computer Engineering',
-						   'DCE'		 =>		'Department of Civil Engineering',
+						   'DCE'	 =>		'Department of Civil Engineering',
 						   'DCHE'	 =>		'Department of Chemical Engineering',
 						   'DEEE'	 =>		'Department of Electrical and Electronics Engineering',+
-						   'DIE'		 =>		'Department of Industrial Engineering',
-						   'DME'		 =>		'Department of Mechanical Engineering');
+						   'DIE'	 =>		'Department of Industrial Engineering',
+						   'DME'	 =>		'Department of Mechanical Engineering');
 		echo "<td>".form_dropdown('department',$arrayName,'','class="form-control" placeholder="Department"')."</td>";
 	echo "</tr>";
 
@@ -77,7 +77,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>Violation</td>";
-		echo "<td>".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
+		echo "<td".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
 	echo "</tr>";
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";
