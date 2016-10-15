@@ -106,7 +106,7 @@ echo "<table id='tableReport' class='table1'>";
                     <td><?php echo $x[$i]->name; ?></td>
                     <td><?php echo $x[$i]->description; ?></td>
                     <td><?php echo $x[$i]->serialnumber; ?></td>
-                    <td><?php echo $x[$i]->dateacquired; ?></td>         
+                    <td><?php echo date("m-d-Y",strtotime($x[$i]->dateacquired)); ?></td>         
                     <td><?php echo $x[$i]->custodian; ?></td>
                     <td><?php echo $x[$i]->currentstatus; ?></td>
                     
@@ -132,8 +132,7 @@ echo "<table id='tableReport'>";
 		echo "<td width='100px'></td>";
 		echo "<td width='100px'></td>";
 
-		echo "<td>Approved By:</td>";
-		echo "<td>".form_input('approvedby','',' placeholder="Approved By" class="form-control1" required')."</td>";
+		
 	echo "</tr>";
 echo "</table>";
 

@@ -16,7 +16,7 @@
 
 foreach ($x->result() as $key) {
 
-echo "<table class='table table-striped'>";
+echo "<table>";
     
     echo "<tr>";
         echo "<td class='label1'>Department:</td>";
@@ -121,7 +121,7 @@ echo "<table id='tableReport'>";
         echo "<td width='100px'></td>";
 
         echo "<td>Approved By: </td>";
-        echo "<td><u> ".$key->approvedby."</u><td>";
+        echo "<td><u> ".$key->departmenthead."</u><td>";
     echo "</tr>";
     echo "<tr>";
         echo "<td></td>";

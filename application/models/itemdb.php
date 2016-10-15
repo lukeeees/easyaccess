@@ -64,7 +64,7 @@ class itemdb extends CI_Model {
               $this->db->where('owner',$this->session->userdata('lab'));
           }
 
-          $query = $this->db->get('item');
+          $query = $this->db->order_by($ref,'asc')->get('item');
           
          return $query->result();
         }

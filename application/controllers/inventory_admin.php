@@ -102,7 +102,7 @@ class inventory_admin extends CI_Controller {
 	{
 		$data = $this->itemdb->sorting($_POST['con'],'remarks');
 
-		$csv = "Item Code,Available Quantity,Item Name,Description,Serial Number, Date Acquired,Owner,Remarks \n";//Column headers
+		$csv = "Item Code,Available Quantity,Item Name,Description,Serial Number, Date Acquired,Custodian,Remarks \n";//Column headers
 		
 		foreach ($data as $value) {
 			$csv.=$value->code.",".$value->availablequantity.",".$value->name.",".$value->description.",".$value->serialnumber.",".$value->dateacquired.",".$value->custodian.",".$value->currentstatus."\n";	
