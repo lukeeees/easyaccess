@@ -3,106 +3,104 @@
 	<div class="jumbotron">
         <center><h1>Add Item</h1>  </center>
     </div>
+    
     <?php echo $this->session->flashdata('msg');?>
-<?php
-echo @$msg;                       
-echo "<table>";
-	echo form_open('item_admin/ItemAdd');
-	echo "<th>";
-	echo "<tr>";
-		echo "<td>Item Name</td>";
-		echo "<td>".form_input('itemName','','class="form-control" placeholder="Item Name" required')."</td>";
-	echo "</tr>";
 
-	echo "<tr>";
-		echo "<td>Description</td>";
-		echo "<td>".form_input('description','','class="form-control" placeholder="Description" required')."</td>";
-	echo "</tr>";
+<form action="../item_admin/ItemAdd" method="POST">
+			<div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Item Name</label>
+                      <input type="text" name = "itemName" id = "itemName" class = "form-control" required placeholder="Item Name"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea placeholder="Description" name="description" class="form-control" rows="5" id="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Previous Status</label>
+                      <input type="text" name = "previousStatus" id = "previousStatus" class = "form-control" required placeholder="Previous Status"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Current Status</label>
+                      <input type="text" name = "currentStatus" id = "currentStatus" class = "form-control" required placeholder="Current Status"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Item Type</label>
+                      <?php $arrayName = array(  'consumable'      =>   'Consumable',
+                                                 'non-consumable'  =>   'Non-Consumable');
+                      echo form_dropdown('itemType',$arrayName,'','class="form-control" placeholder="Item Type"'); ?>
+                    </div>
+                    <div class="form-group">
 
-	echo "<tr>";
-		echo "<td>Previous Status</td>";
-		echo "<td>".form_input('previousStatus','','class="form-control" placeholder="Previous Status" required')."</td>";
-	echo "</tr>";
+                   		<input type="submit" value="Submit" name="addItembtn" class="btn btn-primary">
+                	</div>
+                </div>
 
-	echo "<tr>";
-		echo "<td>Current Status</td>";
-		echo "<td>".form_input('currentStatus','','class="form-control" placeholder="Current Status" required')."</td>";
-	echo "</tr>";
+                 <div class="column">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Serial Number</label>
+                      <input type="text" name = "serialNumber" id = "serialNumber" class = "form-control" required placeholder="Serial Number"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Part Number</label>
+                      <input type="text" name = "partNumber" id = "partNumber" class = "form-control" required placeholder="Part Number"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Manufacturer Number</label>
+                      <input type="text" name = "manufactureNumber" id = "manufacturerNumber" class = "form-control" required placeholder="Manufacturer Number"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Date Acquired</label>
+                      <input type="date" name = "dateAcquired" id = "dateAcquired" class = "form-control" required></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Expiration Date</label>
+                      <input type="date" name = "expirationDate" id = "exirationDate" class = "form-control"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Custodian</label>
+                      <input type="text" name = "custodian" id = "custodian" class = "form-control" placeholder="Custodian" required></input>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Total Quantity</label>          
+                      <input min="0" type="number" name = "totalQuantity" id = "totalQuantity" class = "form-control" required placeholder="Total Quantity"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Available Quantity</label>
+                      <input min="0" type="number" name = "availableQuantity" id = "availableQuantity" class = "form-control" required placeholder="Available Quantity"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Damaged Quantity</label>
+                      <input min="0" type="number" name = "damagedQuantity" id = "damagedQuantity" class = "form-control" required placeholder="Damaged Quantity"></input>
+                    </div>
+                    <div class="form-group">
+                      <label>Remarks</label>
+                      <textarea placeholder="Remarks" name="remarks" class="form-control" rows="9" id="comment"></textarea>
+                    </div>
+					<div class="form-group">
+					<?php 
+							if($this->session->userdata('type')=="admin"):
+								echo "<tr>";
+									//echo "<td>Owner</td>";
+									echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
+									//echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
+								echo "<tr>";
+							else:
+								echo "<tr>";
+									//echo "<td>Owner</td>";
+									echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
+									//echo "<td>".form_input('owner',$this->session->userdata('lab'),'class="form-control" disabled  required')."<td>";
+								echo "<tr>";
+							endif;                      		
+                    ?>
+                    </div>         
+                </div>
+              
+               </div>
+</form>
 
-	echo "<tr>";
-		echo "<td>Serial Number</td>";
-		echo "<td>".form_input('serialNumber','','class="form-control" placeholder="Serial Number" required')."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Part Number</td>";
-		echo "<td>".form_input('partNumber','','class="form-control" placeholder="Part Number" required')."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Manufacture Number</td>";
-		echo "<td>".form_input('manufactureNumber','','class="form-control" placeholder="Manufacture Number" required')."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Date Acquired</td>";
-		echo '<td><input name = "dateAcquired" class="form-control" type="date" placeholder="Date Acquired" required><td>';
-	echo "<tr>";
-	
-	echo "<tr>";
-		echo "<td>Remarks</td>";
-		$remarksarr = array('consumable'=>"Consumable", 'non-consumable'=>"Non-Consumable");
-		echo "<td>".form_dropdown('remarks',$remarksarr,'','class="form-control"')."</td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Total Quantity</td>";
-		$totalQuantity = array('name'=>'totalQuantity','type'=>'number');
-		echo "<td>".form_input($totalQuantity,'0','class="form-control" placeholder="0" required min="0"'  )."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Available Quantity</td>";
-		$availableQuantity = array('name'=>'availableQuantity','type'=>'number');
-		echo "<td>".form_input($availableQuantity,'0','class="form-control" placeholder="0" required min="0"')."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Damaged Quantity</td>";
-		$damagedQuantity = array('name'=>'damagedQuantity','type'=>'number');
-		echo "<td>".form_input($damagedQuantity,'0','class="form-control" placeholder="Damaged Quantity" required min="0"')."<td>";
-	echo "<tr>";
-
-	echo "<tr>";
-		echo "<td>Custodian</td>";
-		echo "<td>".form_input('custodian','','class="form-control" placeholder="Custodian" required')."<td>";
-	echo "<tr>";
-
-	if($this->session->userdata('type')=="admin"):
-		echo "<tr>";
-			//echo "<td>Owner</td>";
-			echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
-			//echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
-		echo "<tr>";
-	else:
-		echo "<tr>";
-			//echo "<td>Owner</td>";
-			echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
-			//echo "<td>".form_input('owner',$this->session->userdata('lab'),'class="form-control" disabled  required')."<td>";
-		echo "<tr>";
-	endif;
-
-
-//echo "<tr><td><button type='button' class='btn-xl btn-danger'>Submit</button></td></tr>";
-	
-	echo "<tr>
-			<td> </td>
-			<td>".form_submit('submit','Add Item','class="form-control"')."</td>
-		 </tr>";
-	echo form_close();
-echo "</table>";
-
-
-
-
-?>
+</div>

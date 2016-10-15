@@ -70,11 +70,11 @@
                       
                       <th>Item Code</th>
                       <th>Item Name</th>
-                      <th>Description</th>
-                      <th>Remarks</th>
-                      <th>Total Quantity</th>
+                      <th>Item Type</th>
+                      <th>Current Status</th>
                       <th>Available Quantity</th>
                       <th>Damaged Quantity</th>
+                      <th>Borrowed Quantity</th>
                       <th>Custodian</th>
                       <th>Laboratory</th>
                       <th></th>
@@ -87,11 +87,12 @@
                         
                         <td><?php echo $x[$i]->code; ?></td>
                         <td><?php echo $x[$i]->name; ?></td>
-                        <td><?php echo $x[$i]->description; ?></td>
+                        <td><?php echo $x[$i]->itemtype; ?></td>
                         <td><?php echo $x[$i]->remarks; ?></td>
-                        <td><?php echo $x[$i]->totalquantity; ?></td>
                         <td><?php echo $x[$i]->availablequantity; ?></td>
                         <td><?php echo $x[$i]->damagedquantity; ?></td>
+                        <td><?php $borrowedQuantity = intval($x[$i]->totalquantity) - intval($x[$i]->availablequantity); 
+                                  echo $borrowedQuantity ?></td>
                         <td><?php echo $x[$i]->custodian; ?></td>
                         <td><?php echo $x[$i]->owner; ?></td>
                         <td><?php echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">Update</button>');?>

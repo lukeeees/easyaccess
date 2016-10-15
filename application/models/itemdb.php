@@ -27,10 +27,12 @@ class itemdb extends CI_Model {
                        'description'                =>      $values['description'] ,
                        'previousstatus'             =>      $values['previousStatus'],
                        'currentstatus'              =>      $values['currentStatus'],
+                       'itemtype'                   =>      $values['itemType'],
                        'serialnumber'               =>      $values['serialNumber'],
                        'partnumber'                 =>      $values['partNumber'],
-                       'manufacturenumber'         =>      $values['manufactureNumber'],
+                       'manufacturenumber'          =>      $values['manufactureNumber'],
                        'dateacquired'               =>      $values['dateAcquired'],
+                       'expirationdate'             =>      $values['expirationDate'],
                        'remarks'                    =>      $values['remarks'],
                        'totalquantity'              =>      $values['totalQuantity'],
                        'availablequantity'          =>      $values['availableQuantity'],
@@ -80,10 +82,12 @@ class itemdb extends CI_Model {
                        'description'                =>      $values['description'] ,
                        'previousstatus'             =>      $values['previousStatus'],
                        'currentstatus'              =>      $values['currentStatus'],
+                       'itemtype'                   =>      $values['itemType'],
                        'serialnumber'               =>      $values['serialNumber'],
                        'partnumber'                 =>      $values['partNumber'],
                        'manufacturenumber'          =>      $values['manufactureNumber'],
                        'dateacquired'               =>      $values['dateAcquired'],
+                       'expirationdate'             =>      $values['expirationDate'],
                        'remarks'                    =>      $values['remarks'],
                        'totalquantity'              =>      $values['totalQuantity'],
                        'availablequantity'          =>      $values['availableQuantity'],
@@ -93,7 +97,7 @@ class itemdb extends CI_Model {
 
              $this->db->where('code', $values['itemCode']);
              $this->db->update('item',$item);
-            
+             $this->addtologs("successfully updated item(".$item['name'].").");
           }
 
         public function sorting($value,$ref1)

@@ -110,7 +110,7 @@
                        <?php $arrayName = array( 'DCE'   =>   'Department of Civil Engineering',
                                                  'DCHE'  =>   'Department of Chemical Engineering',
                                                  'DCpE'  =>   'Department of Computer Engineering',
-                                                 'DEEE'  =>   'Department of Electrical and Electronics Engineering',+
+                                                 'DEEE'  =>   'Department of Electrical and Electronics Engineering',
                                                  'DIE'   =>   'Department of Industrial Engineering',
                                                  'DME'   =>   'Department of Mechanical Engineering');
                       echo form_dropdown('department',$arrayName,'','class="form-control" placeholder="Department"'); ?>
