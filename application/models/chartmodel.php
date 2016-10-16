@@ -20,18 +20,6 @@ class ChartModel extends CI_Model {
         $query = $this->db->get('item');
         $results['chart_data'] = $query->result();
 
-/*       $this->db->select_sum('totalquantity');
-        $query = $this->db->get('item');
-        $results['sum_of_qty'] = $query->result();
-
-        $this->db->select_sum('availablequantity');
-        $query = $this->db->get('item');
-        $results['sum_of_aqty'] = $query->result();
-
-        $this->db->select_sum('damagedquantity');
-        $query = $this->db->get('item');
-        $results['sum_of_dmg'] = $query->result();*/
-
         return $results;
     }
 
@@ -49,6 +37,44 @@ class ChartModel extends CI_Model {
         $query = $this->db->get('item');
         $results['sdq'] = $query->row()->damagedquantity;
         
+        return $results;
+    }
+
+        function chart_VClearance()
+    {
+        $this->db->where('violation!=','Unreturned Item');
+        $this->db->where('status','Pending');
+        $query = $this->db->count_all_results('student');
+        $results['pending'] = $query;
+
+        $this->db->where('violation!=','Unreturned Item');
+        $this->db->where('status','Cleared');
+        $query = $this->db->count_all_results('student');
+        $results['cleared'] = $query;
+
+        $this->db->where('violation!=','Unreturned Item');
+        $query = $this->db->count_all_results('student');
+        $results['total'] = $query;
+
+        return $results;
+    }
+
+      function chart_LClearance()
+    {
+        $this->db->where('violation','Unreturned Item');
+        $this->db->where('status','Pending');
+        $query = $this->db->count_all_results('student');
+        $results['pending'] = $query;
+
+        $this->db->where('violation','Unreturned Item');
+        $this->db->where('status','Cleared');
+        $query = $this->db->count_all_results('student');
+        $results['cleared'] = $query;
+
+        $this->db->where('violation','Unreturned Item');
+        $query = $this->db->count_all_results('student');
+        $results['total'] = $query;
+
         return $results;
     }
 

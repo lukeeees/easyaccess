@@ -34,7 +34,6 @@ class inventorydb extends CI_Model {
                        'inventorydate'          =>      $values['inventorydate'],
                        'position'               =>      $values['position'],
                        'preparedby'             =>      $values['preparedby'],
-                       'approvedby'             =>      $values['approvedby'],
                        'csvFilename'            =>      $values['csvFilename'],
                        'createdby_id'           =>      $values['createdby_id']);
 
@@ -49,12 +48,22 @@ class inventorydb extends CI_Model {
           $query = $this->db->get('user');
         }
 
-        public function get_search($value,$ref)
+        public function get_search($value,$ref,$lab="")
         {
-  
-          $this->db->like($ref,$value);
+          if(!$lab)
+          {
+            $lab = $this->session->userdata('lab');
+          }
 
-          $this->db->where('createdby_id',$this->session->userdata('id'));
+          $this->db->like($ref,$value);
+          
+
+          if($this->session->userdata('type')=="staff")
+            $this->db->where('createdby_id',$this->session->userdata('id'));
+          else if($this->session->userdata('type')=="head")
+            $this->db->like('laboratory',$this->session->userdata('lab'));
+          else if($this->session->userdata('type')=="admin")
+            $this->db->like('laboratory',$lab);
 
           if($ref == 'inventorydate'){
               $query = $this->db->order_by($ref,'DESC')->get('inventory');
@@ -62,9 +71,6 @@ class inventorydb extends CI_Model {
               $query = $this->db->order_by($ref,'ASC')->get('inventory');
           }
 
-
-          
-          
           return $query->result();
         }
 

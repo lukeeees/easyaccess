@@ -97,7 +97,7 @@
                
               </tbody>
             </table>
-          </div>
+          </div>          
       <?php endif;  ?>
    </div>
 </div><!-- /.container -->

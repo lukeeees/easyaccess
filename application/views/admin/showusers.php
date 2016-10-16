@@ -53,7 +53,7 @@
               </thead>
               <tbody>
               <?php 
-              $c=1;
+              $c=1+$start;
               foreach ($x as $row) {
               echo "<tr>
 
@@ -76,7 +76,10 @@
               </tbody>
             </table>
           </div>
-           <?php endif ?>
+          <ul class="pagination pagination-sm">
+            <?php echo $this->pagination->create_links(); ?>
+          </ul>
+      <?php endif ?>
    </div>
 </div><!-- /.container -->
 

@@ -1,7 +1,11 @@
 <div class="container">
 <div class="starter-template">
 	<div class="jumbotron">
-        <center><h1>Update Item</h1>  </center>
+        <center><h1><?php if ($this->session->userdata('type')!="admin"): ?>
+            Update
+          <?php else: ?>
+          View
+        <?php endif ?> Item</h1>  </center>
     </div>
 
 
@@ -40,7 +44,10 @@
                     </div>
                    <div class="form-group">
 
-                   		<input type="submit" value="Submit" name="addItembtn" class="btn btn-primary">
+                   		<?php if ($this->session->userdata('type')!="admin"): ?>
+                          <input type="submit" value="Submit" name="addItembtn" class="btn btn-primary">                        
+                      <?php endif ?>
+                      <a href="../../item_admin/ItemSearch" class="btn btn-default">Back</a>
                 	</div>
                 </div>
 
@@ -92,15 +99,11 @@
 					<?php 
 							if($this->session->userdata('type')=="admin"):
 								echo "<tr>";
-									//echo "<td>Owner</td>";
 									echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
-									//echo "<td>".form_input('owner','DCpE','class="form-control" disabled  required')."<td>";
 								echo "<tr>";
 							else:
 								echo "<tr>";
-									//echo "<td>Owner</td>";
 									echo form_hidden('owner',$this->session->userdata('lab'),'class="form-control"  required');
-									//echo "<td>".form_input('owner',$this->session->userdata('lab'),'class="form-control" disabled  required')."<td>";
 								echo "<tr>";
 							endif;                      		
                     ?>
@@ -110,7 +113,11 @@
                </div>
              </div>  
 </form>
-
 <?php } ?>
-
- 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('input,textarea,select').each(function(){
+      $(this).attr('disabled','disabled');
+    })
+  });
+</script>

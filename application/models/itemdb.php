@@ -8,6 +8,11 @@ class itemdb extends CI_Model {
            
         }
 
+        public function get_labs()
+        {
+          $query = $this->db->get('laboratory');
+          return $query->result();
+        }
 
         public function addtologs($msg)
         {
@@ -54,7 +59,7 @@ class itemdb extends CI_Model {
           return $data;
         }
 
-        public function get_search($value,$ref)
+        public function get_search($value,$ref,$start=0,$limit)
         {        
 
           $this->db->like($ref,$value);
@@ -64,6 +69,7 @@ class itemdb extends CI_Model {
               $this->db->where('owner',$this->session->userdata('lab'));
           }
 
+          $this->db->limit($limit, $start);
           $query = $this->db->order_by($ref,'asc')->get('item');
           
          return $query->result();
@@ -133,16 +139,85 @@ class itemdb extends CI_Model {
           return $query->result();
         }
         
+        public function show_all_returned($id,$value="",$ref="u_id",$labo=""){
 
-        public function show_all_borrowed($id){
+          if($id)
+          {
+            $this->db->where('returnees_idnumber',$id);
+          }
+          else
+          {
+            if($this->session->userdata('type')=="admin" && $labo!="")
+            {
+              $lab = $labo;
+            }
+            else
+            {
+              $lab = $this->session->userdata('lab');
+            } 
+
+            if($value!="")
+            {
+                if($ref=="name")
+                {                    
+                    $where = "laboratory LIKE '$lab' AND (returnees_fname LIKE '%$value%' OR returnees_mname LIKE '%$value%' OR returnees_lname LIKE '%$value%')";   
+                    $this->db->where($where);                      
+                }                  
+                else
+                {
+                    $this->db->like($ref,$value);                  
+                    $this->db->where('laboratory',$lab);                  
+                }
+            }
+            else
+            {
+              $this->db->where('laboratory',$lab);
+            }
+          }
+
+          $this->db->order_by("returnees_id", "DESC"); 
+          $query = $this->db->get('returnees_info');
+          return $query;
+        }
+
+        public function show_all_borrowed($id,$value="",$ref="u_id",$labo=""){
 
           if($id)
           {
             $this->db->where('borrowers_idnumber',$id);
           }
-          
-          $this->db->where('laboratory',$this->session->userdata('lab'));
+          else
+          {
 
+            if($this->session->userdata('type')=="admin" && $labo!="")
+            {
+              $lab = $labo;
+            }
+            else
+            {
+              $lab = $this->session->userdata('lab');
+            }  
+
+            if($value!="")
+            {
+                if($ref=="name")
+                {                                                        
+                    $where = "laboratory LIKE '$lab' AND (borrowers_fname LIKE '%$value%' OR borrowers_mname LIKE '%$value%' OR borrowers_lname LIKE '%$value%')";   
+                    $this->db->where($where);                      
+                }                  
+                else
+                {
+                    $this->db->like($ref,$value);                  
+                    $this->db->where('laboratory',$lab);                  
+                }
+            }
+            else
+            {
+              $this->db->where('laboratory',$lab);
+            }
+          }
+
+          $this->db->order_by("borrowers_id", "DESC"); 
           $query = $this->db->get('borrowers_info');
           return $query;
         }
@@ -227,6 +302,37 @@ class itemdb extends CI_Model {
             $this->db->update('student', $data); 
           }
 
+        }
+
+        public function updatequantity($code,$quan)
+        {
+          $data['availablequantity'] = $quan;
+          $this->db->where('code', $code);
+          $this->db->update('item', $data); 
+        }
+
+        public function addreturn($arr)
+        {         
+
+          $x = $this->show_all_borrowed($arr['idnumber'])->result();
+
+          $data = array(
+              "returnees_idnumber" => $x[0]->borrowers_idnumber,
+              "returnees_fname" => $x[0]->borrowers_fname,
+              "returnees_mname" => $x[0]->borrowers_mname,
+              "returnees_lname" => $x[0]->borrowers_lname,
+              "subject" => $x[0]->subject,
+              "schedule" => $x[0]->schedule,
+              "tablenumber" => $x[0]->tablenumber,
+              "instructor" => $x[0]->instructor,
+              "received_by" => $this->session->userdata('name'),
+              "item_code" => $arr['code'],
+              "item_name" => $arr['itemname'],
+              "laboratory" => $this->session->userdata('lab'),
+              "return_quantity" => $arr['quantity']
+            );
+
+          $this->db->insert('returnees_info', $data); 
         }
 
   }?>

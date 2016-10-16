@@ -20,55 +20,36 @@ echo "<table>";
     
     echo "<tr>";
         echo "<td class='label1'>Department:</td>";
-        echo "<td>".$key->department."<td>";
-
-        echo "<td></td>";   
-        echo "<td></td>";
-
+        echo "<td colspan='2'>".$key->department."</td>";
         echo "<td class='label2'>Campus:</td>";
         echo "<td>".$key->campus."<td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td class='label1'>Department Head:</td>";
-        echo "<td>".$key->departmenthead."<td>";
-         echo "<td></td>";   
-        echo "<td></td>";
-         echo "<td></td>";   
-        echo "<td></td>";
+        echo "<td>".$key->departmenthead."</td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td class='label1'>Building Name:</td>";
-        echo "<td>".$key->buildingname."<td>";
-    
-        echo "<td class='label3'>Floor:</td>";
-        echo "<td>".$key->floor."<td>";
-
+        echo "<td>".$key->buildingname." <span style='float:right;'>Floor: ".$key->floor."</span></td>";    
+        echo "<td></td>";
         echo "<td class='label1'>Inventory Date</td>";
-        echo "<td>".date("F d, Y",strtotime($key->inventorydate))."<td>";
+        echo "<td>".date("F d, Y",strtotime($key->inventorydate))."</td>";
 
     echo "</tr>";
 
     echo "<tr>";
         echo "<td class='label1'>Room: No./Name</td>";
-        echo "<td>".$key->laboratory."<td>";
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "<td></td>";
-
+        echo "<td>".$key->laboratory."</td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td class='label1'>Custodian/Accountable Officer:</td>";
-        echo "<td>".$key->custodian."<td>";
-
-        echo "<td></td>";
-        echo "<td></td>";
-
+        echo "<td>".$key->custodian."</td>";
+        echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
         echo "<td class='label2'>Position:</td>";
-        echo "<td>".$key->position."<td>";
+        echo "<td>".$key->position."</td>";
     echo "</tr>";
 
 $row = 1;
@@ -135,7 +116,7 @@ echo "<table id='tableReport'>";
     echo "</tr>";
 echo "</table>";
 
-    if ($user = $this->session->userdata('type')=="head") {
+    if ($user = $this->session->userdata('lab')!="DCpE") {
         echo "<div style='clear:both;height:50px;'></div>";
         echo "<table id='tableReport'>";
             echo "<tr>";

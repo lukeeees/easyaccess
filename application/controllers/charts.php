@@ -50,5 +50,20 @@ class charts extends CI_Controller {
 		$this->load->view('admin/stat',$result);
 	}
 
+	public function graph_clearanceVio()
+	{
+
+		$results = $this->ChartModel->chart_VClearance();
+
+		$this->load->view('stat_clearance',$results);	
+	}
+
+	public function graph_clearanceLia()
+	{
+
+		$results = $this->ChartModel->chart_LClearance();
+		$this->load->view('stat_clearance',$results);	
+	}
+
 
 }

@@ -89,7 +89,14 @@ class c_clear extends CI_Controller {
 
 	public function notifications()
 	{
-		$data['x'] = $this->clearancedb->shownotifications();
+		if($this->session->userdata('type')=="staff")
+		{
+			$data['x'] = $this->clearancedb->stafflogs();
+		}
+		else
+		{
+			$data['x'] = $this->clearancedb->shownotifications();
+		}		
 
 		$this->load->view('clearance/notifications',$data);
 	}
@@ -111,8 +118,6 @@ class c_clear extends CI_Controller {
 
 	public function addvio()//add violation
 	{
-		/*$this->accountsdb->where('id', $id);
-		$query = $this->accountsdb->get('student');*/
 
 		$student  = array('idnumber'=>		$_POST['idnumber'],
 					   'lastname'	=>		$_POST['lastname'],
@@ -132,48 +137,84 @@ class c_clear extends CI_Controller {
 
 	public function sVio() //show violation search
 	{
-		$data['x'] = $this->clearancedb->showvio('');
+		$data['start'] = $this->uri->segment(3);
+		$this->load->library('pagination');	
+		$pi = 10;	
+
+		$data['x'] = $this->clearancedb->showvio('',$data['start'],$pi);
+		$total = $this->clearancedb->showvio('',$data['start'],"");
 
 		if($this->input->post('btn_search')!==null)
 		{
-			$data['x'] = $this->clearancedb->searchstudent($this->input->post('name_search'),$this->input->post('searchBy'),'');			
-		}
+			$data['x'] = $this->clearancedb->searchstudent($this->input->post('name_search'),$this->input->post('searchBy'),'',$data['start'],$pi);			
+			$total = $this->clearancedb->searchstudent($this->input->post('name_search'),$this->input->post('searchBy'),'',$data['start'],"");			
+		}		
+
+		$config['base_url'] = 'http://localhost:8080/easyaccess/index.php/c_clear/sVio';
+		$config['total_rows'] = count($total);
+		$config['per_page'] = $pi; 
+		$config['cur_tag_open'] = '<li class="page-item active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = "</li>";
+		$config['prev_link'] = '&lt;';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = '&gt;';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+		$config['first_url'] = '';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+		$config['first_url'] = '';
+
+		$this->pagination->initialize($config);
+
 		
 		$this->load->view('clearance/vs_clear',$data);
 
-/*
-		$student = $this->input->post('name_search');
-		$ref = $this->input->post('searchBy');
-		
-		if(!$ref)
-			$ref = 'id';
-		
-		$data['x'] = $this->clearancedb->get_search($student,$ref);
-		//$this->session->set_flashdata('msg', '<div class=alert-success text-center">Violation is successfully added!</div>');
-		$this->load->view('clearance/vs_clear',$data);*/
 	}
 
 	public function sLia() //show liabilities
 	{
-		$data['x'] = $this->clearancedb->showlia('');
+		$data['start'] = $this->uri->segment(3);
+		$this->load->library('pagination');	
+		$pi = 10;	
+		
+		$data['x'] = $this->clearancedb->showlia('','','',$data['start'],$pi);		
+		$total = $this->clearancedb->showlia('','','',$data['start'],"");		
 
 		if($this->input->post('btn_search')!==null)
-		{
-			$data['x'] = $this->clearancedb->showlia($this->input->post('name_search'),$this->input->post('searchBy'),'');			
+		{			
+			$data['x'] = $this->clearancedb->showlia($this->input->post('name_search'),$this->input->post('searchBy'),'',$data['start'],$pi);			
+			$total = $this->clearancedb->showlia($this->input->post('name_search'),$this->input->post('searchBy'),'',$data['start'],"");			
 		}
+
+		$config['base_url'] = 'http://localhost:8080/easyaccess/index.php/c_clear/sLia';
+		$config['total_rows'] = count($total);
+		$config['per_page'] = $pi; 
+		$config['cur_tag_open'] = '<li class="page-item active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = "</li>";
+		$config['prev_link'] = '&lt;';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = '&gt;';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+		$config['first_url'] = '';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+		$config['first_url'] = '';
+
+		$this->pagination->initialize($config);
 		
 		$this->load->view('clearance/vlia',$data);
-
-/*
-		$student = $this->input->post('name_search');
-		$ref = $this->input->post('searchBy');
-		
-		if(!$ref)
-			$ref = 'id';
-		
-		$data['x'] = $this->clearancedb->get_search($student,$ref);
-		//$this->session->set_flashdata('msg', '<div class=alert-success text-center">Violation is successfully added!</div>');
-		$this->load->view('clearance/vs_clear',$data);*/
 	}
 	 
 	public function upVio($values)//view update vioalation

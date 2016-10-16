@@ -124,8 +124,8 @@ echo "<table id='tableReport'>";
 		echo "<td width='100px'></td>";
 		echo "<td width='100px'></td>";
 
-		echo "<td>Approved By:</td>";
-		echo "<td>".form_input('approvedby',$key->approvedby,' placeholder="Approved By" class="form-control1" required')."</td>";
+		echo "<td></td>";
+		echo "<td></td>";
 	echo "</tr>";
 //echo "<tr><td><button type='button' class='btn-xl btn-danger'>Submit</button></td></tr>";	
 echo "</table>";

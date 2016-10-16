@@ -65,7 +65,7 @@
               <tbody>
               <?php
 
-                $c=1;
+                $c=1+$start;
                 foreach ($x as $row) {
                   if($row['status']=="Cleared")
                     $txt = "success";
@@ -84,33 +84,27 @@
                     <td class='text-".$txt."'>".$row['status']."</td>
                     <td>" .anchor('c_clear/clearedvio/'.$row['id'],'<button type="button" class="btn-xs btn-danger" data-togg le="modal" data-target="update">Clear</button>', 'onclick="return doconfirm()"')."".anchor('c_clear/upVio/'.$row['id'],'<button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="update">Update</button>')."</td>
                      </tr>";
-                   //a data-toggle="modal" data-target="#myModal" href="#">Logout</a>
                   $c++;
                   }?>
-                <!--
-              <?php for ($i = 0; $i < count($x); ++$i) { ?>
-
-                <tr>
-                    <td><?php echo $i+1?></td>
-                    <td><?php echo $x[$i]->u_id; ?></td>
-                    <td><?php echo $x[$i]->lastname; ?><?php echo ",&nbsp;"?><?php echo $x[$i]->name; ?><?php echo "&nbsp;"?><?php echo $x[$i]->middlename; ?></td>
-                    <td><?php echo $x[$i]->year; ?></td>
-                    <td><?php echo $x[$i]->course; ?></td>
-                    <td><?php echo $x[$i]->department; ?></td>
-                    <td><?php echo $x[$i]->violation; ?></td>
-                    <td><?php echo $x[$i]->laboratory; ?></td>
-                    <td ><?php    
-                          if($x['status']=="Cleared")
-                            $txt = "success";
-                            else
-                            $txt = "danger"; echo $x[$i]->status; ?></td>
-                    <td><?php echo anchor('c_clear/upVio/'.$x[$i]->id,'<button class="btn-xs btn-success">Update</button>');?></td>
-                </tr>
-                <?php } ?>
--->
               </tbody>
             </table>
 
+          </div>
+          <ul class="pagination pagination-sm">
+            <?php echo $this->pagination->create_links(); ?>
+          </ul> 
+        <?php 
+  $atts = array(
+        'width'       => 800,
+        'height'      => 600,
+        'scrollbars'  => 'yes',
+        'status'      => 'yes',
+        'resizable'   => 'yes',
+        'screenx'     => 0,
+        'screeny'     => 0,
+        'window_name' => '_blank'
+);
+ echo  anchor_popup('charts/graph_ClearanceLia/','<button class="btn-xs">Show Statistics</button>',$atts);?>
           </div>
         <?php endif ?>
     </div>

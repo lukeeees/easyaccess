@@ -50,11 +50,11 @@ class admin extends CI_Controller {
 	}
 	public function sUser()
 	{
-		//$data['x'] = $this->accountsdb->showusers();	
+		$data['start'] = $this->uri->segment(3);
+		$this->load->library('pagination');	
+		$pi = 15;		
 
-		//$this->load->view('admin/showusers',$data);
-
-		if($this->session->userdata('type')=="admin")
+		if($this->session->userdata('type')!="staff")
 		{
 			$name = $this->input->post('name_search');
 			$ref = $this->input->post('searchBy');
@@ -62,7 +62,31 @@ class admin extends CI_Controller {
 			if(!$ref)
 				$ref = 'name';
 			
-			$data['x'] = $this->accountsdb->showusers($name,$ref);
+			$data['x'] = $this->accountsdb->showusers($name,$ref,$data['start'],$pi);
+			$total = $this->accountsdb->showusers($name,$ref,$data['start'],"");
+
+			$config['base_url'] = 'http://localhost:8080/easyaccess/index.php/admin/sUser';
+			$config['total_rows'] = count($total);
+			$config['per_page'] = $pi; 
+			$config['cur_tag_open'] = '<li class="page-item active"><a>';
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li class="page-item">';
+			$config['num_tag_close'] = "</li>";
+			$config['prev_link'] = '&lt;';
+			$config['prev_tag_open'] = '<li class="page-item">';
+			$config['prev_tag_close'] = '</li>';
+			$config['next_link'] = '&gt;';
+			$config['next_tag_open'] = '<li class="page-item">';
+			$config['next_tag_close'] = '</li>';
+			$config['first_tag_open'] = '<li class="page-item">';
+			$config['first_tag_close'] = '</li>';
+			$config['first_url'] = '';
+			$config['last_tag_open'] = '<li class="page-item">';
+			$config['last_tag_close'] = '</li>';
+			$config['first_url'] = '';
+
+			$this->pagination->initialize($config); 	
+
 			$this->load->view('admin/showusers',$data);
 		}		
 		else
@@ -97,7 +121,7 @@ class admin extends CI_Controller {
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'head');
 
-		$data = $this->accountsdb->showusers();
+		$data = $this->accountsdb->showusers("","");
 
 		foreach ($data as $key) {
 			if($_POST['idnum']==$key['idnumber'] || $_POST['name']==$key['name']){
@@ -127,7 +151,7 @@ class admin extends CI_Controller {
 					   'dept'		=>		$_POST['department'],
 					   'lab'		=>		'ceac');
 
-				$data = $this->accountsdb->showusers();
+				$data = $this->accountsdb->showusers("","");
 
 		foreach ($data as $key) {
 			if($_POST['idnum']==$key['idnumber'] || $_POST['name']==$key['name']){
@@ -157,7 +181,7 @@ class admin extends CI_Controller {
 					   'password'	=>		do_hash($_POST['pass'],'md5'),
 					   'type'		=>		'admin',
 					   'dept'		=>		$_POST['owner']);
-		$data = $this->accountsdb->showusers();
+		$data = $this->accountsdb->showusers("","");
 
 		foreach ($data as $key) {
 			if($_POST['idnum']==$key['idnumber'] || $_POST['name']==$key['name']){
@@ -211,6 +235,10 @@ class admin extends CI_Controller {
 
 	public function labSearch()
 	{
+		$data['start'] = $this->uri->segment(3);
+		$this->load->library('pagination');	
+		$pi = 15;	
+
 		if($this->session->userdata('type')=="admin")
 		{
 			$labname = $this->input->post('name_search');
@@ -219,7 +247,31 @@ class admin extends CI_Controller {
 			if(!$ref)
 				$ref = 'name';
 			
-			$data['x'] = $this->accountsdb->get_search($labname,$ref);
+			$data['x'] = $this->accountsdb->get_search($labname,$ref,$data['start'],$pi);
+			$total = $this->accountsdb->get_search($labname,$ref,$data['start'],"");
+
+			$config['base_url'] = 'http://localhost:8080/easyaccess/index.php/admin/labSearch';
+			$config['total_rows'] = count($total);
+			$config['per_page'] = $pi; 
+			$config['cur_tag_open'] = '<li class="page-item active"><a>';
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li class="page-item">';
+			$config['num_tag_close'] = "</li>";
+			$config['prev_link'] = '&lt;';
+			$config['prev_tag_open'] = '<li class="page-item">';
+			$config['prev_tag_close'] = '</li>';
+			$config['next_link'] = '&gt;';
+			$config['next_tag_open'] = '<li class="page-item">';
+			$config['next_tag_close'] = '</li>';
+			$config['first_tag_open'] = '<li class="page-item">';
+			$config['first_tag_close'] = '</li>';
+			$config['first_url'] = '';
+			$config['last_tag_open'] = '<li class="page-item">';
+			$config['last_tag_close'] = '</li>';
+			$config['first_url'] = '';
+
+			$this->pagination->initialize($config); 	
+
 			$this->load->view('admin/searchlab',$data);
 		}		
 		else

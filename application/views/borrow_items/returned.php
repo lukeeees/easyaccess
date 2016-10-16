@@ -31,14 +31,14 @@
   </div>
 
    <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><?php echo anchor('borrow/userlist','Borrowed Item/s');?></li>
-  <li role="presentation" ><?php echo anchor('borrow/returnitems','Returned Item/s');?></li>
+  <li role="presentation"><?php echo anchor('borrow/userlist','Borrowed Item/s');?></li>
+  <li role="presentation" class="active"><?php echo anchor('borrow/returnitems','Returned Item/s');?></li>
  </ul>
   <div class="starter-template">
     <div>
       <div class="row">
         <div class="col-sm-6">
-          <h4>Name: <?php echo $item[0]->borrowers_lname.", ".$item[0]->borrowers_fname." ".$item[0]->borrowers_mname ?></h4> 
+          <h4>Name: <?php echo $item[0]->returnees_lname.", ".$item[0]->returnees_fname." ".$item[0]->returnees_mname ?></h4> 
           <h4>Subject: <?php echo $item[0]->subject; ?></h4>           
           <h4>Table #: <?php echo $item[0]->tablenumber; ?></h4>
         </div>
@@ -54,16 +54,13 @@
 
       <?php else: ?>
 
-        <form action="../borrow/returnedItems" method="POST">
-          <input type="hidden" name="idnumber" value="<?php echo $item[0]->borrowers_idnumber; ?>">        
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th><center>#</center></th>
                   <th><center>Item Code</center></th>     
                   <th><center>Item Name</center></th>            
-                  <th><center>Borrowed Quantity</center></th>
-                  <th><center>Return Quantity</center></th>
+                  <th><center>Returned Quantity</center></th>
                 </tr>
               </thead>
 
@@ -76,54 +73,19 @@
                     <td><center><?php echo $i++; ?></center></td>
                     <td><center><?php echo $row->item_code; ?></center></td>
                     <td><center><?php echo $row->item_name; ?></center></td>
-                    <td><center class="borrowedquantity"><?php echo $row->quantity; ?></center>
-                      <input type="hidden" name="borrowers_id[]" value="<?php echo $row->borrowers_id; ?>">
-                      <input type="hidden" name="itemcode[]" value="<?php echo $row->item_code; ?>">
-                      <input type="hidden" name="itemname[]" value="<?php echo $row->item_name; ?>">
-                      <input type="hidden" name="borrowedquantity[]" value="<?php echo $row->quantity; ?>">
-                    </td>
-                    <td><center><input class="quantity form-control" type="number" name="quantity[]" min="0" max="<?php echo $row->quantity; ?>" value="0" style="width:100px;"></center></td>
+                    <td><center><?php echo $row->return_quantity; ?></center></td>                    
                   </tr>
                 <?php
-                    $count += $row->quantity;
+                    $count += $row->return_quantity;
                  }  ?>
 
               </tbody>
             </table>
         
           <div style="clear:both;height:30px;"></div>
-          <div class="form-group">
-             <input type="submit" value="Return Items" name="returnbtn" class="btn btn-primary" >
-             <?php echo anchor('/borrow/userlist', 'Back','class="btn btn-default"');?>
-          </div>
-        </form> 
-        <center><?php echo "BORROWED ITEMS : ".$count; ?></center><br>
+        <center><?php echo "RETURNED ITEMS : ".$count; ?></center><br>
 
       <?php endif ?>
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(function(){
-    $('.quantity').change(function(){
-      var par = $(this).parent().parent().parent();
-      var bq = parseInt($('.borrowedquantity',par).html());
-      var rq = parseInt($('.quantity',par).val());
-      var dq = parseInt($('.damage',par).val());
-      var max = bq - rq;
-
-      $('.damage',par).attr('max',max);
-
-      if($(this).val() != $('.borrowedquantity',par).html())
-      {
-
-      }
-      else
-      {
-        $('.damage',par).val(0); 
-      }
-    });
-
-  });
-</script>
-

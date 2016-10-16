@@ -23,20 +23,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 // Your own constructor codein!
  			  $user = $this->session->userdata('user');
 
-                if ($this->session->userdata('type')!='staff'){
-
-                	redirect('account/index');
-                }
-
               	$this->load->view('admin/head');
                 $this->load->view('templates/header');
         }
 
-        public function userlist() //show borrowed items
+        public function returnitems()//show return items
         {
-        	$tmp = $this->itemdb->show_all_borrowed('')->result();
+        	$x = $this->itemdb->get_labs();        	
+        	$tmp = $this->itemdb->show_all_returned('')->result();      
+
+        	if($this->input->post('btn_search')!==null)
+        	{              		
+        		$tmp = $this->itemdb->show_all_returned('',$_POST['name_search'],$_POST['searchBy'],$_POST['lab'])->result();
+        	}   	
 
         	$data['item'] = array();
+
+        	foreach ($tmp as $value) {
+        		$data['item'][$value->returnees_idnumber] = $value;
+        	}
+        	$data['lab'] = $x;
+        	$this->load->view('borrow_items/items_return',$data);
+        }
+
+        public function userlist() //show borrowed items
+        {
+        	$x = $this->itemdb->get_labs();        	
+        	$tmp = $this->itemdb->show_all_borrowed('')->result();
+
+        	if($this->input->post('btn_search')!==null)
+        	{              		
+        		$tmp = $this->itemdb->show_all_borrowed('',$_POST['name_search'],$_POST['searchBy'],$_POST['lab'])->result();
+        	}        	
+
+        	$data['item'] = array();
+        	$data['lab'] = $x;
 
         	foreach ($tmp as $value) {
         		$data['item'][$value->borrowers_idnumber] = $value;
@@ -49,23 +70,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         {
         	if($this->input->post('btn_search')!==null)
 			{
-			$data['x'] = $this->itemdb->show_all_borrowed($this->input->post('name_search'),$this->input->post('searchBy'),'');			
+			$data['x'] = $this->itemdb->show_all_borrowed($this->input->post('name_search'),$this->input->post('searchBy'),'','');			
 			}
 			$this->load->view('borrow_items/userlist', $data);
-		}
-
-         public function returnitems()//show return items
-        {
-        	$tmp = $this->itemdb->borrowers_idnumber('')->result();
-
-        	$data['item'] = array();
-
-        	foreach ($tmp as $value) {
-        		$data['item'][$value->borrowers_idnumber] = $value;
-        	}
-
-        	$this->load->view('borrow_items/items_return',$data);
-        }
+		}        
 
 		public function ItemSearch(){		
 
@@ -87,10 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$y = $this->itemdb->get_borrowers();
 			$z = array('x' => $x, 'y' =>$y);
 			$this->load->view('borrow_items/items_return',$z);
-			//$this->load->view('borrow_items/return_items',$z);	
 		}
-
-
 
 		public function list_borrowed(){
 			if(isset($_GET['idnum']))
@@ -109,15 +114,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		public function list_returned(){
-			$other['id'] = $this->session->userdata('id');
-			// $other['type'] = $this->session->userdata('type');
-			$status='ok';
-			// $status='borrowed';
-			$data = $this->itemdb->get_status($status);
-			$info = array('other' => $other,'data' => $data);
-			// die(json_encode($m));
+			if(isset($_GET['idnum']))
+				$id=$_GET['idnum'];
+			else
+				redirect('borrow/returnitems');
 
-			$this->load->view('borrow_items/status_items',$info);
+			$data['item'] = $this->itemdb->show_all_returned($id)->result();
+			
+			if($data['item']==null)
+			{
+				redirect('borrow/returnitems');
+			}
+
+			$this->load->view('borrow_items/returned',$data);
 		}
 
 		public function borrowedItems(){
@@ -126,7 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				foreach ($_POST['quantity'] as $key => $value) {					
 
 					if($value[0]!=0)
-					{
+					{						
 						$tmp = explode('---',$key);
 
 						$borrowers_info['borrowers_idnumber'] = $_POST['borrowers_idnumber'];
@@ -158,13 +167,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					   'laboratory'	=>		$this->session->userdata('lab'),
 					   'status'		=>		'Pending');
 
-						$code = $key;
-						$quantity = $this->itemdb->get_item($code);	
+						$quantity = $this->itemdb->get_item($tmp[0]);	
+						$quantity = $quantity - $value[0];
+						$this->itemdb->updatequantity($tmp[0],$quantity);
 
 						if($quantity != 0){
-						//	$sql = "update item set availablequantity = availablequantity-'".$borrowers_info['quantity']."' where code = '".$borrowers_info['item_code']."'";
-						//	$this->db->query($sql);
-						//	$borrowers_id = $this->db->insert_id();
 							
 							$return_transaction['borrowers_id'] = $_POST['borrowers_idnumber'];
 							$return_transaction['laboratory_id'] = $this->session->userdata('lab');
@@ -177,8 +184,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							echo "<script>alert('Not Available!')</script>";		
 						}
 					}					
-				}		
-
+				}	
 				foreach ($student as $key => $value) {
 					$student  = array('idnumber'=>		$key,
 					   'lastname'	=>		$value['lastname'],
@@ -205,7 +211,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				redirect('borrow/userlist');
 			}
 
-			for ($i=0; $i < count($_POST["borrowedquantity"]); $i++) { 
+			for ($i=0; $i < count($_POST["borrowedquantity"]); $i++) 
+			{ 				
 				if(isset($_POST['damage'][$i]))
 				{					
 					$damage = $_POST['damage'][$i];
@@ -216,6 +223,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 
 				$data['code'] = $_POST['itemcode'][$i];
+				$data['itemname'] = $_POST['itemname'][$i];
 				$data['quantity'] = $_POST['quantity'][$i];
 				$data['borrowedquantity'] = $_POST['borrowedquantity'][$i];
 				$data['damage'] = $damage;
@@ -223,61 +231,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$data['idnumber'] = $_POST['idnumber'];
 
 				$calc = $_POST['borrowedquantity'][$i] - $_POST['quantity'][$i];
+
+				if($_POST['quantity'][$i]>0)
+					$this->itemdb->addreturn($data);
+
 				if($calc == 0)
-				{
-					
+				{				
 					$this->itemdb->clearborrow($data);
 				}
 				else
 				{					
 					$this->itemdb->updateborrow($data);	
-				}
+				}				
 			}
 			redirect('borrow/userlist');
-			exit;
 
-			if(!isset($_POST['idnumber']))
-			{
-				redirect('borrow/returnitems');
-			}
-
-		//	redirect('/borrow/ItemSearchReturn');
-		//	redirect('/borrow/list_borrow?idnum='.$_POST['idnumber']);
-			
-			// $id = $_POST['borrowers_id'];
-			// $status = $_POST['status'];
-
-			// $borrowers_info['borrowers_idnumber'] = $_POST['borrowers_idnumber'];
-			// $borrowers_info['borrowers_id'] = $_POST['borrowers_id'];
-			// $borrowers_info['borrowers_fname'] = $_POST['borrowers_fname'];
-			// $borrowers_info['borrowers_mname'] = $_POST['borrowers_mname'];
-			// $borrowers_info['borrowers_lname'] = $_POST['borrowers_lname'];
-			// $borrowers_info['subject'] = $_POST['subject'];
-			// $borrowers_info['schedule'] = $_POST['schedule'];
-			// $borrowers_info['instructor'] = $_POST['instructor'];
-			// $borrowers_info['tablenumber'] = $_POST['tablenumber'];
-			// $borrowers_info['quantity'] = $_POST['quantity'];
-			// $borrowers_info['item_code'] = $_POST['item_code'];
-			// $data['createdDate'] = date('Y-m-d H:i:s',time());
-
-			// if($status == "defective"){
-			// 	$sql = "update borrowers_info set quantity = quantity-'".$borrowers_info['quantity']."' where borrowers_id = '".$borrowers_info['borrowers_id']."'";
-			// 	$this->db->query($sql);
-			// 	$sql1 = "update item set damagedquantity = damagedquantity+'".$borrowers_info['quantity']."' where code= '".$borrowers_info['item_code']."'";
-			// 	$this->db->query($sql1);
-			// }elseif($status == "ok"){
-			// 	$sql = "update borrowers_info set quantity = quantity-'".$borrowers_info['quantity']."' where borrowers_id = '".$borrowers_info['borrowers_id']."'";
-			// 	$this->db->query($sql);
-			// 	$sql1 = "update item set availablequantity = availablequantity+'".$borrowers_info['quantity']."' where code= '".$borrowers_info['item_code']."'";
-			// 	$this->db->query($sql1);
-			// }
-
-			// $borrowers_transaction['item_code'] = $_POST['item_code'];
-			// $borrowers_transaction['returned_date'] = date('Y-m-d H:i:s',time());
-			// $borrowers_transaction['returnedby'] = $this->session->userdata('id');
-			// $this->db-> insert('borrowers_transaction', $borrowers_transaction);
-			// echo "<script>alert('Successful!')</script>";
-			// echo "<script>setTimeout(\"borrow/ItemSearch';\",0);</script>";
 		}
 	}
 ?>

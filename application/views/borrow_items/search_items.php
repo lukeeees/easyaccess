@@ -50,7 +50,7 @@
                     <td><center><?php echo $row_x->remarks; ?></center></td>
                     <td><center><?php echo $row_x->availablequantity; ?></center></td>
                     <td>
-                      <input type="number" name="quantity[<?php echo $row_x->code."---".$row_x->name; ?>][]" value="0" min="0" max="<?php echo $row_x->availablequantity; ?>" style="width:100px;" class='form-control'>
+                      <input type="number" name="quantity[<?php echo str_replace(" ","_",$row_x->code)."---".str_replace(" ","_",$row_x->name); ?>][]" value="0" min="0" max="<?php echo $row_x->availablequantity; ?>" style="width:100px;" class='form-control'>
                     </td>
                   </tr>
                 <?php } ?>

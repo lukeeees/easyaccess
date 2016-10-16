@@ -90,21 +90,24 @@ class accountsdb extends CI_Model {
           return $query;
         }
 
-        public function showusers($name,$ref)
+        public function showusers($name,$ref,$start=0,$limit)
         {
-          $data=array();
+              if($ref=="")
+                $ref="name";
+              $data=array();
 
-          if ($this->session->userdata('type')=="head")
-          {
+              if ($this->session->userdata('type')=="head")
+              {
 
-            $this->db->where('department',$this->session->userdata('lab'));
-            $this->db->where('type','staff');
-          }
-         
-          $this->db->like($ref,$name);
-          $query = $this->db->order_by($ref,'asc')->get('user');          
-          $data = $query->result_array();
-          return $data;
+                $this->db->where('department',$this->session->userdata('lab'));
+                $this->db->where('type','staff');
+              }
+             
+              $this->db->like($ref,$name);
+              $this->db->limit($limit, $start);
+              $query = $this->db->order_by($ref,'asc')->get('user');          
+              $data = $query->result_array();
+              return $data;
         }
 
         public function solouser($x){
@@ -160,10 +163,11 @@ class accountsdb extends CI_Model {
             $result['laboratory'] = $query->result();
             return $result;
           }
-          public function get_search($value, $ref)
+          public function get_search($value, $ref,$start=0,$limit)
           {
             $ref1=$ref;
             $this->db->like($ref1,$value);
+            $this->db->limit($limit,$start);
             $query = $this->db->order_by($ref,'asc')->get('laboratory');
             return $query->result();
 

@@ -27,27 +27,24 @@ class inventory_admin extends CI_Controller {
                 // if ($this->session->userdata('type')!='admin'){
                 // 	redirect('account/index');
                 // }
+
                 $this->load->view('admin/head');
                 $this->load->view('templates/header');
         }
 
 	public function viewInventory()
 	{
-		if($this->session->userdata('type')!="staff")	
-		{
+			$x = $this->itemdb->get_labs(); 
 			$report = $this->input->post('name_search');
 			$ref = $this->input->post('searchBy');
+			$lab = $this->input->post('lab');
 			
 			if(!$ref)
 				$ref = 'inventorydate';
 
-			$data['x'] = $this->inventorydb->get_search($report,$ref);
+			$data['lab']=$x;
+			$data['x'] = $this->inventorydb->get_search($report,$ref,$lab);
 			$this->load->view('admin/manageReport',$data);
-		}
-		else
-		{
-			redirect('account/index');
-		}
 	}
 
 	public function addInventory()
@@ -61,8 +58,8 @@ class inventory_admin extends CI_Controller {
 			$con='';
 		}
 
-		if ($this->session->userdata('type')!="staff") {
-			$data['x'] = $this->itemdb->sorting($con,'remarks');
+		if ($this->session->userdata('type')!="admin") {
+			$data['x'] = $this->itemdb->sorting($con,'itemtype');
 			$data['con'] = $con;
 			$this->load->view('admin/createReport',$data);
 		}
@@ -85,7 +82,6 @@ class inventory_admin extends CI_Controller {
                        'inventorydate'          =>      $_POST['inventorydate'],
                        'position'               =>      $_POST['position'],
                        'preparedby'             =>      $_POST['preparedby'],
-                       'approvedby'             =>      $_POST['approvedby'],
                        'csvFilename'            =>      $_POST['laboratory'].'_'.$_POST['csvFilename'],
                        'createdby_id'			=>		$this->session->userdata('id'));
 

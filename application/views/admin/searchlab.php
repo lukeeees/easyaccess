@@ -49,7 +49,7 @@
               </thead>
               <tbody>
                
-              <?php    $j = 1;
+              <?php    $j = 1+$start;
               for ($i = 0; $i < count($x); ++$i) { ?>
                 <tr>
                 
@@ -66,6 +66,9 @@
               </tbody>
             </table>
           </div>
+          <ul class="pagination pagination-sm">
+            <?php echo $this->pagination->create_links(); ?>
+          </ul>
       <?php endif ?>
    </div>
 </div><!-- /.container -->

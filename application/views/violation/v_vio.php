@@ -77,7 +77,7 @@ echo "<table>";
 
 	echo "<tr>";
 		echo "<td>Violation</td>";
-		echo "<td".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
+		echo "<td>".form_input('violation','','class="form-control" placeholder="Violation" required')."</td>";
 	echo "</tr>";
 	echo "<tr>";
 		echo "<td>&nbsp;</td>";

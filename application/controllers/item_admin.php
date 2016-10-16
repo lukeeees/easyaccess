@@ -38,13 +38,41 @@ class item_admin extends CI_Controller {
 
 	public function ItemSearch()
 	{
+		$data['start'] = $this->uri->segment(3);
+		$this->load->library('pagination');	
+		$pi = 10;
+
 		$item = $this->input->post('name_search');
 		$ref = $this->input->post('searchBy');
 		
 		if(!$ref)
 			$ref = 'name';
 		
-		$data['x'] = $this->itemdb->get_search($item,$ref);
+		$data['x'] = $this->itemdb->get_search($item,$ref,$data['start'],$pi);
+		$total = $this->itemdb->get_search($item,$ref,$data['start'],"");
+
+		$config['base_url'] = 'http://localhost:8080/easyaccess/index.php/item_admin/ItemSearch';
+		$config['total_rows'] = count($total);
+		$config['per_page'] = $pi; 
+		$config['cur_tag_open'] = '<li class="page-item active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = "</li>";
+		$config['prev_link'] = '&lt;';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = '&gt;';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+		$config['first_url'] = '';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+		$config['first_url'] = '';
+
+		$this->pagination->initialize($config); 
+
 		$this->load->view('admin/searchItem',$data);
 	}
 

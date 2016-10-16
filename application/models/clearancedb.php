@@ -8,6 +8,14 @@ class clearancedb extends CI_Model {
            
         }
 
+        public function stafflogs()
+        {
+          $this->db->like('action',"Staff ".$this->session->userdata('name'));
+          $this->db->order_by('id','DESC');
+          $query = $this->db->get('logs');
+          return $query->result();
+        }
+
         public function addtologs($msg)
         {
           if ($this->session->userdata('type')=="staff") {
@@ -134,21 +142,24 @@ class clearancedb extends CI_Model {
             $this->db->insert('student',$student);
         }
 
-        public function showvio($status) //show violation
+        public function showvio($status,$start=0,$limit) //show violation
         {
           $data=array();
           $lab = $this->session->userdata('lab');
           if ($this->session->userdata('type')=="head" || $this->session->userdata('type')=="staff")
           {
-            echo $lab;
               $this->db->where('laboratory',$lab);
           }
+
           $this->db->order_by('dateviolate','desc');
+
           if($status==""){          
               $this->db->where('violation !=','Unreturned Item');
+              $this->db->limit($limit, $start);
               $query = $this->db->get('student');   
           }else{
               $this->db->where('status',$status);
+              $this->db->limit($limit, $start);
               $query = $this->db->get('student');
           }
 
@@ -157,87 +168,100 @@ class clearancedb extends CI_Model {
         return $data;
         }
 
-        public function showlia($status) //show liabilities
+        public function showlia($value,$ref="name",$status,$start=0,$limit) //show liabilities
         {
-          $data=array();
-          $this->db->order_by('dateviolate','desc');
-          if ($this->session->userdata('type')=="head" || $this->session->userdata('type')=="staff")
+          $lab = $this->session->userdata('lab');
+          if($ref=="")
+            $ref="name";
+
+          if($ref=="name")
+          {                    
+              $where = "laboratory LIKE '$lab' AND (name LIKE '%$value%' OR middlename LIKE '%$value%' OR lastname LIKE '%$value%')";   
+              $this->db->where($where);                      
+          }  
+          else
           {
-              $this->db->where('laboratory',$this->session->userdata('lab'));
+            $this->db->like($ref,$value);            
           }
+          
+          $this->db->order_by('dateviolate','desc');
+
           $lia = array('status'     =>  $status,
                         'violation'  =>  'Unreturned Item');
+
           if($status==""){  
-              $this->db->where('violation','Unreturned Item');        
+              $this->db->like('violation','Unreturned Item');     
+              $this->db->limit($limit, $start);   
               $query = $this->db->get('student');
           }else{
            
               $this->db->where($lia);
+              $this->db->limit($limit, $start);
               $query = $this->db->get('student');
           }
+
           $data = $query->result_array();
           return $data;
         }
 
-        public function searchstudent($value,$ref,$status) //show violation
+        public function searchstudent($value,$ref,$status,$start=0,$limit) //show violation
         {     
+            $this->db->order_by('dateviolate','desc');
+            $lab = $this->session->userdata('lab');               
+            if($ref == "name")
+            {            
+                if($value!="")
+                {                 
+                  
+                  if ($this->session->userdata('type')=="head")
+                  {                  
+                      
+                           $where = "laboratory LIKE '$lab' AND 
+                          (name LIKE '%$value%' OR middlename LIKE '%$value%' 
+                          OR lastname LIKE '%$value%') AND violation !='Unreturned Item'";
+                      $this->db->where($where);
+                      exit;
+                  }elseif ($this->session->userdata('admin')) {
+                      $where = "violation !='Unreturned Item' and (name like '%$value%' or lastname like '%$value%' or middlename 
+                                like '%$value%')";
+                      $this->db->where($where);
+                      exit;
+                  }
 
-          $this->db->order_by('dateviolate','desc');
-        $lab = $this->session->userdata('lab');               
-          if($ref == "name")
-          {            
-              if($value!="")
-              {                 
-                
-                if ($this->session->userdata('type')=="head")
-                {                  
-                    
-                         $where = "laboratory LIKE '$lab' AND 
-                        (name LIKE '%$value%' OR middlename LIKE '%$value%' 
-                        OR lastname LIKE '%$value%') AND violation !='Unreturned Item'";
-                    $this->db->where($where);
-                    exit;
-                }elseif ($this->session->userdata('admin')) {
-                    $where = "violation !='Unreturned Item' and (name like '%$value%' or lastname like '%$value%' or middlename 
-                              like '%$value%')";
-                    $this->db->where($where);
-                    exit;
+                  else
+                  {                             
+                      $where = "violation != 'Unreturned Item' AND 
+                          (name LIKE '%$value%' OR middlename LIKE '%$value%' 
+                          OR lastname LIKE '%$value%')";
+                      $this->db->where($where);
+                  }                  
                 }
+                else{
+                  $this->db->where('violation !=','Unreturned Item');
+                  $this->db->where('laboratory',$this->session->userdata('lab'));
+                }      
+            }          
+            else
+            {
+              $this->db->where('laboratory = ',$lab);
+              $this->db->where('violation !=','Unreturned Item');         
+              $this->db->like($ref,$value);
+            }        
 
-                else
-                {                             
-                    $where = "violation != 'Unreturned Item' AND 
-                        (name LIKE '%$value%' OR middlename LIKE '%$value%' 
-                        OR lastname LIKE '%$value%')";
-                    $this->db->where($where);
-                }                  
-              }
-              else{
-                $this->db->where('violation !=','Unreturned Item');
-                $this->db->where('laboratory',$this->session->userdata('lab'));
-              }      
-          }          
-          else
-          {
-            $this->db->where('laboratory = ',$lab);
-            $this->db->where('violation !=','Unreturned Item');         
-            $this->db->like($ref,$value);
-          }        
-
-          if($status != ""){
-            $this->db->where('status',$status);                     
-           
-          }
-          if ($this->session->userdata('type')=="head") {
+            if($status != ""){
+              $this->db->where('status',$status);                     
+             
+            }
+            if ($this->session->userdata('type')=="head") {
+              
+              $this->db->where('laboratory',$this->session->userdata('lab'));
+            }
             
-            $this->db->where('laboratory',$this->session->userdata('lab'));
-          }
-          
-          
-          $query = $this->db->get('student');
-          $data = $query->result_array();
-          
-          return $data;
+            $this->db->limit($limit, $start);
+            $query = $this->db->get('student');
+            $data = $query->result_array();
+            
+            return $data;
         }
 
       public function searchViolate($value,$ref,$status) //show violation

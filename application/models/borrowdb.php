@@ -31,7 +31,8 @@ class borrowdb extends CI_Controller {
                 $this->load->view('borrow_items/head');
                 $this->load->view('templates/header');
 
-        }
+        }   
+
 	public function index()
 	{
 		$this->load->view('borrow_items/borrow_items');

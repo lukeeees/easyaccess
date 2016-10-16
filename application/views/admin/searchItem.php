@@ -7,9 +7,7 @@
         echo form_open("item_admin/ItemSearch", $attributes);?>
             <div class="form-group">
                 <div class="col-md-4 col-sm-offset-2" style="padding:0;">
-                    <input class="form-control" id="name_search" name="name_search" placeholder="Search Item" type="text" value="<?php echo set_value('name_search'); ?>" />
-
-                    
+                    <input class="form-control" id="name_search" name="name_search" placeholder="Search Item" type="text" value="<?php echo set_value('name_search'); ?>" />         
                 </div>
                 <div class="col-xs-3">
                                        
@@ -77,7 +75,7 @@
                       <th>Borrowed Quantity</th>
                       <th>Custodian</th>
                       <th>Laboratory</th>
-                      <th></th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -95,7 +93,14 @@
                                   echo $borrowedQuantity ?></td>
                         <td><?php echo $x[$i]->custodian; ?></td>
                         <td><?php echo $x[$i]->owner; ?></td>
-                        <td><?php echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">Update</button>');?>
+                        <td><?php if ($this->session->userdata('type')!="admin") {
+                          echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">Update</button>');
+                        }else
+                        {
+                          echo anchor('item_admin/UpdateItem/'.$x[$i]->code,'<button class="btn-xs btn-success">View</button>');
+                        }
+
+                        ?>
                        <?php 
                        echo  anchor_popup('charts/graph_Sitem/'.$x[$i]->code,'<button class="btn-xs">Show Statistics</button>',$atts);
                         ?></td>
@@ -103,10 +108,12 @@
                     <?php } ?>
 
                   </tbody>
-                </table>
-             <?php            
-              echo  anchor_popup('charts/graph_item/','<button class="btn-xs">Show Statistics</button>',$atts);?>
+                </table>             
             </div>
+            <ul class="pagination pagination-sm" style="float:left;">
+            <?php echo $this->pagination->create_links(); ?>
+          </ul>         
+          <?php echo  anchor_popup('charts/graph_item/','<button class="btn-xs" style="margin-top:24px;margin-left:10px;">Show Statistics</button>',$atts);?>   
     <?php endif ?>      
    </div>
 </div><!-- /.container -->

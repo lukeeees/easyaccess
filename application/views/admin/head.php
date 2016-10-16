@@ -41,20 +41,23 @@
                         <a href="#page-top"></a>
                     </li>
 
-                        <?php if ($this->session->userdata['type']=="staff"): ?>
+                        <li class="">
+                          <a href="/easyaccess/index.php/c_clear/notifications">
+                            <?php if ($this->session->userdata('type')=="staff"): ?>
+                                Logs
+                            <?php else: ?>
+                                <span id="notif" class="badge" style="vertical-align:top;margin-right:5px;"></span> Notifications
+                            <?php endif ?>
+                          </a></li>
+
                         <li class="dropdown">
                          <?php echo anchor('borrow/userlist', 'Transactions');?> <!-- <a>Transactions</a>-->
                           <div class="dropdown-content">
                               <?php echo anchor('/borrow/ItemSearch', 'Borrow Items');?>
-                              <?php// echo anchor('borrow/ItemSearchReturn', 'Return Items');?>                              
                           </div>
                         </li>
-                         <?php endif; ?>
-
 
                         <?php if ($this->session->userdata['type']!="staff"): ?>
-                        <li class="">
-                          <a href="/easyaccess/index.php/c_clear/notifications"><span id="notif" class="badge" style="vertical-align:top;margin-right:5px;"></span> Notifications</a></li>
                         <li class="dropdown">
                           <?php echo anchor('c_clear/sVio', 'Clearance');?><!--<a>Clearance</a>-->
                           <div class="dropdown-content">
@@ -68,12 +71,14 @@
                          <li class="dropdown">
                         <?php echo anchor('item_admin/ItemSearch','Manage Items')?>
                         <div class="dropdown-content">
-                          <?php echo anchor('item_admin/addItem','Add Item')?>
-                          <?php if ($this->session->userdata['type']!="staff"): ?>
-                            <?php echo anchor('inventory_admin/addInventory','Create Inventory Report')?>
-                            <?php echo anchor('inventory_admin/viewInventory','Manage Inventory Report')?>
-                            <?php echo anchor('','View Statistics')?>
+                          <?php if ($this->session->userdata('type')!="admin"): ?>
+                              <?php echo anchor('item_admin/addItem','Add Item')?>
+                          <?php endif ?>
+                          <?php if ($this->session->userdata['type']!="admin"): ?>
+                            <?php echo anchor('inventory_admin/addInventory','Create Inventory Report')?>                                                        
                           <?php endif; ?>
+                          <?php echo anchor('inventory_admin/viewInventory','View Inventory Report')?>
+                          <?php echo anchor('','View Statistics')?>                          
                         </div>
                         </li>
                    
